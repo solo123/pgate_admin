@@ -1,1 +1,0 @@
-json.partial! "jgp_b001s/jgp_b001", jgp_b001: @jgp_b001

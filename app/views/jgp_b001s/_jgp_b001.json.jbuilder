@@ -1,2 +1,0 @@
-json.extract! jgp_b001, :id, :send_time, :send_seq_id, :trans_type, :organization_id, :pay_pass, :img_url, :trans_amt, :fee, :card_no, :name, :id_num, :body, :notify_url, :resp_code, :resp_desc, :mac, :status, :created_at, :updated_at
-json.url jgp_b001_url(jgp_b001, format: :json)
