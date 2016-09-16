@@ -1,0 +1,25 @@
+<%= form_for(@jg_signin) do |f| %>
+  <% if @jg_signin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@jg_signin.errors.count, "error") %> prohibited this jg_signin from being saved:</h2>
+
+      <ul>
+      <% @jg_signin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :result_text %><br>
+    <%= f.text_field :result_text %>
+  </div>
+  <div class="field">
+    <%= f.label :terminal_info %><br>
+    <%= f.text_field :terminal_info %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

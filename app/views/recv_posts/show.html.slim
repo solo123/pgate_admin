@@ -1,0 +1,30 @@
+p#notice
+  = notice
+  
+p
+  strong ID
+  = @recv_post.id
+p
+  strong Method
+  = @recv_post.method
+p
+  strong
+    | Remote host:
+  = @recv_post.remote_host
+p
+  strong
+    | Header:
+  = @recv_post.header
+p
+  strong
+    | Params:
+  = @recv_post.params
+p
+  strong Detail
+  |[
+  =h @recv_post.detail.html_safe
+  |]
+  
+= link_to 'Edit', edit_recv_post_path(@recv_post)
+|  | 
+= link_to 'Back', recv_posts_path

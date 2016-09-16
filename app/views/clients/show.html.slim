@@ -1,0 +1,24 @@
+p#notice
+  = notice
+p
+  strong 商户名称：
+  = @object.name
+p
+  strong 商户号：
+  = @object.organization_id
+p
+  strong TMK:
+  = @object.tmk
+p
+  strong D0最低收费
+  = @object.d0_min_fee
+p
+  strong
+    | D0费率(100=1/万, 1000=1/千):
+  = @object.d0_min_percent
+p
+  strong 状态：
+  = @object.status
+= link_to '修改', edit_client_path(@object)
+|  | 
+= link_to '返回', clients_path

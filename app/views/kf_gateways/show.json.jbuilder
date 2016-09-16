@@ -1,0 +1,1 @@
+json.partial! "kf_gateways/kf_gateway", kf_gateway: @kf_gateway

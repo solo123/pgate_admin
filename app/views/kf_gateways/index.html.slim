@@ -1,0 +1,93 @@
+p#notice
+  = notice
+h1
+  | Kf Gateways
+table
+  thead
+    tr
+      th
+        | Parent
+      th
+        | Send time
+      th
+        | Send seq
+      th
+        | Trans type
+      th
+        | Organization
+      th
+        | Pay pass
+      th
+        | Img url
+      th
+        | Trans amt
+      th
+        | Fee
+      th
+        | Card no
+      th
+        | Name
+      th
+        | Id num
+      th
+        | Body
+      th
+        | Notify url
+      th
+        | Callback url
+      th
+        | Resp code
+      th
+        | Resp desc
+      th
+        | Mac
+      th status
+      th[colspan="3"]
+  tbody
+    - @kf_gateways.each do |kf_gateway|
+      tr
+        td
+          = kf_gateway.parent_id
+        td
+          = kf_gateway.send_time
+        td
+          = kf_gateway.send_seq_id
+        td
+          = kf_gateway.trans_type
+        td
+          = kf_gateway.organization_id
+        td
+          = kf_gateway.pay_pass
+        td
+          = kf_gateway.img_url
+        td
+          = kf_gateway.trans_amt
+        td
+          = kf_gateway.fee
+        td
+          = kf_gateway.card_no
+        td
+          = kf_gateway.name
+        td
+          = kf_gateway.id_num
+        td
+          = kf_gateway.body
+        td
+          = kf_gateway.notify_url
+        td
+          = kf_gateway.callback_url
+        td
+          = kf_gateway.resp_code
+        td
+          = kf_gateway.resp_desc
+        td
+          = kf_gateway.mac
+        td= kf_gateway.status
+        td
+          = link_to 'Show', kf_gateway
+        td
+          = link_to 'Edit', edit_kf_gateway_path(kf_gateway)
+        td
+          = link_to 'Destroy', kf_gateway, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Kf Gateway', new_kf_gateway_path

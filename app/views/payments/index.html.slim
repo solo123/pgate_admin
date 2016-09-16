@@ -1,0 +1,87 @@
+p#notice
+  = notice
+h1
+  | Listing Payments
+table
+  thead
+    tr
+      th
+        | id
+      th
+        | Service
+      th
+        | Version
+      th
+        | Agency
+      th
+        | Trade no
+      th
+        | Fee
+      th
+        | Return url
+      th
+        | Notify url
+      th
+        | Expire minutes
+      th
+        | Shop
+      th
+        | Counter
+      th
+        | Operator
+      th
+        | Desc
+      th
+        | Coupon tag
+      th
+        | Nonce str
+      th
+        | Sign
+      th
+        | status
+      th[colspan="3"]
+  tbody
+    - @payments.each do |payment|
+      tr
+        td
+          = payment.id
+        td
+          = payment.service
+        td
+          = payment.version
+        td
+          = payment.agency_id
+        td
+          = payment.trade_no
+        td
+          = payment.fee
+        td
+          = payment.return_url
+        td
+          = payment.notify_url
+        td
+          = payment.expire_minutes
+        td
+          = payment.shop_id
+        td
+          = payment.counter_id
+        td
+          = payment.operator_id
+        td
+          = payment.desc
+        td
+          = payment.coupon_tag
+        td
+          = payment.nonce_str
+        td
+          = payment.sign
+        td
+          = payment.status
+        td
+          = link_to 'Show', payment
+        td
+          = link_to 'Edit', edit_payment_path(payment)
+        td
+          = link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Payment', new_payment_path

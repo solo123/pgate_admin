@@ -1,0 +1,30 @@
+= form_for(client) do |f|
+  - if client.errors.any?
+    #error_explanation
+      h2
+        = pluralize(client.errors.count, "error")
+        |  prohibited this client from being saved:
+      ul
+        - client.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label '商户名称：'
+    = f.text_field :name
+  .field
+    = f.label '商户号：'
+    = f.text_field :organization_id
+  .field
+    = f.label 'TMK：'
+    = f.text_field :tmk
+  .field
+    = f.label 'D0单笔最低收费：'
+    = f.number_field :d0_min_fee
+  .field
+    = f.label 'D0费率(100=1/万,1000=1/千)'
+    = f.number_field :d0_min_percent
+  .field
+    = f.label :status
+    = f.number_field :status
+  .actions
+    = f.submit

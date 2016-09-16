@@ -1,0 +1,1 @@
+json.array! @jg_signins, partial: 'jg_signins/jg_signin', as: :jg_signin

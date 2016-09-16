@@ -1,0 +1,1 @@
+json.partial! "recv_posts/recv_post", recv_post: @recv_post

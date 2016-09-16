@@ -1,0 +1,8 @@
+h2 Users
+
+table
+  - User.all.each do |user|
+    tr
+      td= user.email
+      td= user.created_at
+      td= user.updated_at

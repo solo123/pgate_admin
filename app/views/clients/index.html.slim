@@ -1,0 +1,47 @@
+p#notice
+  = notice
+h1
+  | 商户清单
+p
+  = link_to '🆕新商户', new_client_path
+
+table
+  thead
+    tr
+      th ID
+      th
+        | 商户名称
+      th
+        | 商户号
+      th
+        | TMK
+      th
+        | D0最低费
+      th
+        | D0费率(1/千)
+      th
+        | 状态
+      th[colspan="3"]
+  tbody
+    - @collection.each do |client|
+      tr
+        td= client.id
+        td
+          = client.name
+        td
+          = client.organization_id
+        td
+          = client.tmk
+        td
+          = client.d0_min_fee
+        td
+          = client.d0_min_percent / 1000 if client.d0_min_percent
+        td
+          = client.status
+        td
+          = link_to '查看', client
+        td
+          = link_to '修改', edit_client_path(client)
+        td
+          = link_to '删除', client, method: :delete, data: { confirm: '确认将状态设为停用吗？' }
+br

@@ -1,0 +1,83 @@
+p#notice
+  = notice
+p
+  strong
+    | Parent:
+  = @kf_gateway.parent_id
+p
+  strong
+    | Send time:
+  = @kf_gateway.send_time
+p
+  strong
+    | Send seq:
+  = @kf_gateway.send_seq_id
+p
+  strong
+    | Trans type:
+  = @kf_gateway.trans_type
+p
+  strong
+    | Organization:
+  = @kf_gateway.organization_id
+p
+  strong
+    | Pay pass:
+  = @kf_gateway.pay_pass
+p
+  strong
+    | Img url:
+  = @kf_gateway.img_url
+p
+  strong
+    | Trans amt:
+  = @kf_gateway.trans_amt
+p
+  strong
+    | Fee:
+  = @kf_gateway.fee
+p
+  strong
+    | Card no:
+  = @kf_gateway.card_no
+p
+  strong
+    | Name:
+  = @kf_gateway.name
+p
+  strong
+    | Id num:
+  = @kf_gateway.id_num
+p
+  strong
+    | Body:
+  = @kf_gateway.body
+p
+  strong
+    | Notify url:
+  = @kf_gateway.notify_url
+p
+  strong
+    | Callback url:
+  = @kf_gateway.callback_url
+p
+  strong
+    | Resp code:
+  = @kf_gateway.resp_code
+p
+  strong
+    | Resp desc:
+  = @kf_gateway.resp_desc
+p
+  strong
+    | Mac:
+  = @kf_gateway.mac
+= link_to 'Edit', edit_kf_gateway_path(@kf_gateway)
+|  | 
+= link_to 'Back', kf_gateways_path
+p
+  - if @kf_gateway.status == 0
+    - if @kf_gateway.parent_id == 0
+      = link_to 'Sent_gateway', sent_gateway_kf_gateway_path(@kf_gateway)
+    - else
+      = link_to 'show_post', show_post_kf_gateway_path(@kf_gateway)

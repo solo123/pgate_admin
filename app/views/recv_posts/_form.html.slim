@@ -1,0 +1,24 @@
+= form_for(@recv_post) do |f|
+  - if @recv_post.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@recv_post.errors.count, "error")
+        |  prohibited this recv_post from being saved:
+      ul
+        - @recv_post.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :remote_host
+    br
+    = f.text_field :remote_host
+  .field
+    = f.label :header
+    br
+    = f.text_field :header
+  .field
+    = f.label :body
+    br
+    = f.text_field :body
+  .actions
+    = f.submit

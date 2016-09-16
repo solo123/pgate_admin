@@ -1,0 +1,2 @@
+json.extract! payment, :id, :service, :version, :agency_id, :trade_no, :fee, :return_url, :notify_url, :expire_minutes, :shop_id, :counter_id, :operator_id, :desc, :coupon_tag, :nonce_str, :sign, :created_at, :updated_at
+json.url payment_url(payment, format: :json)

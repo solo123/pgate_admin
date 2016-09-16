@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  organization_id: MyString
+  tmk: MyString
+  d0_min_fee: 1
+  d0_min_percent: 1
+  status: 1
+
+two:
+  name: MyString
+  organization_id: MyString
+  tmk: MyString
+  d0_min_fee: 1
+  d0_min_percent: 1
+  status: 1
