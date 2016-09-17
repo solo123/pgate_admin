@@ -1,7 +1,8 @@
 p#notice
   = notice
+  
 h1
-  | Listing Recv Posts
+  | Kaifu回调列表
 table
   thead
     tr
@@ -13,7 +14,8 @@ table
         | Header
       th
         | Params
-      th[colspan="3"]
+      th Status
+      th op
   tbody
     - @recv_posts.each do |recv_post|
       tr
@@ -25,11 +27,6 @@ table
           = recv_post.header
         td
           = recv_post.params
+        td= recv_post.status
         td
           = link_to 'Show', recv_post
-        td
-          = link_to 'Edit', edit_recv_post_path(recv_post)
-        td
-          = link_to 'Destroy', recv_post, method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'New Recv post', new_recv_post_path

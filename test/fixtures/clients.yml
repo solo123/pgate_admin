@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  organization_id: MyString
-  tmk: MyString
-  d0_min_fee: 1
-  d0_min_percent: 1
+  name: client1
+  organization_id: client1
+  tmk: 'abcde1234567890'
+  d0_min_fee: 30
+  d0_min_percent: 3000
   status: 1
 
 two:

@@ -1,24 +1,12 @@
-# README
+# 最近更新
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* 2016-09-17
+  * Kaifu回调列表
+  * 商户请求列表
+  * 商户请求合法检验
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* 2016-09-16
+  * 商户列表和新增商户
+  * 自动生成商户TMK
+  * 发布管理后台系统

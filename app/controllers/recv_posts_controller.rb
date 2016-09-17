@@ -16,54 +16,6 @@ class RecvPostsController < ApplicationController
   def show
   end
 
-  # GET /recv_posts/new
-  def new
-    @recv_post = RecvPost.new
-  end
-
-  # GET /recv_posts/1/edit
-  def edit
-  end
-
-  # POST /recv_posts
-  # POST /recv_posts.json
-  def create
-    @recv_post = RecvPost.new
-    @recv_post.remote_host = request.remote_ip()
-    @recv_post.header =
-%{
-CONTENT_TYPE : "#{request.headers['CONTENT_TYPE']}"
-CONTENT_LENGTH : "#{request.headers['CONTENT_LENGTH']}"
-}
-    @recv_post.body = params.to_s
-    @recv_post.save
-    redirect_to @recv_post, notice: 'Recv post was successfully created.'
-  end
-
-  # PATCH/PUT /recv_posts/1
-  # PATCH/PUT /recv_posts/1.json
-  def update
-    respond_to do |format|
-      if @recv_post.update(recv_post_params)
-        format.html { redirect_to @recv_post, notice: 'Recv post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recv_post }
-      else
-        format.html { render :edit }
-        format.json { render json: @recv_post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /recv_posts/1
-  # DELETE /recv_posts/1.json
-  def destroy
-    @recv_post.destroy
-    respond_to do |format|
-      format.html { redirect_to recv_posts_url, notice: 'Recv post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recv_post

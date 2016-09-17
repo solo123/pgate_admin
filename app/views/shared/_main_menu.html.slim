@@ -1,9 +1,7 @@
 div
   ul
-    li
-      = link_to '管理用户', admin_users_path
-    li
-      = link_to '商户', clients_path
-    li
-      = link_to 'kf-签到', jgps_path
+    li= link_to '管理用户', admin_users_path
+    li= link_to '商户列表', clients_path
+    li= link_to '商户请求列表', client_payments_path
+    li= link_to 'Kaifu - 回调列表', recv_posts_path
     li

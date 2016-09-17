@@ -1,1 +1,0 @@
-json.array! @recv_posts, partial: 'recv_posts/recv_post', as: :recv_post

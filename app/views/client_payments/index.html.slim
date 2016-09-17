@@ -1,0 +1,49 @@
+p#notice= notice
+h1 商户请求列表
+table
+  thead
+    tr
+      th id
+      th client
+      th org_id
+      th trans_type
+      th order_time
+      th order_id
+      th order_title
+      th pay_pass
+      th img_url
+      th amount
+      th fee
+      th card_no
+      th card_holder_name
+      th person_id_num
+      th notify_url
+      th callback_url
+      th mac
+      th finish_time
+      th status
+      th op
+
+  tbody
+    - @payments.each do |p|
+      tr
+        td= p.id
+        td= p.client
+        td= p.org_id
+        td= p.trans_type
+        td= p.order_time
+        td= p.order_id
+        td= p.order_title
+        td= p.pay_pass
+        td= p.img_url
+        td= p.amount
+        td= p.fee
+        td= p.card_no
+        td= p.card_holder_name
+        td= p.person_id_num
+        td= p.notify_url
+        td= p.callback_url
+        td= p.mac
+        td= p.finish_time
+        td= p.status
+        td= link_to 'Show', payment

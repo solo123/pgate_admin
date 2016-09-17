@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915165847) do
+ActiveRecord::Schema.define(version: 20160917191143) do
 
   create_table "client_payments", force: :cascade do |t|
     t.integer  "client_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20160915165847) do
     t.integer  "status",           default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "resp_code"
+    t.string   "resp_desc"
     t.index ["client_id"], name: "index_client_payments_on_client_id"
   end
 
@@ -70,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160915165847) do
     t.integer  "status",            default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "redirect_url"
     t.index ["client_payment_id"], name: "index_kaifu_gateways_on_client_payment_id"
   end
 

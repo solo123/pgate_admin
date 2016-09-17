@@ -1,5 +1,8 @@
 p#notice
   = notice
+
+p
+  = link_to 'Back', recv_posts_path
   
 p
   strong ID
@@ -21,10 +24,6 @@ p
   = @recv_post.params
 p
   strong Detail
-  |[
-  =h @recv_post.detail.html_safe
-  |]
+  div
+    =h @recv_post.detail.html_safe
   
-= link_to 'Edit', edit_recv_post_path(@recv_post)
-|  | 
-= link_to 'Back', recv_posts_path
