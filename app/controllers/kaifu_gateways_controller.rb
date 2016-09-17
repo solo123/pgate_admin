@@ -1,4 +1,4 @@
-class KfGatewaysController < ApplicationController
+class KaifuGatewaysController < ApplicationController
   before_action :set_kf_gateway, only: [:show, :edit, :update, :destroy]
 
   def sent_gateway
