@@ -9,15 +9,15 @@ class TestPagesController < PubController
       order_id: "ADM" + Time.now.to_i.to_s,
       pay_pass: "1",
       amount: p[:amount],
-      person_id_num: '450303197005030016',
+      fee: p[:fee],
       order_title: p[:order_title],
       notify_url: 'http://112.74.184.236:8080/recv_notify',
       callback_url: "http://a.pooulcloud.cn/test_pages/pay"
     }
     if p[:trans_type] == 'P001'
-      js[:fee] = p[:fee]
       js[:card_no] = '6225886556455713'
       js[:card_holder_name] = '梁益华'
+      js[:person_id_num] = '450303197005030016'
     end
 
     client = Client.find_by(org_id: p[:org_id])
