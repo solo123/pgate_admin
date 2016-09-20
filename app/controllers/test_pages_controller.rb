@@ -15,7 +15,7 @@ class TestPagesController < PubController
       person_id_num: '450303197005030016',
       order_title: p[:order_title],
       notify_url: 'http://112.74.184.236:8080/recv_notify',
-      callback_url: "http://a.pooulcloud.cn/test_pages"
+      callback_url: "http://a.pooulcloud.cn/test_pages/pay"
     }
     client = Client.find_by(org_id: p[:org_id])
     if client
