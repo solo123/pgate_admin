@@ -27,8 +27,8 @@ class TestPagesController < PubController
         begin
           j = JSON.parse(resp.body)
           redirect_to j[:redirect_url]
-        rescue
-          render plain: "resp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
+        rescue e
+          render plain: "redirect error: #{e.message}\nresp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
         end
       else
         render plain: "resp = #{resp.to_s}\nresp.body=#{resp.body}"
