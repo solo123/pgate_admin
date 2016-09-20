@@ -24,12 +24,17 @@ class TestPagesController < PubController
       uri = URI('http://112.74.184.236:8008/payment')
       resp = Net::HTTP.post_form(uri, data: js.to_json)
       if resp.is_a? Net::HTTPOK
-        render plain: "resp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
+        begin
+          j = JSON.parse(resp.body)
+          redirect_to j.redirect_url
+        rescue
+          render plain: "resp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
+        end
       else
         render plain: "resp = #{resp.to_s}\nresp.body=#{resp.body}"
       end
     else
-      render plain: "org:[#{p[:org_id]}] not found!"
+      render plain: "org:[#{p[:org_id]}] not found!\n"
       return
     end
   end
