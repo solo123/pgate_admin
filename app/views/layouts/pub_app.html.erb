@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PooulGate</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <h3 class='text-muted'>普尔支付</h3>
+      </div>
+      <div class='jumbotron'>
+        <h1>title</h1>
+      </div>
+      <div class='container'>
+        <%= yield %>
+      </div>
+      <footer class='footer'>
+      </footer>
+    </div>
+  </body>
+</html>
