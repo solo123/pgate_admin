@@ -21,7 +21,7 @@ class TestPagesController < ApplicationController
     if client
       biz = Biz::PubEncrypt.new
       js[:mac] = biz.md5_mac(js, client.tmk)
-      uri = URI('http://localhost:8008/payment')
+      uri = URI('http://112.74.184.236:8008/payment')
       resp = Net::HTTP.post_form(uri, data: js.to_json)
       if resp.is_a? Net::HTTPOK
         render plain: "resp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
