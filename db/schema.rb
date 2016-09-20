@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918045237) do
+ActiveRecord::Schema.define(version: 20160920065457) do
 
   create_table "client_payments", force: :cascade do |t|
     t.integer  "client_id"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20160918045237) do
     t.string   "order_title"
     t.string   "pay_pass"
     t.string   "img_url"
-    t.string   "amount"
-    t.string   "fee"
+    t.integer  "amount"
+    t.integer  "fee"
     t.string   "card_no"
     t.string   "card_holder_name"
     t.string   "person_id_num"
