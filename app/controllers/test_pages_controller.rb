@@ -26,7 +26,7 @@ class TestPagesController < PubController
       if resp.is_a? Net::HTTPOK
         begin
           j = JSON.parse(resp.body)
-          redirect_to j[:redirect_url]
+          redirect_to j['redirect_url']
         rescue => e
           render plain: "redirect error: #{e.message}\nresp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
         end
