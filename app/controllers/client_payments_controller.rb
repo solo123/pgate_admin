@@ -1,4 +1,4 @@
-class ClientPaymentsController < ApplicationController
+class ClientPaymentsController < ResourcesController
 
   def sent_gateway
     set_payment
@@ -18,18 +18,6 @@ class ClientPaymentsController < ApplicationController
   end
   def show_post
     render text: 'abc!!'
-  end
-
-  # GET /payments
-  # GET /payments.json
-  def index
-    @payments = ClientPayment.all
-  end
-
-  # GET /payments/1
-  # GET /payments/1.json
-  def show
-    @object = ClientPayment.find(params[:id])
   end
 
 end

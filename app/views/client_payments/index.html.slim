@@ -1,6 +1,8 @@
 p#notice= notice
 h1 商户请求列表
-table
+
+= paginate @collection
+table.table.table-bordered.table-striped
   thead
     tr
       th id
@@ -25,7 +27,7 @@ table
       th op
 
   tbody
-    - @payments.each do |p|
+    - @collection.each do |p|
       tr
         td= p.id
         td= p.client.name if p.client

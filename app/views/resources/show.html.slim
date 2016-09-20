@@ -1,0 +1,12 @@
+
+= link_to '返回列表', send("#{@object.class.name.underscore.split('/').last.pluralize}_path")
+table.table.table-bordered.table-striped.table-hover
+  thead
+    tr
+      th Attribures
+      th Value
+  tbody
+    - @object.attributes.each do |attr|
+      tr
+        td= attr[0]
+        td= attr[1]

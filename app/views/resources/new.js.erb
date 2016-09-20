@@ -1,0 +1,18 @@
+var edit_div_id = "edit_<%= @object.class.name.underscore %>_div";
+var edit_div = '#' + edit_div_id;
+var cnt = "<%=j render(partial: "edit_form", locals: {div_id: "edit_#{@object.class.name.underscore}_div"}) %>";
+if ($(edit_div).length == 0){
+  $('body').append(cnt);
+} else {
+  $(edit_div).replaceWith(cnt);
+}
+
+$(edit_div)
+  .modal('show');
+
+$('.html-editor').xheditor({tools: 'Blocktag,Bold,Italic,Underline,|,List,Link,Img,|,Source'});	
+$('.date-picker').datepicker({ showButtonPanel: true, dateFormat: 'yy-mm-dd' });
+
+
+
+

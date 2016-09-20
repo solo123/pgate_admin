@@ -1,7 +1,14 @@
 .pull-right
   ul.nav.nav-inline
+    li.nav-item= link_to 'HOME', '/'
     li.nav-item= link_to '管理用户', admin_users_path
     li.nav-item= link_to '商户列表', clients_path
     li.nav-item= link_to '商户请求列表', client_payments_path
     li.nav-item= link_to 'Kaifu - 回调列表', recv_posts_path
     li.nav-item= link_to '测试支付', '/test_pages/pay'
+    li.nav-item |
+    li.nav-item
+      - if user_signed_in?
+        = link_to('退出登录', destroy_user_session_path, :method => :delete)
+      - else
+        = link_to('登录', new_user_session_path)

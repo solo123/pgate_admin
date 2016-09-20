@@ -1,16 +1,6 @@
-div
-  div
-    h2 payments
+.jumbotron
+  h1 支付测试
 
-div
-  - if user_signed_in?
-    = link_to('Logout', destroy_user_session_path, :method => :delete)
-  - else
-    = link_to('Login', new_user_session_path)
-
-div
-  h2 微信支付机构接入
   div
-    
-div
-  = render 'shared/main_menu'
+    h4 扫固定描支付D0
+    = image_tag 'D0_B001.jpg', size: '200'

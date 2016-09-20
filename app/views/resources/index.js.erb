@@ -1,0 +1,16 @@
+$.Dialog({ 
+  'title':   'title', 
+'content': '<%=j render :partial => 'list' %>', 
+  'draggable'   : true,
+  'overlay'     : true,
+  'closeButton' : true,
+  'position': {
+    'zone' : 'center'
+  },
+  'buttons': { 
+    'Ok' : { 
+      'action' : function(){}
+    } 
+  } 
+});
+

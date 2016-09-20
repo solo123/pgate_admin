@@ -4,19 +4,22 @@ class TestPagesController < PubController
     p = params[:payment]
     js = {
       org_id: p[:org_id],
-      trans_type: 'P001',
+      trans_type: p[:trans_type],
       order_time: Time.now.strftime("%Y%m%d%H%M%S"),
       order_id: "ADM" + Time.now.to_i.to_s,
       pay_pass: "1",
       amount: p[:amount],
-      fee: p[:fee],
-      card_no: '6225886556455713',
-      card_holder_name: '梁益华',
       person_id_num: '450303197005030016',
       order_title: p[:order_title],
       notify_url: 'http://112.74.184.236:8080/recv_notify',
       callback_url: "http://a.pooulcloud.cn/test_pages/pay"
     }
+    if p[:trans_type] == 'P001'
+      js[:fee] = p[:fee]
+      js[:card_no] = '6225886556455713'
+      js[:card_holder_name] = '梁益华'
+    end
+
     client = Client.find_by(org_id: p[:org_id])
     if client
       biz = Biz::PubEncrypt.new
