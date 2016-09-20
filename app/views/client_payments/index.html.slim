@@ -28,7 +28,7 @@ table
     - @payments.each do |p|
       tr
         td= p.id
-        td= p.client
+        td= p.client.name if p.client
         td= p.org_id
         td= p.trans_type
         td= p.order_time

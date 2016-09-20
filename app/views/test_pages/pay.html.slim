@@ -1,0 +1,20 @@
+h2 Pay
+
+h4 D0 - B001
+= form_tag('/test_pages')
+  table
+    tr
+      td org_id
+      td= text_field_tag 'payment[org_id]'
+    tr
+      td Title
+      td= text_field_tag 'payment[order_title]'
+    tr
+      td amount
+      td= text_field_tag 'payment[amount]'
+    tr
+      td fee
+      td= text_field_tag 'payment[fee]'
+    tr
+      td
+      td= submit_tag
