@@ -9,20 +9,12 @@ Rails.application.routes.draw do
   post 'test_pages', to: 'test_pages#do_post'
 
   post 'recv_sm', to: 'recv_sm#recv_post'
-  resources :kaifu_gateways do
-    member do
-      get :sent_gateway, :show_post
-    end
-  end
+  resources :kaifu_gateways
 
-  resources :jg_signins
-  resources :jgp_b001s do
-    member do
-      get :sent_gateway, :show_post
-    end
-  end
+  resources :kaifu_signins, only: [:index]
   root 'home#index'
   get 'home/index'
+  get 'home/kaifu_signin'
   put 'wgate', to: 'wgate#payment'
 
   resources :payments do

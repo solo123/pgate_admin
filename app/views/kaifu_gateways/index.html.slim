@@ -2,11 +2,13 @@ p#notice
   = notice
 h1
   | Kf Gateways
-table
+  
+= paginate @collection  
+table.table.table-striped.table-bordered
   thead
     tr
       th
-        | Parent
+        | Payment
       th
         | Send time
       th
@@ -42,12 +44,12 @@ table
       th
         | Mac
       th status
-      th[colspan="3"]
+      th
   tbody
-    - @kf_gateways.each do |kf_gateway|
+    - @collection.each do |kf_gateway|
       tr
         td
-          = kf_gateway.parent_id
+          = kf_gateway.client_payment_id
         td
           = kf_gateway.send_time
         td
@@ -85,9 +87,3 @@ table
         td= kf_gateway.status
         td
           = link_to 'Show', kf_gateway
-        td
-          = link_to 'Edit', edit_kf_gateway_path(kf_gateway)
-        td
-          = link_to 'Destroy', kf_gateway, method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'New Kf Gateway', new_kf_gateway_path

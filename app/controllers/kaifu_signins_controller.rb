@@ -1,0 +1,2 @@
+class KaifuSigninsController < ResourcesController
+end

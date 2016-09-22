@@ -7,3 +7,11 @@
   div
     h4 扫固定描支付T1
     = image_tag 'T1-B002.png', size: '200'
+  div
+    h4 扫码支付
+    p
+      = link_to 'T0消费', '/test_pages/pay_app_t0'
+    p
+      = link_to 'T1消费', '/test_pages/pay_app_t1'
+    p
+      = link_to '签到', '/home/kaifu_signin', remote: true

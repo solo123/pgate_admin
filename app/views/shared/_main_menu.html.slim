@@ -5,7 +5,8 @@
     li.nav-item= link_to '商户列表', clients_path
     li.nav-item= link_to '商户请求列表', client_payments_path
     li.nav-item= link_to 'Kaifu - 回调列表', recv_posts_path
-    li.nav-item= link_to '测试支付', '/test_pages/pay'
+    li.nav-item= link_to '签到列表', kaifu_signins_path
+    li.nav-item= link_to 'Kaifu数据', kaifu_gateways_path
     li.nav-item |
     li.nav-item
       - if user_signed_in?
