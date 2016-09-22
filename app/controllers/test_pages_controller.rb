@@ -42,4 +42,15 @@ class TestPagesController < PubController
       @js = {error: "org:[#{p[:org_id]}] not found!\n"}
     end
   end
+
+  def gen_qrcode
+    qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay")
+    qr.as_png.save("public/qrcodes/p001.png")
+    qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay_t1")
+    qr.as_png.save("public/qrcodes/p002.png")
+    qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay_app_t0")
+    qr.as_png.save("public/qrcodes/p003.png")
+    qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay_app_t1")
+    qr.as_png.save("public/qrcodes/p004.png")
+  end
 end

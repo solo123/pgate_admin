@@ -4,8 +4,13 @@ p
   
 - if @js[:img_url]
   p 
-    = link_to '确认扫码支付', @js[:img_url]
-    = image_tag @js[:img_url]
+    = @js[:img_url]
+    - img_file = 'qr_' + Time.now.to_i.to_s + '.png'
+    - qr = RQRCode::QRCode.new(@js[:img_url])
+    - qr.as_png.save("public/qrcodes/#{img_file}")
+  h2 扫码支付
+  p
+    = image_tag "/qrcodes/#{img_file}"
     
 - if @js[:redirect_url]
   p 
