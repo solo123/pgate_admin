@@ -5,6 +5,7 @@ p
 - if @js[:img_url]
   p 
     = link_to '确认扫码支付', @js[:img_url]
+    = image_tag @js[:img_url]
     
 - if @js[:redirect_url]
   p 
