@@ -29,25 +29,17 @@ class TestPagesController < PubController
       resp = Net::HTTP.post_form(uri, data: js.to_json)
       if resp.is_a? Net::HTTPOK
         begin
-          j = JSON.parse(resp.body)
-          j.symbolize_keys!
-          if !j[:redirect_url].nil?
-            redirect_to j[:redirect_url]
-          elsif !j[:img_url].nil?
-            redirect_to j[:img_url]
-          else
-            render plain: "resp = #{resp.to_s}\nresp.body=#{resp.body}"
-          end
+          body_txt = resp.body.force_encoding('UTF-8')
+          @js = JSON.parse(body_txt)
+          @js.symbolize_keys!
         rescue => e
-          render plain: "redirect error: #{e.message}\nresp = " + resp.to_s + "\nresp.body = " + resp.body.to_s
+          @js = {error: e.message, resp: resp.to_s, body: body_txt}
         end
       else
-        render plain: "resp = #{resp.to_s}\nresp.body=#{resp.body}"
+        @js = {resp: resp.to_s, body: resp.body.to_s}
       end
     else
-      render plain: "org:[#{p[:org_id]}] not found!\n"
-      return
+      @js = {error: "org:[#{p[:org_id]}] not found!\n"}
     end
   end
-
 end

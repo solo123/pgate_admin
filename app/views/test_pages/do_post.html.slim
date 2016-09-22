@@ -1,0 +1,11 @@
+h2 post result
+p
+  = @js.to_s
+  
+- if @js[:img_url]
+  p 
+    = link_to '确认扫码支付', @js[:img_url]
+    
+- if @js[:redirect_url]
+  p 
+    = link_to '确认跳转支付', @js[:redirect_url]
