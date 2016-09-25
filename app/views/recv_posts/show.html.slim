@@ -6,24 +6,24 @@ p
   
 p
   strong ID
-  = @recv_post.id
+  = @object.id
 p
   strong Method
-  = @recv_post.method
+  = @object.method
 p
   strong
     | Remote host:
-  = @recv_post.remote_host
+  = @object.remote_host
 p
   strong
     | Header:
-  = @recv_post.header
+  = @object.header
 p
   strong
     | Params:
-  = @recv_post.params
+  = @object.params
 p
   strong Detail
   div
-    =h @recv_post.detail.html_safe
+    =h @object.detail.html_safe
   

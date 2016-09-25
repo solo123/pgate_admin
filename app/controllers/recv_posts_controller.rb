@@ -1,29 +1,44 @@
-class RecvPostsController < ApplicationController
-  # For APIs, you may want to use :null_session instead.
-  #protect_from_forgery with: :null_session
-  skip_before_action :verify_authenticity_token
-
-  before_action :set_recv_post, only: [:show, :edit, :update, :destroy]
-
-  # GET /recv_posts
-  # GET /recv_posts.json
-  def index
-    @recv_posts = RecvPost.all
-  end
-
-  # GET /recv_posts/1
-  # GET /recv_posts/1.json
-  def show
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recv_post
-      @recv_post = RecvPost.find(params[:id])
+class RecvPostsController < ResourcesController
+  def send_all_notifies
+    RecvPost.not_send.each do |p|
+      if p.check_is_valid_notify
+        p.kaifu_result.init_validate
+      end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def recv_post_params
-      params.require(:recv_post).permit(:remote_host, :header, :body)
+    KaifuResult.not_send.each {|r| notify_client(r)}
+    redirect_to action: :index
+  end
+
+private
+  def notify_client(kaifu_result)
+    if kaifu_result.status < 7
+      kaifu_result.status += 1
+      kaifu_result.notify_time = Time.now
+      begin
+        resp = post kaifu_result.notify_url, {}
+        uri = URI(kaifu_result.notify_url)
+        js = {
+          org_id: kaifu_result.organization_id,
+          order_id: kaifu_result.org_send_seq_id,
+          resp_code: kaifu_result.resp_code,
+          resp_desc: kaifu_result.resp_desc,
+          pay_result: kaifu_result.pay_result,
+          pay_desc: kaifu_result.pay_desc,
+          amount: kaifu_result.trans_amt,
+          fee: kaifu_result.fee
+        }
+        if kaifu_result.t0_resp_code == '00'
+          js[:pay_desc] += ' T0:' + kaifu_result.t0_resp_desc
+        end
+        resp = Net::HTTP.post_form(uri, data: js.to_json)
+        if resp.is_a?(Net::HTTPOK)
+          kaifu_result.status = 8
+        end
+      rescue => e
+      end
+      kaifu_result.save
     end
+  end
+
 end

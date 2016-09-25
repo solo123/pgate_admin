@@ -3,7 +3,12 @@ p#notice
   
 h1
   | Kaifu回调列表
-table
+
+p
+  = link_to '重发通知', send_all_notifies_recv_posts_path
+  
+= paginate @collection  
+table.table.table-stripped.table-bordered
   thead
     tr
       th ID
@@ -17,7 +22,7 @@ table
       th Status
       th op
   tbody
-    - @recv_posts.each do |recv_post|
+    - @collection.each do |recv_post|
       tr
         td= recv_post.id
         td= recv_post.method
