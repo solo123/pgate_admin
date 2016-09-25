@@ -3,6 +3,7 @@ class RecvPostsController < ResourcesController
     RecvPost.not_send.each do |p|
       if p.check_is_valid_notify
         p.kaifu_result.init_validate
+        p.save
       end
     end
 
