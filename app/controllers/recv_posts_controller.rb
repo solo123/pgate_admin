@@ -1,23 +1,17 @@
 class RecvPostsController < ResourcesController
   def send_all_notifies
-    RecvPost.not_send.each do |p|
-      if p.check_is_valid_notify
-        p.kaifu_result.init_validate
-        p.save
-      end
-    end
-
+    RecvPost.not_send.each {|p| p.check_is_valid_notify }
     KaifuResult.not_send.each {|r| notify_client(r)}
     redirect_to action: :index
   end
 
 private
   def notify_client(kaifu_result)
+    kaifu_result.init_validate
     if kaifu_result.status < 7
       kaifu_result.status += 1
       kaifu_result.notify_time = Time.now
       begin
-        resp = post kaifu_result.notify_url, {}
         uri = URI(kaifu_result.notify_url)
         js = {
           org_id: kaifu_result.organization_id,
