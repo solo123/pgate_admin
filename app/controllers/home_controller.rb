@@ -21,7 +21,9 @@ organizationId: "puerhanda"
         r = KaifuSignin.new(js_to_app_format(js))
         r.update(js_to_app_format(r_js))
         r.save
-        @result = "[签到成功]\n\n#{@result.force_encoding('UTF-8')}"
+        biz = Biz::KaifuApi.new
+        key = biz.get_mackey(true)
+        @result = "[签到成功]\n\nkey=#{key}\n\n#{@result.force_encoding('UTF-8')}"
       rescue => e
         @result = "[签到失败] #{e.message}\n\n" + @result.force_encoding('UTF-8')
       end
