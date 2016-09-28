@@ -1,1 +1,0 @@
-json.array! @kf_gateways, partial: 'kf_gateways/kf_gateway', as: :kf_gateway

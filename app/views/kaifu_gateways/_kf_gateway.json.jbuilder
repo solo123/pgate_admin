@@ -1,2 +1,0 @@
-json.extract! kf_gateway, :id, :parent_id, :send_time, :send_seq_id, :trans_type, :organization_id, :pay_pass, :img_url, :trans_amt, :fee, :card_no, :name, :id_num, :body, :notify_url, :callback_url, :resp_code, :resp_desc, :mac, :created_at, :updated_at
-json.url kf_gateway_url(kf_gateway, format: :json)
