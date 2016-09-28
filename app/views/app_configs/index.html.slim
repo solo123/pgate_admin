@@ -1,0 +1,28 @@
+p#notice
+  = notice
+h1
+  | App Configs
+
+p 
+  = link_to '添加新配置', new_app_config_path
+
+= paginate @collection
+table.table.table-stripped.table-bordered
+  thead
+    tr
+      th Group
+      th Name
+      th Val
+      th[colspan="3"]
+  tbody
+    - @collection.each do |app_config|
+      tr
+        td= app_config.group
+        td
+          = app_config.name
+        td
+          = app_config.val
+        td
+          = link_to 'Show', app_config
+        td
+          = link_to 'Edit', edit_app_config_path(app_config)

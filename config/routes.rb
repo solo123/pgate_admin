@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :app_configs
   devise_for :users, :skip => [:registrations]
 
   resources :clients
@@ -18,8 +19,6 @@ Rails.application.routes.draw do
 
   resources :kaifu_signins, only: [:index]
   root 'home#index'
-  get 'home/index'
-  get 'home/kaifu_signin'
   put 'wgate', to: 'wgate#payment'
 
   resources :payments do
@@ -33,4 +32,6 @@ Rails.application.routes.draw do
       get :signin
     end
   end
+
+  get ':controller/:action/(:id)'
 end
