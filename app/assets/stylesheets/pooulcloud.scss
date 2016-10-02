@@ -1,0 +1,24 @@
+body {
+    background: #fff;
+    font-size: 12px;
+    font-family: 'Lantinghei SC', Hiragino Sans GB, 'Microsoft YaHei', Heiti SC, Verdana, sans-serif, SimHei;
+    font-weight: 300;
+    color: #707478;
+}
+strong{ font-weight:300;}
+.footer {
+    padding: 10px 0;
+    margin: 0 15px;
+    border-top: 1px solid #CAD0D6;
+    line-height: 25px;
+}
+.navbar.navbar-inverse .navbar-brand {
+    font-size: 18px;
+}
+.navbar.navbar-inverse .navbar-nav>li>a {
+    font-size:14px;
+}
+
+.form-group .btn{
+	margin-right:15px;
+}

@@ -1,6 +1,10 @@
-h2 Users List
+h1.page-header
 
-table
+table.table.table-striped.table-bordered
+  thead
+    th Email
+    th Created at
+    th Updated at
   - User.all.each do |user|
     tr
       td= user.email

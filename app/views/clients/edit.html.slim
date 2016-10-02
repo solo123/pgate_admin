@@ -1,6 +1,4 @@
-h1
+h1.page-header
   | 修改商户资料
+  = link_to '查看', @object
 = render 'form', client: @object
-= link_to '查看', @object
-|  | 
-= link_to '返回', clients_path
