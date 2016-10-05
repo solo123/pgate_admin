@@ -1,83 +1,81 @@
 p#notice
   = notice
 p
+  = link_to 'Back', kaifu_gateways_path
+
+
+p
   strong
-    | Parent:
-  = @kf_gateway.parent_id
+    | Payment:
+  - if @object.client_payment
+    = @object.client_payment.org_id
+    |Order#
+    = @object.client_payment.order_id
 p
   strong
     | Send time:
-  = @kf_gateway.send_time
+  = @object.send_time
 p
   strong
     | Send seq:
-  = @kf_gateway.send_seq_id
+  = @object.send_seq_id
 p
   strong
     | Trans type:
-  = @kf_gateway.trans_type
+  = @object.trans_type
 p
   strong
     | Organization:
-  = @kf_gateway.organization_id
+  = @object.organization_id
 p
   strong
     | Pay pass:
-  = @kf_gateway.pay_pass
+  = @object.pay_pass
 p
   strong
     | Img url:
-  = @kf_gateway.img_url
+  = @object.img_url
 p
   strong
     | Trans amt:
-  = @kf_gateway.trans_amt
+  = @object.trans_amt
 p
   strong
     | Fee:
-  = @kf_gateway.fee
+  = @object.fee
 p
   strong
     | Card no:
-  = @kf_gateway.card_no
+  = @object.card_no
 p
   strong
     | Name:
-  = @kf_gateway.name
+  = @object.name
 p
   strong
     | Id num:
-  = @kf_gateway.id_num
+  = @object.id_num
 p
   strong
     | Body:
-  = @kf_gateway.body
+  = @object.body
 p
   strong
     | Notify url:
-  = @kf_gateway.notify_url
+  = @object.notify_url
 p
   strong
     | Callback url:
-  = @kf_gateway.callback_url
+  = @object.callback_url
 p
   strong
     | Resp code:
-  = @kf_gateway.resp_code
+  = @object.resp_code
 p
   strong
     | Resp desc:
-  = @kf_gateway.resp_desc
+  = @object.resp_desc
 p
   strong
     | Mac:
-  = @kf_gateway.mac
-= link_to 'Edit', edit_kf_gateway_path(@kf_gateway)
-|  | 
-= link_to 'Back', kf_gateways_path
-p
-  - if @kf_gateway.status == 0
-    - if @kf_gateway.parent_id == 0
-      = link_to 'Sent_gateway', sent_gateway_kf_gateway_path(@kf_gateway)
-    - else
-      = link_to 'show_post', show_post_kf_gateway_path(@kf_gateway)
+  = @object.mac
