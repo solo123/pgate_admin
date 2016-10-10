@@ -1,17 +1,16 @@
-.pull-right
-  ul.nav.nav-inline
-    li.nav-item= link_to 'HOME', '/'
-    li.nav-item= link_to '管理用户', admin_users_path
-    li.nav-item= link_to '签到列表', kaifu_signins_path
-    li.nav-item= link_to '商户列表', clients_path
-    li.nav-item= link_to '商户请求列表', client_payments_path
-    li.nav-item= link_to 'Kaifu - 回调列表', recv_posts_path
-    li.nav-item= link_to 'Kaifu数据', kaifu_gateways_path
-    li.nav-item= link_to '回调通知', kaifu_results_path
-    li.nav-item= link_to '系统配置', app_configs_path
-    li.nav-item |
-    li.nav-item
-      - if user_signed_in?
-        = link_to('退出登录', destroy_user_session_path, :method => :delete)
-      - else
-        = link_to('登录', new_user_session_path)
+ul.nav.navbar-nav
+  li= link_to 'HOME', '/'
+  li= link_to '管理用户', admin_users_path
+  li= link_to '签到列表', kaifu_signins_path
+  li= link_to '商户列表', clients_path
+  li= link_to '商户请求列表', client_payments_path
+  li= link_to 'Kaifu - 回调列表', recv_posts_path
+  li= link_to 'Kaifu数据', kaifu_gateways_path
+  li= link_to '回调通知', kaifu_results_path
+  li= link_to '系统配置', app_configs_path
+ul.nav.navbar-nav.pull-right role="tablist" 
+  li
+    - if user_signed_in?
+      = link_to('退出登录', destroy_user_session_path, :method => :delete)
+    - else
+      = link_to('登录', new_user_session_path)

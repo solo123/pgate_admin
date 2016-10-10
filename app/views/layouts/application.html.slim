@@ -6,8 +6,6 @@ html[lang="en"]
       | PooulGate
     meta[content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"]
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
     link[href="/color_admin/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet"]
     link[href="/color_admin/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"]
@@ -22,13 +20,23 @@ html[lang="en"]
     link[href="/color_admin/assets/plugins/morris/morris.css" rel="stylesheet"]
     script[src="/color_admin/assets/plugins/pace/pace.min.js"]
 
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
 
   body
-    .container
-      .header
+    nav.navbar.navbar-inverse role="navigation" 
+      .navbar-header
+        button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button" 
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand href="/"  PooulCloud Gateway
+      #navbar.collapse.navbar-collapse
         = render 'shared/main_menu'
-        h3.text-muted
-          | 普尔支付
-      .container
-        = yield
-      footer.footer
+      /! /.nav-collapse
+
+    .container-fluid
+      = yield
+    footer.footer Copyright © 2016 PooulCloud 保留所有权利
