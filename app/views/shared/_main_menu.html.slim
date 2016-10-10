@@ -1,14 +1,43 @@
-ul.nav.navbar-nav
+ul.nav.navbar-nav.navbar-right
+  li.dropdown
+    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
+      i.fa.fa-bell-o
+      span.label
+        | 5
+    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li.dropdown-header
+        | Notifications (5)
+      li.media
+        a[href="javascript:;"]
+
+        .media-left
+          i.fa.fa-bug.media-object.bg-red
+        .media-body
+          h6.media-heading
+            | Server Error Reports
+          .text-muted.f-s-11
+            | 3 minutes ago
+
   li= link_to 'HOME', '/'
-  li= link_to '管理用户', admin_users_path
-  li= link_to '签到列表', kaifu_signins_path
-  li= link_to '商户列表', clients_path
+  li.dropdown
+    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
+      | 管理数据  
+    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li.dropdown-header
+        | 系统管理数据
+      li= link_to '管理用户', admin_users_path
+      li= link_to '签到列表', kaifu_signins_path
+      li= link_to '商户列表', clients_path
+      li= link_to '系统配置', app_configs_path
   li= link_to '商户请求列表', client_payments_path
-  li= link_to 'Kaifu - 回调列表', recv_posts_path
-  li= link_to 'Kaifu数据', kaifu_gateways_path
-  li= link_to '回调通知', kaifu_results_path
-  li= link_to '系统配置', app_configs_path
-ul.nav.navbar-nav.pull-right role="tablist" 
+  li.dropdown
+    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
+      | 凯富数据 
+    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li= link_to 'Kaifu - 回调列表', recv_posts_path
+      li= link_to 'Kaifu数据', kaifu_gateways_path
+      li= link_to '回调通知', kaifu_results_path
+  li= link_to 'POST数据', post_datas_path
   li
     - if user_signed_in?
       = link_to('退出登录', destroy_user_session_path, :method => :delete)

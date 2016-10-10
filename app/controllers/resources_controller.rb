@@ -71,10 +71,10 @@ class ResourcesController < ApplicationController
 	protected
 	def load_collection
 		params[:q] ||= {}
-		if object_name.classify.constantize.respond_to? :show_order
-			@q = object_name.classify.constantize.show_order.ransack(params[:q])
+		if object_name.camelize.constantize.respond_to? :show_order
+			@q = object_name.camelize.constantize.show_order.ransack(params[:q])
 		else
-			@q = object_name.classify.constantize.ransack(params[:q])
+			@q = object_name.camelize.constantize.ransack(params[:q])
 		end
 		pages = 100
 		result = @q.result

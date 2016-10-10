@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :app_configs
   devise_for :users, :skip => [:registrations]
 
-  resources :clients
+  resources :clients, :post_datas
   resources :admin_users
   resources :client_payments, only: [:index, :show]
   resources :recv_posts, only: [:index, :show] do
@@ -10,8 +10,11 @@ Rails.application.routes.draw do
       get :send_all_notifies
     end
   end
-  get 'test_pages/:action', to: 'test_pages#%(action)'
-  post 'test_pages', to: 'test_pages#do_post'
+  namespace :test_pages do
+    %w(do_post gen_qrcode).each do |action|
+      get action, action: action
+    end
+  end
 
   post 'recv_sm', to: 'recv_sm#recv_post'
   resources :kaifu_gateways
@@ -33,5 +36,4 @@ Rails.application.routes.draw do
     end
   end
 
-  get ':controller/:action/(:id)'
 end

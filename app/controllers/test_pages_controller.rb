@@ -52,5 +52,6 @@ class TestPagesController < PubController
     qr.as_png.save("public/qrcodes/p003.png")
     qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay_app_t1")
     qr.as_png.save("public/qrcodes/p004.png")
+    render plain: 'gen_qrcode ok'
   end
 end

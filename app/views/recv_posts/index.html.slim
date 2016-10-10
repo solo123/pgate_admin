@@ -13,13 +13,9 @@ table.table.table-striped.table-bordered
     tr
       th ID
       th Method
-      th
-        | Remote host
-      th
-        | Header
+      th Remote host
+      th Header
       th data
-      th
-        | Params
       th Status
       th op
   tbody
@@ -31,8 +27,11 @@ table.table.table-striped.table-bordered
           = recv_post.remote_host
         td
           = recv_post.header
-        td= recv_post.data
         td
+          = recv_post.data
+          br/
+          |---
+          br/
           = recv_post.message
           br/
           = recv_post.params

@@ -1,0 +1,28 @@
+p#notice= notice
+h1.page-header POST DATA列表
+
+= paginate @collection
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th id
+      th sender
+      th url
+      th data
+      th response
+      th body
+      th error message
+      th created_at
+
+  tbody
+    - @collection.each do |p|
+      tr
+        td= p.id
+        td #{p.sender_id}(#{p.sender_type})
+        td= p.url
+        td= p.data
+        td= p.response
+        td= p.body
+        td= p.error_message
+        td= p.created_at
+        td= link_to 'Show', p
