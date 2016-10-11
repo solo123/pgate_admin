@@ -29,7 +29,7 @@ table.table.table-striped.table-bordered
   tbody
     - @collection.each do |r|
       tr
-        td=r.recv_post
+        td=r.sender
         td=r.client
         td=r.client_payment
         td=r.send_time
