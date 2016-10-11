@@ -11,7 +11,7 @@ class TestPagesController < PubController
       amount: p[:amount],
       fee: p[:fee],
       order_title: p[:order_title],
-      notify_url: 'http://112.74.184.236:8080/recv_notify',
+      notify_url: 'http://112.74.184.236:8011/recv_notify',
       callback_url: "http://a.pooulcloud.cn/test_pages/pay"
     }
     if p[:trans_type] == 'P001' || p[:trans_type] == 'P003'
@@ -24,19 +24,14 @@ class TestPagesController < PubController
     if client
       biz = Biz::PubEncrypt.new
       js[:mac] = biz.md5_mac(js, client.tmk)
-      #uri = URI('http://112.74.184.236:8008/payment')
-      uri = URI('http://localhost:8008/payment')
-      resp = Net::HTTP.post_form(uri, data: js.to_json)
-      if resp.is_a? Net::HTTPOK
-        begin
-          body_txt = resp.body.force_encoding('UTF-8')
-          @js = JSON.parse(body_txt)
-          @js.symbolize_keys!
-        rescue => e
-          @js = {error: e.message, resp: resp.to_s, body: body_txt}
-        end
-      else
-        @js = {resp: resp.to_s, body: resp.body.to_s}
+      url = 'http://112.74.184.236:8008/payment'
+      #uri = URI('http://localhost:8008/payment')
+      body_txt = Biz::WebBiz.post_data(url, js.to_json, nil)
+      begin
+        @js = JSON.parse(body_txt)
+        @js.symbolize_keys!
+      rescue => e
+        @js = {error: e.message, resp: resp.to_s, body: body_txt}
       end
     else
       @js = {error: "org:[#{p[:org_id]}] not found!\n"}
