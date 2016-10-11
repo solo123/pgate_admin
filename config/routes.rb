@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :app_configs
   devise_for :users, :skip => [:registrations]
 
-  resources :clients, :post_datas
+  resources :clients, :post_dats
   resources :admin_users
   resources :client_payments, only: [:index, :show]
   resources :recv_posts, only: [:index, :show] do

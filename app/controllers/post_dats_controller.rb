@@ -1,2 +1,2 @@
-class PostDatasController < ResourcesController
+class PostDatsController < ResourcesController
 end

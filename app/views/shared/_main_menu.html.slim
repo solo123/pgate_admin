@@ -37,7 +37,7 @@ ul.nav.navbar-nav.navbar-right
       li= link_to 'Kaifu - 回调列表', recv_posts_path
       li= link_to 'Kaifu数据', kaifu_gateways_path
       li= link_to '回调通知', kaifu_results_path
-  li= link_to 'POST数据', post_datas_path
+  li= link_to 'POST数据', post_dats_path
   li
     - if user_signed_in?
       = link_to('退出登录', destroy_user_session_path, :method => :delete)

@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20161010083640) do
     t.index ["client_id"], name: "index_payment_queries_on_client_id"
   end
 
-  create_table "post_data", force: :cascade do |t|
+  create_table "post_dats", force: :cascade do |t|
     t.string   "sender_type"
     t.integer  "sender_id"
     t.string   "url"
@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(version: 20161010083640) do
     t.text     "error_message"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["sender_type", "sender_id"], name: "index_post_data_on_sender_type_and_sender_id"
+    t.index ["sender_type", "sender_id"], name: "index_post_dats_on_sender_type_and_sender_id"
   end
 
   create_table "recv1_posts", force: :cascade do |t|
