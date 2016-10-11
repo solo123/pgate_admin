@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   namespace :test_pages do
-    %w(do_post gen_qrcode).each do |action|
+    %w(do_post gen_qrcode pay pay_t1 pay_app_t0 pay_app_t1 query_openid).each do |action|
       get action, action: action
     end
   end
