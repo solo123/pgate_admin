@@ -8,7 +8,6 @@ table.table.table-bordered.table-striped
       th id
       th sender
       th url
-      th data
       th response
       th body
       th error message
@@ -17,12 +16,14 @@ table.table.table-bordered.table-striped
   tbody
     - @collection.each do |p|
       tr
-        td= p.id
+        td rowspan=2
+          = link_to p.id, p
         td #{p.sender_id}(#{p.sender_type})
         td= p.url
-        td= p.data
         td= p.response
         td= p.body
         td= p.error_message
         td= p.created_at
-        td= link_to 'Show', p
+      tr
+        td colspan=6
+          = p.data
