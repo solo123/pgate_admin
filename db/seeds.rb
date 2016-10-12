@@ -14,6 +14,9 @@ AppConfig.set('kaifu.user.t1.skey', '1234567890abcdef')
 AppConfig.set('kaifu.host.notify', '61.135.202.242')
 AppConfig.set('kaifu.api.notify_url', 'http://112.74.184.236:8010/notify/kaifu')
 AppConfig.set('tfb.api.notify_url', 'http://112.74.184.236:8010/notify/tfb')
+AppConfig.set('tfb.api.spid', '1800314099')
+AppConfig.set('tfb.api.key', '12345')
+AppConfig.set('tfb.api.pay_url', 'http://apitest.tfb8.com/cgi-bin/v2.0/api_wx_pay_apply.cgi')
 
 puts "Add uni_order_id to ClientPayment."
 ClientPayment.where(uni_order_id: nil).each do |c|

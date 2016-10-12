@@ -11,7 +11,7 @@ class TestPagesController < PubController
       amount: p[:amount],
       fee: p[:fee],
       order_title: p[:order_title],
-      notify_url: 'http://112.74.184.236:8010/notify/test_page',
+      notify_url: AppConfig.get('kaifu.api.notify_url') + "_test",
       callback_url: "http://a.pooulcloud.cn/test_pages/pay",
       remote_ip: request.remote_ip
     }
@@ -25,14 +25,16 @@ class TestPagesController < PubController
     if client
       biz = Biz::PubEncrypt.new
       js[:mac] = biz.md5_mac(js, client.tmk)
-      url = 'http://112.74.184.236:8008/payment'
-      #uri = URI('http://localhost:8008/payment')
-      body_txt = Biz::WebBiz.post_data(url, js.to_json, nil)
-      begin
-        @js = JSON.parse(body_txt)
-        @js.symbolize_keys!
-      rescue => e
-        @js = {error: e.message}
+      url = AppConfig.get('pooul.api.pay_url')
+      if body_txt = Biz::WebBiz.post_data(url, js.to_json, nil)
+        begin
+          @js = JSON.parse(body_txt)
+          @js.symbolize_keys!
+        rescue => e
+          @js = {error: e.message}
+        end
+      else
+        @js = {error: 'post_data失败'}
       end
     else
       @js = {error: "org:[#{p[:org_id]}] not found!\n"}
@@ -48,6 +50,8 @@ class TestPagesController < PubController
     qr.as_png.save("public/qrcodes/p003.png")
     qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay_app_t1")
     qr.as_png.save("public/qrcodes/p004.png")
+    qr = RQRCode::QRCode.new("#{root_url}/test_pages/pay_wap")
+    qr.as_png.save("public/qrcodes/p005.png")
     render plain: 'gen_qrcode ok'
   end
 end

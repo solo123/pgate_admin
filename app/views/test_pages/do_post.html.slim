@@ -14,4 +14,4 @@ p
     
 - if @js[:redirect_url]
   p 
-    = link_to '确认跳转支付', @js[:redirect_url]
+    = link_to '确认跳转支付', URI.decode(@js[:redirect_url])
