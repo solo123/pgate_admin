@@ -32,7 +32,7 @@ class TestPagesController < PubController
         @js = JSON.parse(body_txt)
         @js.symbolize_keys!
       rescue => e
-        @js = {error: e.message, resp: resp.to_s, body: body_txt}
+        @js = {error: e.message}
       end
     else
       @js = {error: "org:[#{p[:org_id]}] not found!\n"}
