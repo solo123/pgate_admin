@@ -12,7 +12,8 @@ class TestPagesController < PubController
       fee: p[:fee],
       order_title: p[:order_title],
       notify_url: 'http://112.74.184.236:8011/recv_notify',
-      callback_url: "http://a.pooulcloud.cn/test_pages/pay"
+      callback_url: "http://a.pooulcloud.cn/test_pages/pay",
+      remote_ip: request.remote_ip
     }
     if p[:trans_type] == 'P001' || p[:trans_type] == 'P003'
       js[:card_no] = '6225886556455713'
