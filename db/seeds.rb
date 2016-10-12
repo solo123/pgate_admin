@@ -7,12 +7,13 @@ AppConfig.set('kaifu.api.openid.pay_url', 'http://61.135.202.242/payform/organiz
 AppConfig.set('kaifu.api.openid.query_url', 'http://61.135.202.242:8022/payform/organization')
 AppConfig.set('kaifu.api.app.pay_url', 'http://61.135.202.242:8020/payform/organization')
 AppConfig.set('kaifu.api.app.query_url', 'http://61.135.202.242:8022/payform/organization')
-AppConfig.set('pooul.api.notify_url', 'http://112.74.184.236:8010/recv_notify')
 AppConfig.set('pooul.api.pay_url', 'http://112.74.184.236:8008/payment')
 AppConfig.set('pooul.api.query_url', 'http://112.74.184.236:8009/query')
 AppConfig.set('kaifu.user.d0.skey', '1234567890abcdef')
 AppConfig.set('kaifu.user.t1.skey', '1234567890abcdef')
 AppConfig.set('kaifu.host.notify', '61.135.202.242')
+AppConfig.set('kaifu.api.notify_url', 'http://112.74.184.236:8010/notify/kaifu')
+AppConfig.set('tfb.api.notify_url', 'http://112.74.184.236:8010/notify/tfb')
 
 puts "Add uni_order_id to ClientPayment."
 ClientPayment.where(uni_order_id: nil).each do |c|

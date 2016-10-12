@@ -2,26 +2,25 @@ p#notice
   = notice
 
 p
-  = link_to 'Back', recv_posts_path
+  = link_to 'Back', 'javascript:history.back()'
   
-p
-  strong ID
-  = @object.id
-p
-  strong Method
-  = @object.method
-p
-  strong
-    | Remote host:
-  = @object.remote_host
-p
-  strong
-    | Header:
-  = @object.header
-p
-  strong
-    | Params:
-  = @object.params
+table.table.table-striped.table-bordered
+  tr
+    td ID
+    td= @object.id
+  tr
+    td Method
+    td= @object.method
+  tr
+    td Remote host
+    td= @object.remote_host
+  tr
+    td Header
+    td= @object.header
+  tr
+    td Params
+    td= @object.params
+
 p
   strong Detail
   div

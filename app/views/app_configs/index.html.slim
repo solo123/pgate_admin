@@ -13,16 +13,14 @@ table.table.table-striped.table-bordered
       th Group
       th Name
       th Val
-      th[colspan="3"]
+      th
   tbody
     - @collection.each do |app_config|
       tr
-        td= app_config.group
+        td= link_to app_config.group, app_config
         td
           = app_config.name
         td
           = app_config.val
-        td
-          = link_to 'Show', app_config
         td
           = link_to 'Edit', edit_app_config_path(app_config)

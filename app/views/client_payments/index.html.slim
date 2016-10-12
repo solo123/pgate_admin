@@ -12,42 +12,40 @@ table.table.table-bordered.table-striped
       th order_time
       th order_id
       th order_title
-      th pay_pass
-      th img_url
       th amount
       th fee
-      th card_no
-      th card_holder_name
-      th person_id_num
-      th notify_url
-      th callback_url
       th remote_ip
       th mac
-      th finish_time
       th status
-      th op
 
   tbody
     - @collection.each do |p|
       tr
-        td= p.id
+        td rowspan=2
+          = link_to p.id, p
         td= p.client.name if p.client
         td= p.org_id
         td= p.trans_type
         td= p.order_time
         td= p.order_id
         td= p.order_title
-        td= p.pay_pass
-        td= p.img_url
         td= p.amount
         td= p.fee
-        td= p.card_no
-        td= p.card_holder_name
-        td= p.person_id_num
-        td= p.notify_url
-        td= p.callback_url
         td= p.remote_ip
         td= p.mac
-        td= p.finish_time
         td= p.status
-        td= link_to 'Show', p
+      tr
+        td colspan=11
+          - if p.img_url
+            strong 二维码url:
+            = p.img_url
+          - if p.card_no
+            strong 银行卡：
+            = p.card_no
+            strong 名字：
+            = p.card_holder_name
+          br/
+          strong Notify：
+          = p.notify_url
+          strong Callback：
+          = p.callback_url

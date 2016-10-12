@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :app_configs
   devise_for :users, :skip => [:registrations]
 
-  resources :clients, :post_dats
+  resources :clients, :post_dats, :biz_errors
   resources :admin_users
   resources :client_payments, only: [:index, :show]
   resources :recv_posts, only: [:index, :show] do
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   namespace :test_pages do
-    %w(gen_qrcode pay pay_t1 pay_app_t0 pay_app_t1 query_openid).each do |action|
+    %w(gen_qrcode pay pay_t1 pay_app_t0 pay_app_t1 pay_wap query_openid).each do |action|
       get action, action: action
     end
   end

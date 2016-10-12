@@ -1,21 +1,23 @@
-= form_for(app_config) do |f|
-  - if app_config.errors.any?
+= form_for(@object, html: {class: 'table-form'}) do |f|
+  - if @object.errors.any?
     #error_explanation
       h2
-        = pluralize(app_config.errors.count, "error")
+        = pluralize(@object.errors.count, "error")
         |  prohibited this app_config from being saved:
       ul
-        - app_config.errors.full_messages.each do |message|
+        - @object.errors.full_messages.each do |message|
           li
             = message
-  .field
-    = f.label :group
-    = f.text_field :group
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :val
-    = f.text_field :val
-  .actions
-    = f.submit
+  table.table.table-bordered
+    tr
+      td= f.label :group
+      td= f.text_field :group
+    tr
+      td= f.label :name
+      td= f.text_field :name
+    tr
+      td= f.label :val
+      td= f.text_field :val
+    tr
+      td
+      td= f.submit

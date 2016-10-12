@@ -1,0 +1,22 @@
+p#notice= notice
+h1.page-header 业务错误列表
+
+= paginate @collection
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th id
+      th source
+      th code
+      th message
+      th detail
+      th created_at
+  tbody
+    - @collection.each do |c|
+      tr
+        td= link_to c.id, c
+        td= c.error_source
+        td= c.code
+        td= c.message
+        td= c.detail
+        td= c.created_at

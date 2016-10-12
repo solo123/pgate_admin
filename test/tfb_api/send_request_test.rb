@@ -29,7 +29,7 @@ class SendRequestTest < ActionDispatch::IntegrationTest
       notify_url: notify_url,
       pay_show_url: 'http://a.pooulcloud.cn',
       sp_billno: order_id,
-      spbill_create_ip: '112.74.184.236',
+      spbill_create_ip: '183.16.160.240',
       pay_type: '800206',
       tran_time: Time.now.strftime("%Y%m%d%H%M%S"),
       tran_amt: 1000,
@@ -52,6 +52,7 @@ class SendRequestTest < ActionDispatch::IntegrationTest
       puts "-------GET TFB-------"
       puts "mab: " + mab
       puts "rt:  " + rt.to_s
+      puts "pay: " + URI.decode(rt['pay_info'])
     #end
     assert_equal "00", rt['retcode']
     #{"cur_type"=>"CNY", "listid"=>"1021800314099161012000020661", "pay_info"=>"https%3A%2F%2Fpay.swiftpass.cn%2Fpay%2Fwappay%3Ftoken_id%3D91079346142fdcbfc0d0be8aae906f77%26service%3Dpay.weixin.wappay", "pay_type"=>"800206", "retcode"=>"00", "retmsg"=>"操作成功", "sign"=>"287696d6bf93f94edae1dfdcd93c50f4", "sp_billno"=>"ORD1476239835", "spid"=>"1800314099", "sysd_time"=>"20161012103718", "tran_amt"=>"100"}

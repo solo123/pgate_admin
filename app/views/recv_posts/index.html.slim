@@ -2,7 +2,7 @@ p#notice
   = notice
   
 h1.page-header
-  | Kaifu回调列表
+  | 回调列表
 
 p
   = link_to '重发通知', send_all_notifies_recv_posts_path
@@ -12,29 +12,25 @@ table.table.table-striped.table-bordered
   thead
     tr
       th ID
-      th Method
-      th Remote host
-      th Header
-      th data
-      th Status
-      th op
+      th 发送方
+      th 发送方IP
+      th HTTP头
+      th 状态
   tbody
     - @collection.each do |recv_post|
       tr
-        td= recv_post.id
+        td rowspan=2
+          = link_to recv_post.id, recv_post
         td= recv_post.method
         td
           = recv_post.remote_host
         td
           = recv_post.header
-        td
-          = recv_post.data
+        td= recv_post.status
+      tr
+        td colspan=4
+          = recv_post.params
           br/
           |---
           br/
-          = recv_post.message
-          br/
-          = recv_post.params
-        td= recv_post.status
-        td
-          = link_to 'Show', recv_post
+          = recv_post.data
