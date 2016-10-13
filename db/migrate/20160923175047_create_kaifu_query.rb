@@ -15,7 +15,7 @@ class CreateKaifuQuery < ActiveRecord::Migration[5.0]
       t.string :resp_code
       t.string :resp_desc
       t.string :mac
-      t.string :response_text
+      t.text :response_text
       t.timestamps
     end
   end
