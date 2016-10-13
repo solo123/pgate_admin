@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :clients, :post_dats, :biz_errors
   resources :tfb_orders
   resources :admin_users
-  resources :client_payments, only: [:index, :show]
+  resources :client_payments, only: [:index, :show] do
+    member do
+      get :send_notify
+    end
+  end
   resources :recv_posts, only: [:index, :show] do
     collection do
       get :send_all_notifies

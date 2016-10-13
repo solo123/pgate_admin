@@ -19,5 +19,9 @@ class ClientPaymentsController < ResourcesController
   def show_post
     render text: 'abc!!'
   end
+  def send_notify
+    @object = ClientPayment.find(params[:id])
+    Biz::PaymentBiz.send_notify(@object)
+  end
 
 end
