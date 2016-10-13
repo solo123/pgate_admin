@@ -3,8 +3,8 @@ class CreateRecvPosts < ActiveRecord::Migration
     create_table :recv_posts do |t|
       t.string :method
       t.string :remote_host
-      t.string :header
-      t.string :params
+      t.text :header
+      t.text :params
       t.text :detail
       t.integer :status, default: 0
 
