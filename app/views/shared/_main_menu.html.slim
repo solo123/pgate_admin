@@ -33,6 +33,11 @@ ul.nav.navbar-nav.navbar-right
   li= link_to '回调列表', recv_posts_path
   li.dropdown
     a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
+      | 天付宝数据 
+    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li= link_to 'TFB数据', tfb_orders_path
+  li.dropdown
+    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
       | 凯富数据 
     ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
       li= link_to 'Kaifu数据', kaifu_gateways_path
