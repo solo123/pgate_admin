@@ -5,12 +5,10 @@ h1.page-header 商户请求列表
 table.table.table-bordered.table-striped
   thead
     tr
-      th id
-      th client
-      th org_id
+      th 商户
+      th order_id
       th trans_type
       th order_time
-      th order_id
       th order_title
       th amount
       th fee
@@ -22,21 +20,23 @@ table.table.table-bordered.table-striped
     - @collection.each do |p|
       tr
         td rowspan=2
-          = link_to p.id, p
+          = p.client.name if p.client
           br/
-          br/
-          = link_to '通知', send_notify_client_payment_path(p), remote: true
-        td= p.client.name if p.client
-        td= p.org_id
+          = p.org_id
+        td= link_to p.order_id, p
         td= p.trans_type
         td= p.order_time
-        td= p.order_id
         td= p.order_title
         td= p.amount
         td= p.fee
         td= p.remote_ip
         td= p.mac
-        td= p.status
+        td
+          = p.status
+          | &nbsp;
+          - if p.status < 7
+            = link_to '通知', send_notify_client_payment_path(p), remote: true
+
       tr
         td colspan=11
           - if p.img_url
@@ -50,5 +50,6 @@ table.table.table-bordered.table-striped
           br/
           strong Notify：
           = p.notify_url
+          | &nbsp;
           strong Callback：
           = p.callback_url
