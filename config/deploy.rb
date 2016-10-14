@@ -42,9 +42,6 @@ end
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
-
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
 
@@ -52,27 +49,9 @@ task :setup => :environment do
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
 
-  # puma.rb 配置puma必须得文件夹及文件
-  queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
-
-  queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
-
-  queue! %[touch "#{deploy_to}/shared/config/puma.rb"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/puma.rb'."]
-
-  # tmp/sockets/puma.state
-  queue! %[touch "#{deploy_to}/shared/tmp/sockets/puma.state"]
-  queue  %[echo "-----> Be sure to edit 'shared/tmp/sockets/puma.state'."]
-
-  # log/puma.stdout.log
-  queue! %[touch "#{deploy_to}/shared/log/puma.stdout.log"]
-  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stdout.log'."]
-
-  # log/puma.stdout.log
-  queue! %[touch "#{deploy_to}/shared/log/puma.stderr.log"]
-  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stderr.log'."]
+  queue! %[touch "#{deploy_to}/#{shared_path}/Gemfile"]
+  queue! %[touch "#{deploy_to}/#{shared_path}/Gemfile.lock"]
+  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/Gemfile' and 'Gemfile.lock'."]
 
   if repository
     repo_host = repository.split(%r{@|://}).last.split(%r{:|\/}).first
@@ -103,7 +82,27 @@ task :deploy => :environment do
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
-      queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      #queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      #invoke :'puma:restart'
+    end
+  end
+  namespace :puma do
+    desc "Start the application"
+    task :start do
+      queue 'echo "-----> Start Puma"'
+      queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start", :pty => false
+    end
+
+    desc "Stop the application"
+    task :stop do
+      queue 'echo "-----> Stop Puma"'
+      queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
+    end
+
+    desc "Restart the application"
+    task :restart do
+      queue 'echo "-----> Restart Puma"'
+      queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
     end
   end
 end
