@@ -83,8 +83,9 @@ task :deploy => :environment do
     to :launch do
       queue  %[echo "-----> do launch"]
 
-      queue! %["cd #{deploy_to}/#{current_path} && bundle exec pumactl --state #{deploy_to}/tmp/pids/puma-production.state restart"]
+      queue! "pumactl --state #{deploy_to}/tmp/pids/puma-production.state restart"
       queue %["mkdir -p #{deploy_to}/#{current_path}/tmp/"]
+      #queue 'touch tmp/restart.txt'
       #queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
 
     end
