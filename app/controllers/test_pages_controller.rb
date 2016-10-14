@@ -11,8 +11,8 @@ class TestPagesController < PubController
       amount: p[:amount],
       fee: p[:fee],
       order_title: p[:order_title],
-      notify_url: AppConfig.get('kaifu.api.notify_url') + "_test",
-      callback_url: "http://a.pooulcloud.cn/test_pages/pay",
+      notify_url: AppConfig.get('kaifu.api.notify_url') + "_test_notify",
+      callback_url: AppConfig.get('kaifu.api.notify_url') + "_test_callback",
       remote_ip: request.remote_ip
     }
     if p[:trans_type] == 'P001' || p[:trans_type] == 'P003'

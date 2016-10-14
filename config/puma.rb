@@ -1,7 +1,7 @@
 #!/usr/bin/env puma
 
 # start puma with:
-# bundle exec puma -e production -C path/to/your/app/config/puma.rb
+# bundle exec puma -e production -C /home/rb/work/pgate_admin/config/puma.rb
 
 application_path = '/home/rb/work/pgate_admin'
 railsenv = 'production'
