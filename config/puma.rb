@@ -6,7 +6,7 @@
 #bundle exec pumactl --state tmp/sockets/puma.state restart
 
 railsenv = 'production'
-application_path = '/home/rb/work/pgate_admin'
+application_path = '/home/rb/work/pgate_admin/current'
 threads 2, 32 # minimum 2 threads, maximum 64 threads
 workers 2
 
