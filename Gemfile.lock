@@ -1,5 +1,5 @@
 PATH
-  remote: ../pgate_model
+  remote: /home/rb/work/pgate_model
   specs:
     pgate_model (0.1.0)
       rails (~> 5.0.0, >= 5.0.0.1)
