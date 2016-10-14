@@ -81,12 +81,12 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
+      queue  %[echo "-----> do launch"]
 
-      queue! "cd #{deploy_to}/#{current_path} && pumactl --state #{deploy_to}/tmp/pids/puma-production.state restart"
-      queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
+      queue! %["cd #{deploy_to}/#{current_path} && pumactl --state #{deploy_to}/tmp/pids/puma-production.state restart"]
+      queue %["mkdir -p #{deploy_to}/#{current_path}/tmp/"]
       #queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
 
-      #invoke :'puma:restart'
     end
   end
 
