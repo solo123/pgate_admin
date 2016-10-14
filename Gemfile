@@ -53,7 +53,7 @@ end
 gem 'bootstrap'
 gem 'devise'
 gem 'slim'
-gem 'pgate_model', path: '../pgate_model'
+gem 'pgate_model', path: '/home/rb/work/pgate_model'
 gem 'ransack'
 gem 'kaminari'
 gem 'rqrcode'
