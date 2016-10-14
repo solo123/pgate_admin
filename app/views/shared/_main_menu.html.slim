@@ -29,8 +29,12 @@ ul.nav.navbar-nav.navbar-right
       li= link_to '签到列表', kaifu_signins_path
       li= link_to '商户列表', clients_path
       li= link_to '系统配置', app_configs_path
-  li= link_to '商户请求', client_payments_path
-  li= link_to '回调列表', recv_posts_path
+  li.dropdown
+    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
+      | 商户数据 
+    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li= link_to '商户请求', client_payments_path
+      li= link_to '商户对账单', statement_client_payments_path
   li.dropdown
     a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
       | 天付宝数据 
@@ -46,6 +50,7 @@ ul.nav.navbar-nav.navbar-right
     a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
       | 系统数据 
     ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li= link_to '回调列表', recv_posts_path
       li= link_to 'POST数据', post_dats_path
       li= link_to '系统错误', biz_errors_path
 

@@ -1,0 +1,25 @@
+p#notice= notice
+h1.page-header 商户对账单
+
+= paginate @collection
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th 交易时间
+      th 商户
+      th 订单号
+      th 交易类型
+      th 商品名称
+      th 金额
+      th 手续费
+
+  tbody
+    - @collection.each do |p|
+      tr
+        td= string_2_datetime_format p.order_time
+        td= p.client.name if p.client
+        td= link_to p.order_id, p
+        td= p.trans_type
+        td= p.order_title
+        td= p.amount
+        td= p.fee

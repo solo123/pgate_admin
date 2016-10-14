@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     member do
       get :send_notify
     end
+    collection do
+      get :statement
+    end
   end
   resources :recv_posts, only: [:index, :show] do
     collection do
