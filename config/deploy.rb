@@ -14,13 +14,14 @@ set :domain, 'rb@a.pooulcloud.cn'
 set :deploy_to, '/home/rb/work/pgate_admin'
 set :repository, 'git://github.com/solo123/pgate_admin.git'
 set :branch, 'deploy'
+set :work_path, '/home/rb/work'
 
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'Gemfile', 'Gemfile.lock']
+#set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'Gemfile', 'Gemfile.lock']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -30,10 +31,6 @@ set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'Gemfile
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  # invoke :'rbenv:load'
-
   # For those using RVM, use this to load an RVM version@gemset.
   invoke :'rvm:use[ruby-2.3.1@default]'
 end
@@ -41,29 +38,36 @@ end
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
-task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
-
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
-
-  queue! %[touch "#{deploy_to}/#{shared_path}/Gemfile"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/Gemfile.lock"]
-  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/Gemfile' and 'Gemfile.lock'."]
-
-  if repository
-    repo_host = repository.split(%r{@|://}).last.split(%r{:|\/}).first
-    repo_port = /:([0-9]+)/.match(repository) && /:([0-9]+)/.match(repository)[1] || '22'
-
-    queue %[
-      if ! ssh-keygen -H  -F #{repo_host} &>/dev/null; then
-        ssh-keyscan -t rsa -p #{repo_port} -H #{repo_host} >> ~/.ssh/known_hosts
-      fi
-    ]
-  end
+task :clone => :environment do
+  queue  %[echo "-----> git clone"]
+  queue! %{cd #{work_path}}
+  queue! %{git clone #{repository}}
 end
+
+task :pull => :environment do
+  queue  %[echo "-----> git pull"]
+  queue  %[cd #{deploy_to}]
+  queue! %{git checkout deploy}
+  queue! %{git reset --hard}
+  queue! %{git pull origin deploy}
+
+  queue  %{rm config/puma.rb}
+  queue  %{ln -s /home/rb/work/puma/pgate_admin.rb config/puma.rb}
+  queue  %{rm config/database.yml}
+  queue  %{ln -s /home/rb/work/database.yml config/database.yml}
+
+  queue  %{mkdir -p tmp/sockets}
+  queue  %{mkdir -p tmp/pids}
+  queue! %{bundle install --without development test}
+
+  queue  %[echo "-----> restart puma"]
+  queue  %{touch tmp/pids/puma-production.state}
+  queue! %{pumactl --state tmp/pids/puma-production.state restart}
+
+  queue %{echo "====== test after pull ======"}
+  queue! %{curl http://a.pooulcloud.cn/}
+end
+
 
 desc "Deploys the current version to the server."
 task :deploy => :environment do
@@ -87,7 +91,6 @@ task :deploy => :environment do
       #queue %["mkdir -p #{deploy_to}/#{current_path}/tmp/"]
       #queue 'touch tmp/restart.txt'
       #queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-
     end
   end
 
@@ -95,10 +98,3 @@ task :deploy => :environment do
   #bundle exec pumactl --state tmp/sockets/puma.state stop
   #bundle exec pumactl --state tmp/sockets/puma.state restart
 end
-
-# For help in making your deploy script, see the Mina documentation:
-#
-#  - http://nadarei.co/mina
-#  - http://nadarei.co/mina/tasks
-#  - http://nadarei.co/mina/settings
-#  - http://nadarei.co/mina/helpers
