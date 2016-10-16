@@ -5,7 +5,7 @@ PATH
       rails (~> 5.0.0, >= 5.0.0.1)
 
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://gems.ruby-china.org/
   remote: https://rails-assets.org/
   specs:
     actioncable (5.0.0.1)
