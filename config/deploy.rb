@@ -1,7 +1,6 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
@@ -51,21 +50,19 @@ task :pull => :environment do
   queue! %{git reset --hard}
   queue! %{git pull origin deploy}
 
-  queue  %{rm config/puma.rb}
-  queue  %{ln -s /home/rb/work/puma/pgate_admin.rb config/puma.rb}
-  queue  %{rm config/database.yml}
-  queue  %{ln -s /home/rb/work/database.yml config/database.yml}
+  queue  %{echo "app_name = 'pgate_admin'" > config/puma.rb && cat ../puma/pgate.rb >> config/puma.rb}
+  queue  %{cp ../database.yml config}
+  queue  %{cp ../secrets.yml config}
 
-  queue  %{mkdir -p tmp/sockets}
-  queue  %{mkdir -p tmp/pids}
   queue! %{bundle install --without development test}
+  queue! %{RAILS_ENV=production rails assets:precompile}
 
   queue  %[echo "-----> restart puma"]
-  queue  %{touch tmp/pids/puma-production.state}
-  queue! %{pumactl --state tmp/pids/puma-production.state restart}
+  queue  %{touch /home/rb/tmp/pids/pgate_admin.state}
+  queue! %{pumactl restart}
 
   queue %{echo "====== test after pull ======"}
-  queue! %{curl http://a.pooulcloud.cn/}
+  queue! %{curl http://b.pooulcloud.cn/}
 end
 
 
