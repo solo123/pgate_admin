@@ -19,15 +19,19 @@ class SendRequestTest < ActionDispatch::IntegrationTest
   end
   test "post to TFB valid" do
     url = "http://apitest.tfb8.com/cgi-bin/v2.0/api_wx_pay_apply.cgi"
-    notify_url = 'http://112.74.184.236:8011/recv_notify'
+    #url = "http://upay.tfb8.com/cgi-bin/v2.0/api_wx_pay_apply.cgi"
+    notify_url = 'http://112.74.184.236:8010/notify/test_reqeust'
+    callback_url = "http://112.74.184.236:8010/notify/test_reqeust_cb"
     order_id = 'ORD-' + Time.now.to_i.to_s + '-001'
+    #user_id = '1800329293'
+    #tmk = '21ae47d4910b11e698eb6c0b84b7aa1a'
     user_id = '1800314099'
     tmk = '12345'
 
     js = {
       spid: user_id,
       notify_url: notify_url,
-      pay_show_url: 'http://a.pooulcloud.cn',
+      pay_show_url: callback_url,
       sp_billno: order_id,
       spbill_create_ip: '183.16.160.240',
       pay_type: '800206',

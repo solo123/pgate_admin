@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017093559) do
+ActiveRecord::Schema.define(version: 20161017162213) do
 
   create_table "app_configs", force: :cascade do |t|
     t.string   "group"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(version: 20161017093559) do
     t.datetime "last_notify"
     t.string   "attach_info"
     t.string   "sp_udid"
+    t.datetime "pay_time"
+    t.datetime "close_time"
+    t.string   "refund_id"
     t.index ["client_id"], name: "index_client_payments_on_client_id"
     t.index ["order_id"], name: "index_client_payments_on_order_id"
     t.index ["org_id"], name: "index_client_payments_on_org_id"
@@ -290,6 +293,12 @@ ActiveRecord::Schema.define(version: 20161017093559) do
     t.integer  "status",            default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "tran_state"
+    t.string   "refund_state"
+    t.string   "state"
+    t.datetime "pay_time"
+    t.datetime "close_time"
+    t.string   "refund_listid"
     t.index ["client_payment_id"], name: "index_tfb_orders_on_client_payment_id"
   end
 
