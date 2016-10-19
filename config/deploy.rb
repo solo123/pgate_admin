@@ -56,6 +56,7 @@ task :pull => :environment do
 
   queue! %{bundle install --without development test}
   queue! %{RAILS_ENV=production rails assets:precompile}
+  queue! %{RAILS_ENV=production rails db:migrate}
 
   queue  %[echo "-----> restart puma"]
   queue  %{touch /home/rb/tmp/pids/pgate_admin.state}
