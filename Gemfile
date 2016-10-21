@@ -59,3 +59,5 @@ gem 'ransack'
 gem 'kaminari'
 gem 'rqrcode'
 gem 'mina'
+
+gem 'rails_admin', '~> 1.0'

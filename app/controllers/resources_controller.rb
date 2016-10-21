@@ -1,4 +1,6 @@
 class ResourcesController < ApplicationController
+  layout 'backend'
+  before_action :authenticate_user!
 	respond_to :html, :js, :json
 
 	def select

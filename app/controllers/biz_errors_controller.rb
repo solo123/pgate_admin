@@ -1,2 +1,0 @@
-class BizErrorsController < ResourcesController
-end

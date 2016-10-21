@@ -1,4 +1,4 @@
-class ClientPaymentsController < ResourcesController
+class Backend::ClientPaymentsController < ResourcesController
   def statement
     @collection = ClientPayment.where(status: 8).show_order\
       .page(params[:page]).per(100)

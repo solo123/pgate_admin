@@ -1,4 +1,4 @@
-class TestPagesController < PubController
+class TestPagesController < ApplicationController
   def do_post
     params.permit!
     p = params[:payment]

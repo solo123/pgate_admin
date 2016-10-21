@@ -1,4 +1,4 @@
-class RecvPostsController < ResourcesController
+class Backend::RecvPostsController < ResourcesController
   def send_all_notifies
     RecvPost.not_send.each do |p|
       if p.method == 'tfb'

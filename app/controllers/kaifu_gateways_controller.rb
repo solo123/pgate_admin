@@ -1,2 +1,0 @@
-class KaifuGatewaysController < ResourcesController
-end

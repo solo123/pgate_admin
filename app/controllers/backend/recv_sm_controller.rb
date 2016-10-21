@@ -1,4 +1,4 @@
-class RecvSmController < ApplicationController
+class Backend::RecvSmController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def recv_post
