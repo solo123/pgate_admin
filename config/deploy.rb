@@ -82,7 +82,7 @@ end
 task :test do
   run :local do
     comment "test #{app_name}!"
-    command %{curl -X POST -d 'data={"org_id":"123"}' http://a.pooulcloud.cn:8009/query}
+    command %{curl http://a.pooulcloud.cn}
   end
 end
 # For help in making your deploy script, see the Mina documentation:
