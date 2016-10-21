@@ -10,7 +10,7 @@ require 'securerandom'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-app_name = 'pgate_query'
+app_name = 'pgate_admin'
 
 set :domain, 'rb@a.pooulcloud.cn'
 set :deploy_to, "/home/rb/work/#{app_name}"
@@ -60,8 +60,8 @@ task :deploy do
     invoke :clean_shared_files
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    #invoke :'rails:db_migrate'
-    #invoke :'rails:assets_precompile'
+    invoke :'rails:db_migrate'
+    invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do

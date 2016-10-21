@@ -54,7 +54,7 @@ end
 gem 'bootstrap'
 gem 'devise'
 gem 'slim'
-gem 'pgate_model', path: '../pgate_model'
+gem 'pgate_model', git: 'https://github.com/solo123/pgate_model.git'
 gem 'ransack'
 gem 'kaminari'
 gem 'rqrcode'
