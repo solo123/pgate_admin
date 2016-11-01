@@ -79,6 +79,9 @@ task :clean_shared_files do
   command %{rm config/database.yml config/puma.rb config/secrets.yml}
 end
 
+task :server_info do
+  command %{ps aux|grep puma}
+end
 task :test do
   run :local do
     comment "test #{app_name}!"

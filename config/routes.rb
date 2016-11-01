@@ -4,38 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations]
 
   scope module: :backend, path: :adm do
-    root to: 'client_payments#index'
+    root to: 'payments#index'
     resources :app_configs
-    resources :clients, :post_dats, :biz_errors
-    resources :tfb_orders
-    resources :admin_users
-    resources :kaifu_gateways
-    resources :kaifu_results
-    resources :kaifu_signins, only: [:index]
-    resources :client_payments, only: [:index, :show] do
-      member do
-        get :send_notify
-      end
-      collection do
-        get :statement
-      end
-    end
-    resources :recv_posts, only: [:index, :show] do
-      collection do
-        get :send_all_notifies
-      end
-    end
-    resources :payments do
-      member do
-        get :sent_gateway, :show_post
-      end
-    end
-    resources :jgps do
-      collection do
-        get :signin
-      end
-    end
-
+    resources :orgs, :sent_posts, :notify_recvs
+    resources :payments
   end
 
   namespace :test_pages do
@@ -46,6 +18,5 @@ Rails.application.routes.draw do
   post 'test_pages', to: 'test_pages#do_post'
   post 'recv_sm', to: 'recv_sm#recv_post'
   root 'home#index'
-  put 'wgate', to: 'wgate#payment'
 
 end

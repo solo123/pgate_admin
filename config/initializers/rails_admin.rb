@@ -31,7 +31,6 @@ RailsAdmin.config do |config|
   config.navigation_static_links = {
     '临时后台' => '/adm'
   }
-  config.excluded_models = ["KaifuGateway", "KaifuQuery", "KaifuResult", "KaifuSignin"]
 
   config.actions do
     dashboard                     # mandatory
@@ -41,7 +40,7 @@ RailsAdmin.config do |config|
     #bulk_delete
     show
     edit do
-      only ['AppConfig', 'Client']
+      only ['AppConfig', 'Org']
     end
     #delete
     show_in_app
@@ -51,33 +50,7 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
-  config.model 'RecvPost' do
-    list do
-      field :method
-      field :remote_host
-      field :header
-      field :params
-      field :status
-      field :message
-    end
-    show do
-      include_all_fields
-      field :detail do
-        formatted_value do
-          value.html_safe
-        end
-      end
-    end
-  end
-#  config.model 'ClientPayment' do
-#    show do
-#      field :org_id
-#      field :alex do
-#        formatted_value{bindings[:object].client.tmk}
-#      end
-#    end
-#  end
-  config.model 'Client' do
+  config.model 'Org' do
     navigation_label '系统管理'
     label '商户账号'
   end
@@ -92,10 +65,6 @@ RailsAdmin.config do |config|
     #  field :name
     #  field :created_at
     #end
-  end
-  config.model 'BizError' do
-    navigation_label '系统管理'
-    label '错误信息'
   end
 
 end
