@@ -61,13 +61,13 @@ class CreatePayments < ActiveRecord::Migration[5.0]
       t.string :uni_order_num
       t.string :channel_order_num
       t.string :real_order_num
-      t.integer :send_code
+      t.string :send_code
       t.string :send_desc
       t.datetime :send_time
-      t.integer :pay_code
+      t.string :pay_code
       t.string :pay_desc
       t.datetime :pay_time
-      t.integer :t0_code
+      t.string :t0_code
       t.string :t0_desc
       t.string :pay_url
       t.string :barcode_url

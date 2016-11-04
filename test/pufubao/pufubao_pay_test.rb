@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PufubaoPayTest < ActionDispatch::IntegrationTest
   test "post to Pufubao invalid" do
+    return
     url = "http://pay.pufubao.net/weixin/toPay"
     xml = %{<xml>
   <attach>测试附加数据</attach>
@@ -19,24 +20,6 @@ class PufubaoPayTest < ActionDispatch::IntegrationTest
   <time_start>20160620143422</time_start>
   <total_fee>1</total_fee>
 </xml>}
-=begin
-    service_type
-    mch_id
-    customer_out_trade_ no
-    device_inf o
-    body
-    attach
-    total_fee
-    "mch_creat
-    e_ip "
-    time_start
-    op_user_i d
-    op_shop_i d
-    notify_url
-    callback_url
-    nonce_str
-    sign
-=end
     begin
       uri = URI(url)
       request = Net::HTTP::Post.new(uri)
@@ -51,49 +34,41 @@ class PufubaoPayTest < ActionDispatch::IntegrationTest
     end
 
   end
+
   test "post to Pufubao valid" do
-    return
-    url = "http://apitest.tfb8.com/cgi-bin/v2.0/api_wx_pay_apply.cgi"
-    #url = "http://upay.tfb8.com/cgi-bin/v2.0/api_wx_pay_apply.cgi"
+
+    url = "http://brcb.pufubao.net/gateway"
     notify_url = 'http://112.74.184.236:8010/notify/test_reqeust'
     callback_url = "http://112.74.184.236:8010/notify/test_reqeust_cb"
     order_id = 'ORD-' + Time.now.to_i.to_s + '-001'
-    #user_id = '1800329293'
-    #tmk = '21ae47d4910b11e698eb6c0b84b7aa1a'
-    user_id = '1800314099'
-    tmk = '12345'
-
+    mch_id = "C147815927610610144"
+    key = "80ec3fa34fa04d8fa369d6170aaa55a2"
     js = {
-      spid: user_id,
-      notify_url: notify_url,
-      pay_show_url: callback_url,
-      sp_billno: order_id,
-      spbill_create_ip: '183.16.160.240',
-      pay_type: '800206',
-      tran_time: Time.now.strftime("%Y%m%d%H%M%S"),
-      tran_amt: 1000,
-      cur_type: 'CNY',
-      item_name: 'Test-Good中文',
-      bank_mch_name: 'APD001',
-      bank_mch_id: '1200567'
+      service_type: 'WECHAT_WEBPAY',
+      mch_id: mch_id,
+      nonce_str: 'abcd',
+      body: 'test1',
+      out_trade_no: order_id,
+      total_fee: '1000',
+      spbill_create_ip: '127.0.0.1',
+      notify_url: 'http://112.74.184.236:8008/notify/pufubao_test',
+      trade_type: 'JSAPI'
     }
+
     mab = js.keys.sort.map{|k| "#{k}=#{js[k.to_sym]}"}.join('&')
-    sign = Biz::PubEncrypt.md5(mab + "&key=#{tmk}").upcase
-
-    js[:input_charset] = 'UTF-8'
+    sign = Biz::PubEncrypt.md5(mab + key).upcase
+    #js[:input_charset] = 'UTF-8'
     js[:sign] = sign
-    ret = Biz::WebBiz.get_tfb(url, js, nil)
-    assert ret
-    assert ret['root']
 
-    rt = ret['root']
-    #if rt['retcode'] != '00'
-      puts "-------GET TFB-------"
-      puts "mab: " + mab
-      puts "rt:  " + rt.to_s
-      puts "pay: " + URI.decode(rt['pay_info'])
-    #end
-    assert_equal "00", rt['retcode']
-    #{"cur_type"=>"CNY", "listid"=>"1021800314099161012000020661", "pay_info"=>"https%3A%2F%2Fpay.swiftpass.cn%2Fpay%2Fwappay%3Ftoken_id%3D91079346142fdcbfc0d0be8aae906f77%26service%3Dpay.weixin.wappay", "pay_type"=>"800206", "retcode"=>"00", "retmsg"=>"操作成功", "sign"=>"287696d6bf93f94edae1dfdcd93c50f4", "sp_billno"=>"ORD1476239835", "spid"=>"1800314099", "sysd_time"=>"20161012103718", "tran_amt"=>"100"}
+    #debugger
+    pd = Biz::WebBiz.post_data('test.pay', url, js, nil)
+
+    puts "-------GET Pufubao-------"
+    puts "---->JSON: " + js.to_json
+    puts "---->MAB:  " + mab
+    puts "---->post: " + pd.inspect
+    puts "---->resu: " + pd.result_message.to_s
+    puts "---->body: " + pd.resp_body.to_s
+    assert pd
   end
 end
