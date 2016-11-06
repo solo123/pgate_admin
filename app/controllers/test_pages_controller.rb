@@ -28,11 +28,15 @@ class TestPagesController < ApplicationController
         data: js.to_json
       }
       if resp = Biz::WebBiz.post_data('test.pay', url, params, nil)
-        begin
-          @js = JSON.parse(resp.resp_body)
-          @js.symbolize_keys!
-        rescue => e
-          @js = {error: e.message}
+        unless resp.resp_body
+          begin
+            @js = JSON.parse(resp.resp_body)
+            @js.symbolize_keys!
+          rescue => e
+            @js = {error: e.message}
+          end
+        else
+          @js = {error: "[BIZ] #{resp.result_message}"}
         end
       else
         @js = {error: 'post_data失败'}
