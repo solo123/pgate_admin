@@ -1,4 +1,8 @@
+#require 'securerandom'
+
 class TestPagesController < ApplicationController
+  protect_from_forgery except: :random_string
+
   def do_post
     params.permit!
     p = params[:payment]
@@ -15,7 +19,7 @@ class TestPagesController < ApplicationController
     org = Org.find_by(org_code: p[:org_code])
     if org
       biz = Biz::PooulApi.new
-      js[:mac] = biz.md5_mac(js, org.tmk)
+      js[:mac] = Biz::PooulApi.md5_mac(js, org.tmk)
       url = AppConfig.get('pooul', 'pay_url')
       params = {
         org_code: p[:org_code],
@@ -51,4 +55,5 @@ class TestPagesController < ApplicationController
     qr.as_png.save("public/qrcodes/p005.png")
     render plain: 'gen_qrcode ok'
   end
+
 end
