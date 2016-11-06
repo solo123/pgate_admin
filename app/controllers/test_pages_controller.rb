@@ -27,9 +27,9 @@ class TestPagesController < ApplicationController
         sign: sign,
         data: js.to_json
       }
-      if body_txt = Biz::WebBiz.post_data('test.pay', url, params, nil)
+      if resp = Biz::WebBiz.post_data('test.pay', url, params, nil)
         begin
-          @js = JSON.parse(body_txt)
+          @js = JSON.parse(resp.resp_body)
           @js.symbolize_keys!
         rescue => e
           @js = {error: e.message}
