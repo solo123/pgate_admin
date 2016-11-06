@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   respond_to :html, :js
-  def index
-  end
   def kaifu_signin
     js = {
       sendTime: "#{Time.now.strftime("%Y%m%d%H%M%S")}",
