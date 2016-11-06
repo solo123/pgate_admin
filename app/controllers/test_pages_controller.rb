@@ -19,7 +19,7 @@ class TestPagesController < ApplicationController
     org = Org.find_by(org_code: p[:org_code])
     if org
       biz = Biz::PooulApi.new
-      js[:mac] = Biz::PooulApi.md5_mac(js, org.tmk)
+      js[:mac] = Biz::PooulApi.get_mac(js, org.tmk)
       url = AppConfig.get('pooul', 'pay_url')
       params = {
         org_code: p[:org_code],
