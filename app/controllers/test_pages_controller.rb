@@ -27,6 +27,7 @@ class TestPagesController < ApplicationController
         sign: sign,
         data: js.to_json
       }
+      
       if resp = Biz::WebBiz.post_data('test.pay', url, params, nil)
         if resp.resp_body
           begin
