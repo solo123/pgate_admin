@@ -28,7 +28,7 @@ class TestPagesController < ApplicationController
         data: js.to_json
       }
       if resp = Biz::WebBiz.post_data('test.pay', url, params, nil)
-        unless resp.resp_body
+        if resp.resp_body
           begin
             @js = JSON.parse(resp.resp_body)
             @js.symbolize_keys!
