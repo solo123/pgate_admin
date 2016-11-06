@@ -3,7 +3,6 @@ class TestPagesController < ApplicationController
     params.permit!
     p = params[:payment]
     js = {
-      org_code: p[:org_code],
       order_time: Time.now.strftime("%Y%m%d%H%M%S"),
       order_id: "TST" + Time.now.to_i.to_s,
       amount: p[:amount],
@@ -18,7 +17,13 @@ class TestPagesController < ApplicationController
       biz = Biz::PooulApi.new
       js[:mac] = biz.md5_mac(js, org.tmk)
       url = AppConfig.get('pooul', 'pay_url')
-      if body_txt = Biz::WebBiz.post_data(url, {data: js.to_json}, nil)
+      params = {
+        org_code: p[:org_code],
+        method: 'JSAPI',
+        sign: sign,
+        data: js.to_json
+      }
+      if body_txt = Biz::WebBiz.post_data(url, params, nil)
         begin
           @js = JSON.parse(body_txt)
           @js.symbolize_keys!

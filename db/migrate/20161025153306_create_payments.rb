@@ -3,6 +3,8 @@ class CreatePayments < ActiveRecord::Migration[5.0]
     create_table :req_recvs do |t|
       t.string :remote_ip
       t.string :method
+      t.string :org_code
+      t.string :sign
       t.text :data
       t.text :params
       t.datetime :time_recv
