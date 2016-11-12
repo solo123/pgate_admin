@@ -43,9 +43,10 @@ class CreatePayments < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :org_code
       t.string :tmk
-      t.integer :d0_rate
-      t.integer :d0_min_fee
-      t.integer :t1_rate
+      t.string :public_key
+      t.string :aes_key
+      t.string :sign_mode
+      t.string :trans_mode
       t.integer :status, default: 0
       t.timestamps
     end
@@ -72,7 +73,7 @@ class CreatePayments < ActiveRecord::Migration[5.0]
       t.string :t0_code
       t.string :t0_desc
       t.string :pay_url
-      t.string :barcode_url
+      t.string :qr_code
       t.timestamps
     end
 
