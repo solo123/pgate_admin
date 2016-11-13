@@ -6,29 +6,25 @@ class TestPagesController < ApplicationController
   def do_post
     params.permit!
     p = params[:payment]
-    js = {
+    js_biz = {
       order_time: Time.now.strftime("%Y%m%d%H%M%S"),
-      order_id: "TST" + Time.now.to_i.to_s,
+      order_num: "TST" + Time.now.to_i.to_s,
       amount: p[:amount],
       order_title: p[:order_title],
       notify_url: AppConfig.get('pooul','notify_url') + "/test_notify",
       callback_url: AppConfig.get('pooul','callback_url') + "/test_callback",
       remote_ip: request.remote_ip
     }
-
+    js_request = {
+      org_code: p[:org_code],
+      method: p[:method],
+      data: js_biz.to_json
+    }
     org = Org.find_by(org_code: p[:org_code])
     if org
-      biz = Biz::PooulApi.new
-      sign = Biz::PooulApi.get_mac(js, org.tmk)
+      js_request[:sign] = Biz::PooulApi.get_mac(js_biz, org.tmk)
       url = AppConfig.get('pooul', 'pay_url')
-      params = {
-        org_code: p[:org_code],
-        method: 'JSAPI',
-        sign: sign,
-        data: js.to_json
-      }
-      
-      if resp = Biz::WebBiz.post_data('test.pay', url, params, nil)
+      if resp = Biz::WebBiz.post_data('test.pay', url, js_request, nil)
         if resp.resp_body
           begin
             @js = JSON.parse(resp.resp_body)
