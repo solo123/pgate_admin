@@ -40,7 +40,7 @@ RailsAdmin.config do |config|
     #bulk_delete
     show
     edit do
-      only ['AppConfig', 'Org']
+      only ['AppConfig', 'Org', 'ZxMercht']
     end
     #delete
     show_in_app
@@ -61,10 +61,13 @@ RailsAdmin.config do |config|
   config.model 'AppConfig' do
     navigation_label '系统管理'
     label '系统配置'
-    #list do
-    #  field :name
-    #  field :created_at
-    #end
+  end
+  config.model 'ZxMercht' do
+    navigation_label '系统管理'
+    label '中信商户数据'
+  end
+  config.model 'ZxContrInfoList' do
+    visible false
   end
 
 end

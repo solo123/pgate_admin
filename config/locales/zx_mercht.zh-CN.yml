@@ -1,0 +1,46 @@
+zh-CN:
+  admin:
+    help:
+      zx_mercht:
+        chnl_id: '渠道编号，由银行统一提供！'
+        chnl_mercht_id: '渠道商户编号，由银行提供！'
+        pay_chnl_encd: '支付渠道编号'
+        mercht_belg_chnl_id: '商户归属渠道编号，一般为渠道编号，多级渠道时为直属上级渠道编号'
+        mercht_full_nm: '商户全名称'
+        mercht_sht_nm: '商户简称'
+        cust_serv_tel: '客户服务电话'
+        contcr_nm: '联系人名称'
+        contcr_tel: '联系人电话'
+        contcr_mobl_num: '联系人手机'
+        contcr_eml: '联系人邮箱'
+        opr_cls: '经营类目，详见附件《经营类目》中的明细编码'
+        mercht_memo: '商户备注'
+        prov: '省份（字典）'
+        urbn: '城市（汉字标示）'
+        dtl_addr: '详细地址'
+        acct_nm: '银行开立的账户名称'
+        opn_bnk: '开户行名称'
+        is_nt_citic: '是否中信银行'
+        acct_typ: '账户类型'
+        pay_ibank_num: '支付联行号，人行大小额系统中规定的支付联行号，由银行定期提供'
+        acct_num: '商户结算账号'
+        is_nt_two_line: '是否支持收支两条线'
+
+        comm_fee_acct_type: '手续费账户类型（暂不支持）'
+        comm_fee_acct_nm: '手续费账户名称（暂不支持）'
+        comm_fee_bank_nm: '手续费银行名称（暂不支持）'
+        ibank_num: '中信银行网点号/联行号（暂不支持）'
+        comm_fee_acct_num: '手续费账号（暂不支持）'
+
+        biz_lics: '营业执照zip压缩文件（1.5M以内)'
+        dtl_memo: '文件摘要(MD5)，--由系统计算生成'
+
+        appl_typ: '申请类型'
+        trancode: '上送交易码: 0100SDC1'
+        msg_sign: '报文签名 --由系统计算生成'
+        zx_contr_info_lists: '签约信息列表，请填写此商户的所有支付类型'
+
+      zx_contr_info_list:
+        pay_typ_encd: '支付类型编码'
+        start_dt: '费率生效日期（必须是当日或之后的日期yyyymmdd）'
+        pay_typ_fee_rate: '支付类型费率（商户签约费率，商户交易总扣除率）'

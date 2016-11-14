@@ -1,0 +1,1 @@
+json.partial! "zx_merchts/zx_mercht", zx_mercht: @zx_mercht

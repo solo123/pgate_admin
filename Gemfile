@@ -59,6 +59,7 @@ gem 'pgate_model', git: 'https://github.com/solo123/pgate_model.git'
 gem 'ransack'
 gem 'kaminari'
 gem 'rqrcode'
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'mina'
 
 gem 'rails_admin', '~> 1.0'

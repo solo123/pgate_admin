@@ -1,0 +1,1 @@
+json.array! @zx_merchts, partial: 'zx_merchts/zx_mercht', as: :zx_mercht
