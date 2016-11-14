@@ -7,10 +7,10 @@ p
     = @js[:qr_code]
     - img_file = 'qr_' + Time.now.to_i.to_s + '.png'
     - qr = RQRCode::QRCode.new(@js[:qr_code])
-    - qr.as_png.save("public/qrcodes/#{img_file}")
+    - qr.as_png.save("public/#{img_file}")
   h2 扫码支付
   p
-    = image_tag "/qrcodes/#{img_file}", size: 200
+    = image_tag "/#{img_file}", size: 200
     
 - if @js[:pay_url]
   p 
