@@ -11,10 +11,10 @@ class AlipayTest < ActionDispatch::IntegrationTest
   end
 
   test "rsa" do
-    pri = OpenSSL::PKey::RSA.new(File.read("#{Rails.root}/../keys/test_k"))
+    pri = OpenSSL::PKey::RSA.new(File.read("#{AppConfig.get('pooul', 'keys_path')}/pooul_rsa_private.pem"))
     sign = pri.sign("sha1", "abc中文".force_encoding("utf-8"))
 
-    pub = OpenSSL::PKey::RSA.new(File.read("#{Rails.root}/../keys/test_p.pem"))
+    pub = OpenSSL::PKey::RSA.new(File.read("#{AppConfig.get('pooul', 'keys_path')}/test_p.pem"))
     result = pub.verify("sha1", sign, "abc中文".force_encoding("utf-8"))
     assert result, "verify #{result ? 'successful!' : 'failed!'}"
   end
@@ -28,9 +28,9 @@ class AlipayTest < ActionDispatch::IntegrationTest
   end
   test "verify pooul sign" do
     str = "abcdef123456"
-    sign = Biz::AlipayBiz.rsa_sign(File.read("#{Rails.root}/../keys/test_k"), str)
+    sign = Biz::AlipayBiz.rsa_sign(File.read("#{AppConfig.get('pooul', 'keys_path')}/pooul_rsa_private.pem"), str)
 
-    ck = Biz::AlipayBiz.rsa_verify?(File.read("#{Rails.root}/../keys/test_p.pem"), str, sign)
+    ck = Biz::AlipayBiz.rsa_verify?(File.read("#{AppConfig.get('pooul', 'keys_path')}/test_p.pem"), str, sign)
     assert ck
 
     pub_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKs8tcdYpfIdLEQoN7X3lwIxLo wIhQUl3Dt2MIDIzr7m89T8sQOk8UZi35FNOIX4fKTVhz4dVSzjogJqrbtK8jCFN9 aYhNTQsNnPR1/C19fmggxgoAwOlGYlWdv5i4dVuoHMPoAaaVNW7xQcdti/nEZ8hx vXFipPDroBji7q3I7QIDAQAB"
@@ -55,7 +55,7 @@ class AlipayTest < ActionDispatch::IntegrationTest
     str = "abcdef123456"
     sign = Biz::AlipayBiz.rsa_sign(Base64.decode64(priv_key), str)
 
-    ck = Biz::AlipayBiz.rsa_verify?(File.read("#{Rails.root}/../keys/test_p.pem"), str, sign)
+    ck = Biz::AlipayBiz.rsa_verify?(File.read("#{AppConfig.get('pooul', 'keys_path')}/test_p.pem"), str, sign)
     assert ck
 
   end
@@ -96,7 +96,7 @@ class AlipayTest < ActionDispatch::IntegrationTest
     mab = Biz::AlipayBiz.get_mab(js_request)
     log "mab: ", mab
 
-    sign = Biz::AlipayBiz.rsa_sign(File.read("#{Rails.root}/../keys/test_k"), mab)
+    sign = Biz::AlipayBiz.rsa_sign(File.read("#{AppConfig.get('pooul', 'keys_path')}/pooul_rsa_private.pem"), mab)
     log "sign: ", sign
     js_request[:sign] = sign
 
@@ -150,7 +150,7 @@ class AlipayTest < ActionDispatch::IntegrationTest
     mab = Biz::AlipayBiz.get_mab(js_request)
     log "mab: ", mab
 
-    sign = Biz::AlipayBiz.rsa_sign(File.read("#{Rails.root}/../keys/test_k"), mab)
+    sign = Biz::AlipayBiz.rsa_sign(File.read("#{AppConfig.get('pooul', 'keys_path')}/pooul_rsa_private.pem"), mab)
     log "sign: ", sign
     js_request[:sign] = sign
 
@@ -172,7 +172,10 @@ class AlipayTest < ActionDispatch::IntegrationTest
     js_biz = {
       out_trade_no: 'TST-' + n,
       total_amount: '1.00',
-      subject: 'POOUL product:' + n
+      subject: 'POOUL product:' + n,
+      sub_merchant: {
+        merchant_id: '16392481404'
+      }
     }
     js_request = {
       app_id: app_id,
@@ -190,7 +193,7 @@ class AlipayTest < ActionDispatch::IntegrationTest
     mab = Biz::AlipayBiz.get_mab(js_request)
     log "mab: ", mab
 
-    sign = Biz::AlipayBiz.rsa_sign(File.read("#{Rails.root}/../keys/test_k"), mab)
+    sign = Biz::AlipayBiz.rsa_sign(File.read("#{AppConfig.get('pooul', 'keys_path')}/pooul_rsa_private.pem"), mab)
     log "sign: ", sign
     js_request[:sign] = sign
 

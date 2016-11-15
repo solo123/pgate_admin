@@ -1,0 +1,4 @@
+keys_path:
+  group: 'pooul'
+  name: 'keys_path'
+  val: '/Users/jimmy/work/keys'

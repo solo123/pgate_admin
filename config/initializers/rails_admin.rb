@@ -43,7 +43,7 @@ RailsAdmin.config do |config|
       only ['AppConfig', 'Org', 'ZxMercht']
     end
     #delete
-    show_in_app
+    #show_in_app
 
 
     ## With an audit adapter, you can add:
