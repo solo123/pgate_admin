@@ -11,7 +11,7 @@ class TestPagesController < ApplicationController
       order_num: "TST" + Time.now.to_i.to_s,
       amount: p[:amount],
       order_title: p[:order_title],
-      notify_url: AppConfig.get('pooul','notify_url') + "/test_notify",
+      notify_url: AppConfig.get('pooul','notify_url') + "/test_notify/",
       callback_url: AppConfig.get('pooul','callback_url') + "/test_callback",
       remote_ip: request.remote_ip
     }
