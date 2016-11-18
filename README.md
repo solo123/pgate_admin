@@ -2,8 +2,17 @@
   * errbit, OneAPM, Logstasher
   * http://rails-bestpractices.com/
   * http://rails-bestpractices.com/posts/2013/03/28/monitor-your-backend-services/
+  * 接口订单检查order_num重复
+  *
 
 # 最近更新
+
+* 2016-11-18
+  * 添加alipay支付接口
+  * 添加zx开户服务
+  * 数据库结构整体重构
+  * 合并查询与callback到一个应用，将来负载大时再分
+  
 
 * 2016-10-21
   * 添加rails_admin

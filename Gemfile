@@ -61,5 +61,8 @@ gem 'kaminari'
 gem 'rqrcode'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'mina'
-
+gem 'logstash-logger'
+gem "lograge"
+gem "logstash-event"
+gem 'request_store'
 gem 'rails_admin', '~> 1.0'

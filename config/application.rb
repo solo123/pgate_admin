@@ -13,6 +13,5 @@ module PooulGate
     # -- all .rb files in that directory are automatically loaded.
     #config.kaifu = config_for :kaifu
     config.time_zone = "Beijing"
-
   end
 end
