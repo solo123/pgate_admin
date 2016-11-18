@@ -28,7 +28,6 @@ RailsAdmin.config do |config|
 
   config.main_app_name = Proc.new { |controller| [ "PooulGate", "管理后台 - #{controller.params[:action].try(:titleize)}" ] }
   I18n.default_locale = :"zh-CN"
-  config.time_zone = "Beijing"
   config.navigation_static_links = {
     '临时后台' => '/adm'
   }
