@@ -1,0 +1,128 @@
+0100SDC1,0,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC1,0,Chnl_Mercht_Id,渠道商户编号,20,VARCHAR(40),1,1,1
+0100SDC1,0,Pay_Chnl_Encd,支付渠道编号,30,VARCHAR(10),1,1,1
+0100SDC1,0,Mercht_Belg_Chnl_Id,商户归属渠道编号,40,CHAR(8),0,0,1
+0100SDC1,0,Mercht_Full_Nm,商户全名称,50,VARCHAR(200),0,1,1
+0100SDC1,0,Mercht_Sht_Nm,商户简称,60,VARCHAR(128),0,1,1
+0100SDC1,0,Cust_Serv_Tel,客户服务电话,70,VARCHAR(64),0,0,1
+0100SDC1,0,Contcr_Nm,联系人名称,80,VARCHAR(128),0,0,1
+0100SDC1,0,Contcr_Tel,联系人电话,90,VARCHAR(64),0,0,1
+0100SDC1,0,Contcr_Mobl_Num,联系人手机号,100,VARCHAR(64),0,0,1
+0100SDC1,0,Contcr_Eml,联系人邮箱,110,VARCHAR(128),0,0,1
+0100SDC1,0,Opr_Cls,经营类目,120,VARCHAR(128),0,1,1
+0100SDC1,0,Mercht_Memo,商户备注,130,VARCHAR(255),0,0,1
+0100SDC1,0,Prov,省份（字典）,140,VARCHAR(20),0,0,1
+0100SDC1,0,Urbn,城市（汉字标示）,150,VARCHAR(20),0,0,1
+0100SDC1,0,Dtl_Addr,详细地址,160,VARCHAR(400),0,0,1
+0100SDC1,0,Acct_Nm,账户名称（账号名）,170,VARCHAR(200),0,1,1
+0100SDC1,0,Opn_Bnk,开户行（中文名）,180,VARCHAR(200),0,1,1
+0100SDC1,0,Is_Nt_CITIC,是否中信银行,190,CHAR(1),0,0,1
+0100SDC1,0,Acct_Typ,账户类型（0=对公;/1=对私）,200,CHAR(1),0,0,1
+0100SDC1,0,Pay_Ibank_Num,支付联行号,210,VARCHAR(12),0,1,1
+0100SDC1,0,Acct_Num,账号,220,VARCHAR(50),0,0,1
+0100SDC1,0,Is_Nt_Two_Line,是否支持收支两条线,230,CHAR(1),0,0,1
+0100SDC1,0,Comm_Fee_Acct_Typ,手续费账户类型,240,CHAR(1),0,0,1
+0100SDC1,0,Comm_Fee_Acct_Nm,手续费账户名称,250,VARCHAR(200),0,0,1
+0100SDC1,0,Comm_Fee_Bank_Nm,手续费银行名称,260,VARCHAR(200),0,0,1
+0100SDC1,0,Ibank_Num,网点号/联行号,270,VARCHAR(12),0,0,1
+0100SDC1,0,Comm_Fee_Acct_Num,手续费账号,280,VARCHAR(50),0,1,1
+0100SDC1,0,Biz_Lics,营业证照压缩文件,290,FILE,0,0,1
+0100SDC1,0,Dtl_Memo,文件摘要（MD5）,300,VARCHAR(100),0,1,1
+0100SDC1,0,Contr_Info_List,签约信息列表,310,LIST,0,1,1
+0100SDC1,0,Appl_Typ,申请类型(0=新增；1=修改；2=停用),320,CHAR(1),1,1,1
+0100SDC1,0,trancode,交易代码（固定：0100SDC1）,330,CHAR(8),1,1,1
+0100SDC1,0,Msg_Sign,报文签名,340,VARCHAR(1000),1,0,1
+0100SDC1,1,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC1,1,Chnl_Mercht_Id,渠道商户编号,20,VARCHAR(40),1,1,1
+0100SDC1,1,Pay_Chnl_Encd,支付渠道编号,30,VARCHAR(10),1,1,1
+0100SDC1,1,rtncode,返回码,40,CHAR(8),1,1,1
+0100SDC1,1,rtninfo,返回信息,50,VARCHAR(200),0,1,1
+0100SDC1,1,Msg_Sign,报文签名,60,VARCHAR(1000),1,0,1
+0100SDC0,0,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC0,0,Chnl_Mercht_Id,渠道商户编号,20,VARCHAR(40),1,1,1
+0100SDC0,0,Pay_Chnl_Encd,支付渠道编号,30,VARCHAR(10),1,1,1
+0100SDC0,0,trancode,交易代码（固定：0100SDC0）,40,CHAR(8),1,1,1
+0100SDC0,0,Msg_Sign,报文签名,60,VARCHAR(1000),1,0,1
+0100SDC2,0,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC2,0,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0100SDC2,0,Mercht_Dtl,客户批量维护压缩文件（参考批量接口）,30,FILE,1,0,1
+0100SDC2,0,Dtl_Memo,文件摘要,40,VARCHAR(100),1,1,1
+0100SDC2,0,trancode,交易代码（固定：0100SDC2）,50,CHAR(8),1,1,1
+0100SDC2,0,Msg_Sign,报文签名,70,VARCHAR(1000),1,0,1
+0100SDC0,1,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC0,1,Chnl_Mercht_Id,渠道商户编号,20,VARCHAR(40),1,1,1
+0100SDC0,1,Pay_Chnl_Encd,支付渠道编号,30,VARCHAR(10),1,1,1
+0100SDC0,1,Belg_Chnl_Id,归属渠道编号,40,CHAR(8),0,1,1
+0100SDC0,1,Mercht_Full_Nm,商户全名称,50,VARCHAR(200),0,1,1
+0100SDC3,0,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC3,0,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0100SDC3,0,trancode,交易代码（固定：0100SDC3）,30,CHAR(8),1,1,1
+0100SDC3,0,Msg_Sign,报文签名,50,VARCHAR(1000),1,0,1
+0100SDC3,1,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC3,1,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0100SDC3,1,Rtrn_Doc,商户批量维护结果压缩文件,30,FILE,1,0,1
+0100SDC3,1,Dtl_Memo,文件摘要,40,VARCHAR(100),1,1,1
+0100SDC3,1,rtncode,返回码,50,CHAR(8),1,1,1
+0100SDC3,1,rtninfo,返回信息,60,VARCHAR(200),0,1,1
+0100SDC3,1,Msg_Sign,报文签名,70,VARCHAR(1000),1,0,1
+0100SDC4,0,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC4,0,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0100SDC4,0,Clr_Dt,清分日期,30,CHAR(8),1,1,1
+0100SDC4,0,trancode,交易代码（固定：0100SDC4）,40,CHAR(8),1,1,1
+0100SDC4,0,Msg_Sign,报文签名,60,VARCHAR(1000),1,0,1
+0100SDC4,1,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC4,1,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0100SDC4,1,Clr_Dtl,清分文件（压缩）,30,FILE,0,0,1
+0100SDC4,1,Dtl_Memo,文件摘要,40,VARCHAR(100),1,1,1
+0100SDC4,1,rtncode,返回码,50,CHAR(8),1,1,1
+0100SDC4,1,rtninfo,返回信息,60,VARCHAR(200),0,1,1
+0100SDC4,1,Msg_Sign,报文签名,70,VARCHAR(1000),1,0,1
+0200SDC5,0,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0200SDC5,0,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0200SDC5,0,Clr_Dt,清分日期,30,CHAR(8),1,0,1
+0200SDC5,0,Clr_OK,清分确认（固定为1）,40,CHAR(1),1,1,1
+0200SDC5,0,trancode,交易代码（固定：0200SDC5）,50,CHAR(8),1,1,1
+0200SDC5,0,Msg_Sign,报文签名,70,VARCHAR(),1,0,1
+0200SDC5,1,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0200SDC5,1,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0200SDC5,1,Clr_Dt,清分日期,30,CHAR(8),1,1,1
+0200SDC5,1,rtncode,返回码,40,CHAR(8),1,1,1
+0200SDC5,1,rtninfo,返回信息,50,VARCHAR(200),0,1,1
+0200SDC5,1,Msg_Sign,报文签名,60,VARCHAR(),1,0,1
+0100SDC0,1,Mercht_Sht_Nm,商户简称,60,VARCHAR(128),0,1,1
+0100SDC0,1,Mercht_Idtfy_num,商户识别号(子商户号),70,VARCHAR(20),0,1,1
+0100SDC0,1,Cust_Serv_Tel,客户服务电话,80,VARCHAR(64),0, ,1
+0100SDC0,1,Contcr_Nm,联系人名称,90,VARCHAR(128),0, ,1
+0100SDC0,1,Contcr_Tel,联系人电话,100,VARCHAR(64),0, ,1
+0100SDC0,1,Contcr_Mobl_Num,联系人手机号,110,VARCHAR(64),0, ,1
+0100SDC0,1,Contcr_Eml,联系人邮箱,120,VARCHAR(128),0, ,1
+0100SDC0,1,Opr_Cls,经营类目,130,VARCHAR(128),0, ,1
+0100SDC0,1,Mercht_Memo,商户备注,140,VARCHAR(255),0, ,1
+0100SDC0,1,Prov,省份,150,VARCHAR(20),0, ,1
+0100SDC0,1,Urbn,城市,160,VARCHAR(20),0, ,1
+0100SDC0,1,Dtl_Addr,详细地址,170,VARCHAR(400),0, ,1
+0100SDC0,1,Acct_Nm,账户名称,180,VARCHAR(200),0, ,1
+0100SDC0,1,Opn_Bnk,开户行,190,VARCHAR(200),0, ,1
+0100SDC0,1,Is_Nt_CITIC,是否本行（中信银行？）,200,CHAR(1),0, ,1
+0100SDC0,1,Acct_Typ,账户类型（对公/对私）,210,CHAR(1),0, ,1
+0100SDC0,1,Pay_Ibank_Num,支付联行号,220,VARCHAR(12),0, ,1
+0100SDC0,1,Acct_Num,账号,230,VARCHAR(50),0, ,1
+0100SDC0,1,Is_Nt_Two_Line,是否支持收支两条线,240,CHAR(1),0, ,1
+0100SDC0,1,Comm_Fee_Acct_Typ,手续费账户类型,250,CHAR(1),0, ,1
+0100SDC0,1,Comm_Fee_Acct_Nm,手续费账户名称,260,VARCHAR(200),0, ,1
+0100SDC0,1,Comm_Fee_Bank_Nm,手续费银行名称,270,VARCHAR(200),0, ,1
+0100SDC0,1,Ibank_Num,网点号/联行号,280,VARCHAR(12),0, ,1
+0100SDC0,1,Comm_Fee_Acct_Num,手续费账号,290,VARCHAR(50),0, ,1
+0100SDC0,1,Contr_Info_List,签约信息列表,300,LIST,0, ,1
+0100SDC0,1,Submt_Dt,提交日期,310,CHAR(8),0, ,1
+0100SDC0,1,Chk_Dt,审核日期,320,CHAR(8),0, ,1
+0100SDC0,1,Actv_Dt,激活日期,330,CHAR(8),0, ,1
+0100SDC0,1,Actv_Stat,激活状态,340,CHAR(1),0, ,1
+0100SDC0,1,rtncode,返回码,350,CHAR(8),1, ,1
+0100SDC0,1,rtninfo,返回信息,360,VARCHAR(200),0, ,1
+0100SDC0,1,Msg_Sign,报文签名,370,VARCHAR(1000),1, ,1
+0100SDC2,1,Chnl_Id,渠道编号,10,CHAR(8),1,1,1
+0100SDC2,1,Pay_Chnl_Encd,支付渠道编号,20,VARCHAR(10),1,1,1
+0100SDC2,1,rtncode,返回码,30,CHAR(8),1,1,1
+0100SDC2,1,rtninfo,返回信息,40,VARCHAR(200),0,1,1
+0100SDC2,1,Msg_Sign,报文签名,50,VARCHAR(1000),1,0,1
