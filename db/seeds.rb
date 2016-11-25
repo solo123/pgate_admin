@@ -6,10 +6,10 @@ User.create(email: 'solo123@21cn.com', password: 'liang123', password_confirmati
 User.create(email: 'alei@pooul.com', password: 'alei123', password_confirmation: 'alei123')
 
 puts "#{prompt}Add base config"
-AppConfig.set('pooul', 'pay_url', 'http://112.74.184.236:8008/pay')
-AppConfig.set('pooul', 'query_url', 'http://112.74.184.236:8008/query')
-AppConfig.set('pooul', 'notify_url', 'http://112.74.184.236:8008/notify')
-AppConfig.set('pooul', 'callback_url', 'http://112.74.184.236:8008/callback')
+AppConfig.set('pooul', 'pay_url', 'http://pay.pooulcloud.cn/pay')
+AppConfig.set('pooul', 'query_url', 'http://pay.pooulcloud.cn/query')
+AppConfig.set('pooul', 'notify_url', 'http://cb.pooulcloud.cn/notify')
+AppConfig.set('pooul', 'callback_url', 'http://cb.pooulcloud.cn/callback')
 AppConfig.set('alipay', 'notify.return', 'SUCCESS')
 
 require 'csv'
