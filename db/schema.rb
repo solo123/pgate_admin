@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126121410) do
+ActiveRecord::Schema.define(version: 20161126191843) do
 
   create_table "app_configs", force: :cascade do |t|
     t.string   "group"
@@ -116,6 +116,12 @@ ActiveRecord::Schema.define(version: 20161126121410) do
     t.string   "qr_code"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "open_id"
+    t.string   "is_subscribe"
+    t.string   "bank_type"
+    t.integer  "total_fee"
+    t.string   "transaction_id"
+    t.string   "need_query"
     t.index ["payment_id"], name: "index_pay_results_on_payment_id"
   end
 
@@ -144,6 +150,7 @@ ActiveRecord::Schema.define(version: 20161126121410) do
     t.integer  "status",            default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "auth_code"
     t.index ["card_id"], name: "index_payments_on_card_id"
     t.index ["order_day"], name: "index_payments_on_order_day"
     t.index ["order_num"], name: "index_payments_on_order_num"

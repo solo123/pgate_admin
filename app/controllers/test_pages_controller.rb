@@ -13,7 +13,8 @@ class TestPagesController < ApplicationController
       order_title: p[:order_title],
       notify_url: AppConfig.get('pooul','notify_url') + "/test_notify/",
       callback_url: AppConfig.get('pooul','callback_url') + "/test_callback",
-      remote_ip: request.remote_ip
+      remote_ip: p[:remote_ip] || request.remote_ip,
+      auth_code: p[:auth_code]
     }
     js_request = {
       org_code: p[:org_code],

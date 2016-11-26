@@ -6,7 +6,7 @@
     table.table.table-bordered.table-striped
       tr
         td.text-right Method
-        td= text_field_tag 'payment[method]', 'alipay.trade.precreate'
+        td= select_tag 'payment[method]', options_for_select(%w'wechat.jsapi wechat.scan wechat.micro alipay.trade.precreate')
       tr
         td.text-right 商户ID
         td= text_field_tag 'payment[org_code]', 'pooul_test'
@@ -16,6 +16,18 @@
       tr
         td 金额
         td= text_field_tag 'payment[amount]'
+      tr
+        td app_id
+        td= text_field_tag 'payment[app_id]'
+      tr
+        td open_id
+        td= text_field_tag 'payment[open_id]'
+      tr
+        td remote_ip
+        td= text_field_tag 'payment[remote_ip]'
+      tr
+        td auto_code
+        td= text_field_tag 'payment[auth_code]' 
       tr
         td
         td= submit_tag '确认支付'
