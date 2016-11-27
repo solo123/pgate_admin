@@ -5,7 +5,7 @@ class TestPagesController < ApplicationController
 
   def do_post
     params.permit!
-    p = params[:payment]
+    p = params[:payment].select { |_, value| !value.empty? }
     js_biz = {
       order_time: Time.now.strftime("%Y%m%d%H%M%S"),
       order_num: "TST" + Time.now.to_i.to_s,
