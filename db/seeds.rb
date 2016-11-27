@@ -11,6 +11,7 @@ AppConfig.set('pooul', 'query_url', 'http://pay.pooulcloud.cn/query')
 AppConfig.set('pooul', 'notify_url', 'http://cb.pooulcloud.cn/notify')
 AppConfig.set('pooul', 'callback_url', 'http://cb.pooulcloud.cn/callback')
 AppConfig.set('alipay', 'notify.return', 'SUCCESS')
+AppConfig.set('pfb', 'notify.return', 'SUCCESS')
 
 require 'csv'
 if ENV["refresh"]
