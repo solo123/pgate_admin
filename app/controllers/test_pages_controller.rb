@@ -6,13 +6,14 @@ class TestPagesController < ApplicationController
   def do_post
     params.permit!
     p = params[:payment].select { |_, value| !value.empty? }
+    order_num = "TST" + Time.now.to_i.to_s
     js_biz = {
       order_time: Time.now.strftime("%Y%m%d%H%M%S"),
-      order_num: "TST" + Time.now.to_i.to_s,
+      order_num: order_num,
       amount: p[:amount],
       order_title: p[:order_title],
-      notify_url: AppConfig.get('pooul','notify_url') + "/test_notify/",
-      callback_url: AppConfig.get('pooul','callback_url') + "/test_callback",
+      notify_url: AppConfig.get('pooul','notify_url') + "/test_notify/#{order_num}",
+      callback_url: AppConfig.get('pooul','callback_url') + "/test_callback/#{order_num}",
       remote_ip: p[:remote_ip] || request.remote_ip,
       auth_code: p[:auth_code]
     }

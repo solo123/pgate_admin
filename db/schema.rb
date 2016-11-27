@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126191843) do
+ActiveRecord::Schema.define(version: 20161127194032) do
 
   create_table "app_configs", force: :cascade do |t|
     t.string   "group"
@@ -122,6 +122,10 @@ ActiveRecord::Schema.define(version: 20161126191843) do
     t.integer  "total_fee"
     t.string   "transaction_id"
     t.string   "need_query"
+    t.string   "app_id"
+    t.string   "channel_client_id"
+    t.integer  "notify_times"
+    t.datetime "last_notify_at"
     t.index ["payment_id"], name: "index_pay_results_on_payment_id"
   end
 
