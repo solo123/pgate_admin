@@ -2,7 +2,7 @@ ol.breadcrumb
   li.breadcrumb-item= link_to 'Home', '/'
   li.breadcrumb-item= link_to '返回', edit_org_path(@object.org) 
 
-- if @post_data
+- unless @error_msg
   .bs-callout.bs-callout-warning
     h4 返回结果
     pre

@@ -18,6 +18,9 @@ class Backend::ZxMctsController < ResourcesController
         url = AppConfig.get('zx', 'intfc_url')
         pd = Biz::WebBiz.post_xml('zx_intfc', url, @xml, @object)
         @post_data = pd
+        @error_msg = nil
+      else
+        @error_msg = '数据不齐，提交失败！'
       end
       render 'send_to_zx'
     else
