@@ -15,8 +15,8 @@ class Backend::ZxMctsController < ResourcesController
       biz = Biz::ZxIntfcApi.new(@object.org)
       biz.prepare_request
       @xml = biz.xml
-      url = AppConfig.get('zx', 'inftc_url')
-      pd = Biz::WebBiz.post_xml('zx_inftc', url, @xml, @object)
+      url = AppConfig.get('zx', 'intfc_url')
+      pd = Biz::WebBiz.post_xml('zx_intfc', url, @xml, @object)
       @post_data = pd
       render 'send_to_zx'
     else

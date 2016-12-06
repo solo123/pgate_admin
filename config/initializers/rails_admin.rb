@@ -29,7 +29,8 @@ RailsAdmin.config do |config|
   config.main_app_name = Proc.new { |controller| [ "PooulGate", "管理后台 - #{controller.params[:action].try(:titleize)}" ] }
   I18n.default_locale = :"zh-CN"
   config.navigation_static_links = {
-    '测试首页' => '/'
+    '测试首页' => '/',
+    '商户管理' => '/adm/orgs'
   }
 
   config.actions do
