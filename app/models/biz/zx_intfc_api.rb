@@ -42,6 +42,7 @@ module Biz
         }
       end
       @xml = builder.to_xml
+      @err_code = '00'
       unless missed_require_fields.empty?
         @err_code = '03'
         @err_desc = "缺少必须的字段：\n" + missed_require_fields.join("\n")

@@ -14,13 +14,13 @@ class Backend::ZxMctsController < ResourcesController
       flash[:alert] = "已经发送给银行"
       biz = Biz::ZxIntfcApi.new(@object.org)
       biz.prepare_request
-      if @xml = biz.xml
+      if biz.err_code == '00' && (@xml = biz.xml)
         url = AppConfig.get('zx', 'intfc_url')
         pd = Biz::WebBiz.post_xml('zx_intfc', url, @xml, @object)
         @post_data = pd
         @error_msg = nil
       else
-        @error_msg = '数据不齐，提交失败！'
+        @error_msg = '数据不齐，提交失败！' + biz.err_desc
       end
       render 'send_to_zx'
     else
