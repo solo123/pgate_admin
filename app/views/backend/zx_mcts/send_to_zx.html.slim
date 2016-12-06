@@ -5,7 +5,7 @@ ol.breadcrumb
 .bs-callout.bs-callout-warning
   h4 返回结果
   pre
-    code.xml data-lang='xml'
+    code.xml
       = @post_data.resp_body if @post_data.resp_body
   .notice
     = @post_data.result_message
@@ -13,7 +13,7 @@ ol.breadcrumb
 .bs-callout.bs-callout-warning
   h4 请求XML文件
   pre
-    code.xml data-lang='xml'
+    code.xml
       = @xml if @xml
 
 - if @error_msg
