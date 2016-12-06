@@ -7,8 +7,14 @@ Rails.application.routes.draw do
   scope module: :backend, path: :adm do
     root to: 'payments#index'
     resources :app_configs
-    resources :orgs, :sent_posts, :notify_recvs
-    resources :payments
+    resources :orgs do
+      member do
+        get :create_zx_mct, :send_to_zx
+      end
+    end
+    resources :sent_posts, :notify_recvs
+    resources :merchants
+    resources :zx_mcts
   end
 
   namespace :test_pages do

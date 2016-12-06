@@ -1,6 +1,0 @@
-0100SDC0,1,Contr_Info_List                                   ,Pay_Typ_Encd                                      ,支付类型编码                                      ,10,VARCHAR(20),0,1,1
-0100SDC0,1,Contr_Info_List                                   ,Start_Dt                                          ,费率生效日期                                      ,20,CHAR(8),0,1,1
-0100SDC0,1,Contr_Info_List                                   ,Pay_Typ_Fee_Rate                                  ,支付类型费率                                      ,30,"DECIMAL(5,4)",0,1,1
-0100SDC1,0,Contr_Info_List                                   ,Pay_Typ_Encd                                      ,支付类型编码                                      ,10,VARCHAR(20),0,1,1
-0100SDC1,0,Contr_Info_List                                   ,Start_Dt                                          ,费率生效日期                                      ,20,CHAR(8),0,1,1
-0100SDC1,0,Contr_Info_List                                   ,Pay_Typ_Fee_Rate                                  ,支付类型费率                                      ,30,"DECIMAL(5,4)",0,1,1

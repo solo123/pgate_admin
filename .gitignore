@@ -19,6 +19,7 @@
 /public/qrcodes/*
 /public/color_admin/*
 /public/uploads/*
+/public/*.png
 
 # Ignore Byebug command history file.
 .byebug_history

@@ -1,0 +1,10 @@
+.bs-callout.bs-callout-warning
+  h4 扫描件资料
+  .container
+    - @object.attachments.each do |att|
+      .col-md-3
+        = image_tag att.attach_asset.thumb.url
+        br/ 
+        |#{att.tag_name} #{att.title}
+        br/
+        |#{att.updated_at}

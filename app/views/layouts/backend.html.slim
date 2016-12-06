@@ -37,6 +37,9 @@ html[lang="en"]
         = render 'shared/main_menu'
       /! /.nav-collapse
 
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :class => "flash_#{name}"
     .container-fluid
       = yield
     footer.footer Copyright © 2016 PooulCloud 保留所有权利

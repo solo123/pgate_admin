@@ -1,5 +1,15 @@
 one:
   zx_mercht_id: 1
-  pay_typ_encd: 00010002
+  pay_typ_encd: '00010001'
   pay_typ_fee_rate: 0.003
-  start_dt: 20161020
+  start_dt: 20161220
+two:
+  zx_mercht_id: 1
+  pay_typ_encd: '00010002'
+  pay_typ_fee_rate: 0.003
+  start_dt: 20161220
+three:
+  zx_mercht_id: 1
+  pay_typ_encd: '00010003'
+  pay_typ_fee_rate: 0.003
+  start_dt: 20161220

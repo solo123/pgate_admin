@@ -29,7 +29,7 @@ RailsAdmin.config do |config|
   config.main_app_name = Proc.new { |controller| [ "PooulGate", "管理后台 - #{controller.params[:action].try(:titleize)}" ] }
   I18n.default_locale = :"zh-CN"
   config.navigation_static_links = {
-    '临时后台' => '/adm'
+    '测试首页' => '/'
   }
 
   config.actions do
@@ -40,7 +40,7 @@ RailsAdmin.config do |config|
     #bulk_delete
     show
     edit do
-      only ['AppConfig', 'Org', 'ZxMercht']
+      only ['AppConfig', 'Org', 'Merchant', 'PfbMercht']
     end
     #delete
     #show_in_app
@@ -53,6 +53,9 @@ RailsAdmin.config do |config|
   config.model 'Org' do
     navigation_label '系统管理'
     label '商户账号'
+    edit do
+      exclude_fields :d0_rate, :d0_min_fee, :t1_rate, :payments
+    end
   end
   config.model 'User' do
     navigation_label '系统管理'
@@ -61,10 +64,6 @@ RailsAdmin.config do |config|
   config.model 'AppConfig' do
     navigation_label '系统管理'
     label '系统配置'
-  end
-  config.model 'ZxMercht' do
-    navigation_label '系统管理'
-    label '中信商户数据'
   end
   config.model 'ZxContrInfoList' do
     visible false

@@ -1,0 +1,26 @@
+p#notice
+  = notice
+  
+h1.page-header
+  | 商户数据管理
+  
+= paginate @collection  
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th ID
+      th 商户代码
+      th 商户简称
+      th 创建日期
+      th 最后更新
+      th 状态
+  tbody
+    - @collection.each do |dt|
+      tr
+        td= dt.id
+        td= link_to dt.org_code, edit_org_path(dt)
+        td= dt.name
+        td= dt.created_at
+        td= dt.updated_at
+        td= dt.status
+= paginate @collection  
