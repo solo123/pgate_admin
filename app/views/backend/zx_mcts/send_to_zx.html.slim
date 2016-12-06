@@ -6,7 +6,7 @@ ol.breadcrumb
   h4 返回结果
   pre
     code.xml data-lang='xml'
-      = @post_data.resp_body.encode('utf-8', 'gbk') if @post_data.resp_body
+      = @post_data.resp_body if @post_data.resp_body
   .notice
     = @post_data.result_message
 
@@ -14,7 +14,7 @@ ol.breadcrumb
   h4 请求XML文件
   pre
     code.xml data-lang='xml'
-      = @xml.encode('utf-8', 'gbk') if @xml
+      = @xml if @xml
 
 - if @error_msg
   h4= @error_msg
