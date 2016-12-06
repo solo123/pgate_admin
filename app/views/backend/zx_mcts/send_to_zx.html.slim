@@ -17,4 +17,4 @@ ol.breadcrumb
       code.xml data-lang='xml'
         = @xml.encode('utf-8', 'gbk')
 - else
-  h4 数据不齐，提交失败！
+  h4= @error_msg
