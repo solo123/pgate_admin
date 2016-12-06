@@ -2,17 +2,19 @@ ol.breadcrumb
   li.breadcrumb-item= link_to 'Home', '/'
   li.breadcrumb-item= link_to '返回', edit_org_path(@object.org) 
 
-.bs-callout.bs-callout-warning
-  h4 返回结果
-  pre
-    code.xml data-lang='xml'
-      = @post_data.resp_body.encode('utf-8', 'gbk') if @post_data.resp_body
-  .notice
-    = @post_data.result_message
+- if @post_data
+  .bs-callout.bs-callout-warning
+    h4 返回结果
+    pre
+      code.xml data-lang='xml'
+        = @post_data.resp_body.encode('utf-8', 'gbk') if @post_data.resp_body
+    .notice
+      = @post_data.result_message
 
-.bs-callout.bs-callout-warning
-  h4 请求XML文件
-  pre
-    code.xml data-lang='xml'
-      = @xml.encode('utf-8', 'gbk')
-      
+  .bs-callout.bs-callout-warning
+    h4 请求XML文件
+    pre
+      code.xml data-lang='xml'
+        = @xml.encode('utf-8', 'gbk')
+- else
+  h4 数据不齐，提交失败！

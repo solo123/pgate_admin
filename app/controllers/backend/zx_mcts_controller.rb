@@ -14,10 +14,11 @@ class Backend::ZxMctsController < ResourcesController
       flash[:alert] = "已经发送给银行"
       biz = Biz::ZxIntfcApi.new(@object.org)
       biz.prepare_request
-      @xml = biz.xml
-      url = AppConfig.get('zx', 'intfc_url')
-      pd = Biz::WebBiz.post_xml('zx_intfc', url, @xml, @object)
-      @post_data = pd
+      if @xml = biz.xml
+        url = AppConfig.get('zx', 'intfc_url')
+        pd = Biz::WebBiz.post_xml('zx_intfc', url, @xml, @object)
+        @post_data = pd
+      end
       render 'send_to_zx'
     else
       redirect_to edit_org_path(@object.org)
