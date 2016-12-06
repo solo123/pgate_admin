@@ -31,7 +31,22 @@ module Biz
         xml.ROOT {
           CSV.foreach("#{Rails.root}/config/zx_reg_fields.csv", headers: true) do |r|
             if r['f_name']
-              val = eval(r['f_name'])
+              if r['f_name'] == 'list'
+                xml.Contr_Info_List {
+                  @org.zx_mct.zx_contr_info_lists.each do |cl|
+                    xml.Contrinfo {
+                      xml.Pay_Typ_Encd cl.pay_typ_encd
+                      xml.Start_Dt cl.start_dt
+                      xml.Pay_Typ_Fee_Rate cl.pay_typ_fee_rate
+                    }
+                    mabs << cl.pay_typ_encd
+                    mabs << cl.start_dt
+                    mabs << cl.pay_typ_fee_rate
+                  end
+                }
+              else
+                val = eval(r['f_name'])
+              end
             else
               val = org.zx_mct[r['regn_en_nm'].downcase]
             end
@@ -47,21 +62,6 @@ module Biz
         @err_code = '03'
         @err_desc = "缺少必须的字段：\n" + missed_require_fields.join("\n")
       end
-    end
-
-    def gen_contr_list(xml, mabs)
-      xml.Contr_Info_List {
-        @org.zx_mct.zx_contr_info_lists.each do |cl|
-          xml.Contrinfo {
-            xml.Pay_Typ_Encd cl.pay_typ_encd
-            xml.Start_Dt cl.start_dt
-            xml.Pay_Typ_Fee_Rate cl.pay_typ_fee_rate
-          }
-          mabs << cl.pay_typ_encd
-          mabs << cl.start_dt
-          mabs << cl.pay_typ_fee_rate
-        end
-      }
     end
 
     def sign(mabs)
