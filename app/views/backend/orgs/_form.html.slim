@@ -1,4 +1,3 @@
-- merchant = @object.merchant || @object.build_merchant
 .bs-callout.bs-callout-warning
   = form_for(@object) do |f|
     h4 商户接口信息
@@ -19,57 +18,6 @@
         td
         td.inp colspan='3'
           = f.submit '保存'
-    
-.bs-callout.bs-callout-warning
-  = form_for(merchant) do |f|
-    h4 商户基本信息
-    table.table.table-bordered.table-striped
-      tr
-        td.lbl 所属代理商：
-        td.inp= f.text_field :channel_code
-        td.lbl 公众号：
-        td.inp= f.text_field :app_id
-      tr
-        td.lbl 商户类型：
-        td.inp= f.text_field :merchant_type
-        td.lbl 商户全称：
-        td.inp= f.text_field :full_name
-      tr
-        td.lbl 经营行业：
-        td.inp= f.text_field :business_category
-        td.lbl 
-        td.inp
-      tr
-        td.lbl 法人姓名：
-        td.inp= f.text_field :jp_name
-        td.lbl 法人身份证：
-        td.inp= f.text_field :jp_id_number
-      tr
-        td.lbl 联系人： 
-        td.inp= f.text_field :contact_name
-        td.lbl 联系人手机：
-        td.inp= f.text_field :contact_tel
-      tr
-        td.lbl 服务电话：
-        td.inp= f.text_field :service_tel
-        td.lbl 联系邮箱：
-        td.inp= f.text_field :contact_email
-      tr
-        td.lbl 商户备注：
-        td.inp colspan='3'= f.text_field :memo 
-      tr
-        td.lbl 省份：
-        td.inp= f.text_field :province
-        td.lbl 城市：
-        td.inp= f.text_field :urbn
-      tr
-        td.lbl 行政区：
-        td.inp colspan='3'= f.text_field :city_area
-      tr
-        td.lbl 地址
-        td.inp colspan='3'= f.text_area :address
-      tr
-        td
-        td colspan='3'= f.submit
+= render 'form_merchant'    
 = render 'form_photos'
 = render partial: 'form_zx'

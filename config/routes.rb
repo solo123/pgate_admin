@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :app_configs
     resources :orgs do
       member do
-        get :create_zx_mct, :send_to_zx
+        get :create_zx_mct, :send_to_zx, :create_merchant
       end
     end
     resources :sent_posts, :notify_recvs
