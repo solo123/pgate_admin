@@ -9,7 +9,7 @@ module Biz
 
     def prepare_request
       @mab = @xml = nil
-      return nil unless @org && @org.zx_mct
+      return nil unless @org && @org.zx_mct && @org.merchant
 
       @err_code = '00'
       mabs = []
