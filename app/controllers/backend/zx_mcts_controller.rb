@@ -16,7 +16,7 @@ class Backend::ZxMctsController < ResourcesController
       biz.prepare_request
       if @xml = biz.xml
         url = AppConfig.get('zx', 'intfc_url')
-        pd = Biz::WebBiz.post_xml('zx_intfc', url, @xml, @object)
+        pd = biz.post_xml_gbk('zx_intfc', url, @xml, @object)
         @post_data = pd
         @error_msg = nil
       else
