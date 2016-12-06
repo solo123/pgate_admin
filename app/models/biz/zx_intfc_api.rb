@@ -72,5 +72,39 @@ module Biz
       sign.certificates = []
       Base64.strict_encode64 sign.to_der
     end
+
+    def post_xml_gbk(method, url, data, sender)
+      pd = SentPost.new
+      pd.method = method
+      pd.sender = sender
+      pd.post_url = url
+      pd.post_data = 'xml data'
+
+      begin
+        uri = URI(url)
+        https = Net::HTTP.new(uri.host, uri.port)
+        https.use_ssl = (uri.scheme == "https")
+        https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+        req = Net::HTTP::Post.new(uri, initheader = {"Content-Type": "text/xml"})
+        req.body = data
+
+        resp = nil
+        https.start do |http|
+          resp = http.request(req)
+        end
+        pd.resp_type = resp.inspect
+        if resp.is_a?(Net::HTTPOK)
+          pd.resp_body = resp.body.encode('utf-8', 'gbk')
+        else
+          pd.result_message = "not HTTPOK!\n" + resp.to_s + "\n" + resp.to_hash.to_s
+        end
+      rescue => e
+        pd.result_message = "request error!\n#{e.message}"
+      end
+      pd.save!
+      pd
+    end
+
   end
 end
