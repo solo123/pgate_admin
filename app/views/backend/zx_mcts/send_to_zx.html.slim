@@ -6,7 +6,7 @@ ol.breadcrumb
   h4 返回结果
   pre
     code.xml
-      = @post_data.resp_body if @post_data.resp_body
+      = @post_data.resp_body.inspect if @post_data.resp_body
   .notice
     = @post_data.result_message
 
@@ -14,7 +14,7 @@ ol.breadcrumb
   h4 请求XML文件
   pre
     code.xml
-      = @xml if @xml
+      = @xml.inspect if @xml
 
 - if @error_msg
   h4= @error_msg
