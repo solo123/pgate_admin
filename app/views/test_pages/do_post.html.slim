@@ -1,21 +1,22 @@
 h2 post result
 p
   = @js.to_s
-  
-- if @js[:qr_code]
+
+- js = JSON.parse(@js[:data]).symbolize_keys
+- if js[:qr_code]
   p 
-    = @js[:qr_code]
+    = js[:qr_code]
     - img_file = 'qr_' + Time.now.to_i.to_s + '.png'
-    - qr = RQRCode::QRCode.new(@js[:qr_code])
+    - qr = RQRCode::QRCode.new(js[:qr_code])
     - qr.as_png.save("public/#{img_file}")
   h2 扫码支付
   p
     = image_tag "/#{img_file}", size: 200
     
-- if @js[:pay_url]
+- if js[:pay_url]
   p 
-    = link_to '确认跳转支付', @js[:pay_url]
+    = link_to '确认跳转支付', js[:pay_url]
 
-- if @js[:qr_code]
+- if js[:qr_code]
   p 
-    = link_to '确认跳转支付', @js[:qr_code]
+    = link_to '确认跳转支付', js[:qr_code]
