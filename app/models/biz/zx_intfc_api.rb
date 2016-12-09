@@ -44,15 +44,19 @@ module Biz
                     mabs << cl.pay_typ_fee_rate
                   end
                 }
+                val = nil
               else
                 val = eval(r['f_name'])
               end
             else
               val = org.zx_mct[r['regn_en_nm'].downcase]
             end
-            xml.send r['regn_en_nm'], val
-            mabs << val if r['is_sign_regn'] == 1
-            missed_require_fields << "#{r['regn_en_nm']}(r['regn_cn_nm'])"
+            if val
+              xml.send r['regn_en_nm'], val
+              mabs << val if r['is_sign_regn'] == 1
+            else
+              missed_require_fields << "#{r['regn_en_nm']}(#{r['regn_cn_nm']})" if r['regn_nt_null'] == 1 && r['f_name'] != 'list'
+            end
           end
         }
       end

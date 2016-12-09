@@ -10,7 +10,7 @@
           td.inp= f.text_field :chnl_mercht_id
         tr
           td.lbl 支付渠道编号：
-          td.inp= f.text_field :pay_chnl_encd
+          td.inp= f.select :pay_chnl_encd, f.object.pay_chnl_encd_enum
           td.lbl 商户渠道归属编号：
           td.inp= f.text_field :mercht_belg_chnl_id
         tr
@@ -22,17 +22,17 @@
           td.lbl 开户行：
           td.inp= f.text_field :opn_bnk
           td.lbl 是否中信银行：
-          td.inp= f.text_field :is_nt_citic
+          td.inp= f.select :is_nt_citic, f.object.is_nt_citic_enum 
         tr
           td.lbl 账户类型：
-          td.inp= f.text_field :acct_typ
+          td.inp= f.select :acct_typ, f.object.acct_typ_enum
           td.lbl 支付联行号：
           td.inp= f.text_field :pay_ibank_num
         tr
           td.lbl 商户结算账号：
           td.inp= f.text_field :acct_num
           td.lbl 是否收支两条线：
-          td.inp= f.text_field :is_nt_two_line
+          td.inp= f.select :is_nt_two_line, f.object.is_nt_two_line_enum
         tr
           td.lbl 手续费账户类型（不支持）：
           td.inp= f.text_field :comm_fee_acct_type

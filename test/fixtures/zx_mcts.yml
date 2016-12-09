@@ -1,0 +1,30 @@
+one:
+  id: 1
+  org_id: 1
+  chnl_id: '001001'
+  chnl_mercht_id: QD_001
+  pay_chnl_encd: '001001'
+  mercht_belg_chnl_id: '001001'
+  opr_cls: ad
+  acct_nm: db
+  opn_bnk: zx
+  is_nt_citic: '1'
+  acct_typ: ddd
+  pay_ibank_num: ''
+  acct_num: ''
+  is_nt_two_line: '1'
+  comm_fee_acct_type: ''
+  comm_fee_acct_nm: ''
+  comm_fee_bank_nm: ''
+  ibank_num: ''
+  comm_fee_acct_num: ''
+  trancode: ''
+  submt_dt:
+  chk_dt:
+  actv_dt:
+  actv_stat:
+  rtncode:
+  rtninfo:
+  status: 0
+  created_at: '2016-12-09 08:33:01.146977'
+  updated_at: '2016-12-09 08:33:51.790029'

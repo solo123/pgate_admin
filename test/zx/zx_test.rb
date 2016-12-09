@@ -8,9 +8,6 @@ class ZxTest < ActionDispatch::IntegrationTest
     return unless DEBUG_MODE
     Rails.logger.info params.join("\n")
   end
-  def load_seed
-    load "#{Rails.root}/db/seeds.rb"
-  end
 
   test "file md5" do
     f_md5 = Digest::MD5.hexdigest(File.read("#{Rails.root}/test/zx/zxzhmx.zip"))
@@ -51,11 +48,40 @@ class ZxTest < ActionDispatch::IntegrationTest
   end
 
   test "get_mab" do
-    load_seed
+    return
     biz = Biz::ZxIntfcApi.new
     biz.set_mercht(zx_merchts(:one))
     mab = "1000000720161020115500029110000007商户入驻测试商户入驻测试15712945988张xx0755-8211000013900000000001zhang@company.com2016062900190127测试商户河南郑州郑州市金水区花园南路测试中国银行金融街支行1110210000494302000494192000514540md5_ABCD00100sdc1"
     assert_equal mab, biz.mab
+  end
+
+  test "test stub" do
+    # attach = OpenStruct.new
+    # attach.attach_asset_identifier = 'aid'
+    # attach.attach_asset = OpenStruct.new(url: 'aurl')
+    attach = stub(attach_asset_identifier: 'aid', attach_asset: stub(url: 'aurl'))
+    Org.any_instance.stubs(:attachments).returns(stub(find_by: attach))
+
+    org = orgs(:one)
+    lics = org.attachments.find_by(tag_name: 'lics')
+    assert_equal attach, lics
+    assert_equal "aid", lics.attach_asset_identifier
+    assert_equal "aurl", lics.attach_asset.url
+  end
+  test "gen zx_intfc request" do
+    attach = stub(
+      attach_asset_identifier: 'aid',
+      attach_asset: stub(url: "/../test/fixtures/attach_1.data")
+    )
+    Org.any_instance.stubs(:attachments).returns(stub(find_by: attach))
+
+    biz = Biz::ZxIntfcApi.new(orgs(:one))
+    biz.prepare_request
+    puts biz.xml
+    xml = Nokogiri::XML(biz.xml)
+    assert xml.errors.empty?
+    assert_equal 1, xml.xpath("//Contr_Info_List").count
+    assert_equal '00', biz.err_code
   end
 
 end
