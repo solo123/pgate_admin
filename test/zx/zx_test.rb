@@ -34,11 +34,17 @@ class ZxTest < ActionDispatch::IntegrationTest
   end
 
   test "get_mab" do
-    return
-    biz = Biz::ZxIntfcApi.new
-    biz.set_mercht(zx_merchts(:one))
-    mab = "1000000720161020115500029110000007商户入驻测试商户入驻测试15712945988张xx0755-8211000013900000000001zhang@company.com2016062900190127测试商户河南郑州郑州市金水区花园南路测试中国银行金融街支行1110210000494302000494192000514540md5_ABCD00100sdc1"
-    assert_equal mab, biz.mab
+    attach = stub(
+      attach_asset_identifier: 'aid',
+      attach_asset: stub(url: "/../test/fixtures/attach_1.data")
+    )
+    Org.any_instance.stubs(:attachments).returns(stub(find_by: attach))
+
+    biz = Biz::ZxIntfcApi.new(orgs(:one))
+    biz.prepare_request
+    mab = "10000007201610201155000290001商户入驻测试商户入驻测试2016062900190127测试中国银行金融街支行102100004943ae351b342df716825cfc8d44b0bd9f4600010002201610200.00300100SDC1"
+    puts biz.inspect
+    assert_equal mab, biz.mab.encode('utf-8', 'gbk')
   end
 
   test "test stub" do

@@ -30,6 +30,7 @@ module Biz
       builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
         xml.ROOT {
           CSV.foreach("#{Rails.root}/config/zx_reg_fields.csv", headers: true) do |r|
+            val = nil
             if r['f_name']
               if r['f_name'] == 'list'
                 xml.Contr_Info_List {
@@ -44,7 +45,6 @@ module Biz
                     mabs << cl.pay_typ_fee_rate
                   end
                 }
-                val = nil
               else
                 val = eval(r['f_name'])
               end
@@ -53,11 +53,14 @@ module Biz
             end
             if val
               xml.send r['regn_en_nm'], val
-              mabs << val if r['is_sign_regn'] == 1
+              if r['is_sign_regn'] == "1"
+                mabs << val
+              end
             else
-              missed_require_fields << "#{r['regn_en_nm']}(#{r['regn_cn_nm']})" if r['regn_nt_null'] == 1 && r['f_name'] != 'list'
+              missed_require_fields << "#{r['regn_en_nm']}(#{r['regn_cn_nm']})" if r['regn_nt_null'] == "1" && r['f_name'] != 'list'
             end
           end
+          xml.Msg_Sign sign(mabs)
         }
       end
       @xml = builder.to_xml

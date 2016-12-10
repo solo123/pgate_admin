@@ -1,24 +1,24 @@
 one:
   id: 1
   org_id: 1
-  chnl_id: '001001'
-  chnl_mercht_id: QD_001
-  pay_chnl_encd: '001001'
-  mercht_belg_chnl_id: '001001'
-  opr_cls: ad
-  acct_nm: db
-  opn_bnk: zx
+  chnl_id: '10000007'
+  chnl_mercht_id: '20161020115500029'
+  pay_chnl_encd: '0001'
+  mercht_belg_chnl_id: '10000007'
+  opr_cls: '2016062900190127'
+  acct_nm: '测试'
+  opn_bnk: '中国银行金融街支行'
   is_nt_citic: '1'
-  acct_typ: ddd
-  pay_ibank_num: ''
-  acct_num: ''
-  is_nt_two_line: '1'
+  acct_typ: '1'
+  pay_ibank_num: '102100004943'
+  acct_num: '0200049419200051454'
+  is_nt_two_line: '0'
   comm_fee_acct_type: ''
   comm_fee_acct_nm: ''
   comm_fee_bank_nm: ''
   ibank_num: ''
   comm_fee_acct_num: ''
-  trancode: ''
+  trancode: '0100SDC1'
   submt_dt:
   chk_dt:
   actv_dt:

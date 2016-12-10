@@ -1,16 +1,16 @@
 one:
   id: 1
   org_id: 1
-  full_name: 商户全名
-  short_name: 简称
+  full_name: 商户入驻测试
+  short_name: 商户入驻测试
   service_tel: 0755-8008008000
   business_category: 机械行业
   memo: '企业信息memo'
   lic_number: 800-8ACD-001-000
   jp_name: 王先生
   jp_id_number: '440303194030300001'
-  contact_name: 张经理
-  contact_tel: 0755-82000001
+  contact_name: 张xx
+  contact_tel: "15712945988"
   contact_email: sales@pooul.cn
   province: 广东
   urbn: 深圳市
