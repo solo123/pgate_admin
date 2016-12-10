@@ -42,8 +42,8 @@ class ZxTest < ActionDispatch::IntegrationTest
 
     biz = Biz::ZxIntfcApi.new(orgs(:one))
     biz.prepare_request
-    mab = "10000007201610201155000290001商户入驻测试商户入驻测试2016062900190127测试中国银行金融街支行102100004943ae351b342df716825cfc8d44b0bd9f4600010002201610200.00300100SDC1"
-    puts biz.inspect
+    mab = "10000007201610201155000290001商户入驻测试普尔支付12016062900190127测试中国银行金融街支行1021000049430b5a0d4ab4e401d2692ccba11b4406d900010003201612200.00300010002201612200.00300010001201612200.00300100SDC1"
+    #puts biz.inspect
     assert_equal mab, biz.mab.encode('utf-8', 'gbk')
   end
 
