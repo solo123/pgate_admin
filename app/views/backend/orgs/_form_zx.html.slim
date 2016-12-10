@@ -48,6 +48,21 @@
           td.inp= f.text_field :comm_fee_acct_num
           td.lbl 上送交易代码：
           td.inp= f.text_field :trancode
+        tr
+          td.lbl 签约信息列表：
+          td colspan='3'
+            - if f.object.zx_contr_info_lists.count < 3
+              - (3 - f.object.zx_contr_info_lists.count).times { f.object.zx_contr_info_lists.build }
+
+            table.table.table-bordered.table-striped
+              thead
+                tr
+                  th 支付类型编码
+                  th 生效日期
+                  th 费率
+              tbody
+                = f.fields_for :zx_contr_info_lists do |builder|
+                  = render "form_list_item", f: builder
       h4 中信银行商户(确认)信息
       table.table.table-bordered.table-striped
         tr

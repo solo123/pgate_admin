@@ -33,20 +33,6 @@ class ZxTest < ActionDispatch::IntegrationTest
     assert pkcs7.verify([crt], OpenSSL::X509::Store.new, data, OpenSSL::PKCS7::NOVERIFY)
   end
 
-  test 'request xml' do
-    return
-    load_seed
-    biz = Biz::ZxIntfcApi.new(zx_merchts(:one))
-    if biz.err_code != '00'
-      puts "error: " + biz.err_desc
-    end
-
-    #byebug
-    #xml_gbk = biz.xml.encode('GBK', 'UTF-8')
-    File.write('test/zx/zx_m1.xml', biz.xml)
-    #byebug
-  end
-
   test "get_mab" do
     return
     biz = Biz::ZxIntfcApi.new
@@ -77,11 +63,14 @@ class ZxTest < ActionDispatch::IntegrationTest
 
     biz = Biz::ZxIntfcApi.new(orgs(:one))
     biz.prepare_request
-    puts biz.xml
+    #puts biz.xml
     xml = Nokogiri::XML(biz.xml)
     assert xml.errors.empty?
     assert_equal 1, xml.xpath("//Contr_Info_List").count
     assert_equal '00', biz.err_code
+
+    File.write('test/zx/zx_m1.xml', biz.xml)
+
   end
 
 end
