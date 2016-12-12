@@ -1,5 +1,6 @@
-PATH
-  remote: ../pgate_model
+GIT
+  remote: https://github.com/solo123/pgate_model.git
+  revision: 61db03b1ca9e7a483946152a1ecdf3402e6f2d76
   specs:
     pgate_model (0.9.20)
       rails (~> 5.0.0, >= 5.0.0.1)
