@@ -80,18 +80,18 @@ module Biz
         url = AppConfig.get('zx', 'intfc_url')
         pd = post_xml_gbk('zx_intfc', url, @xml, @org.zx_mct)
         @post_data = pd
-        @error_msg = nil
+        @err_desc = nil
         xml = Nokogiri::XML(pd.resp_body)
         if xml.xpath("//rtncode").text == '00000000'
           @org.zx_mct.status = 1
           @org.zx_mct.save!
         else
           @err_code = '20'
-          @error_msg = xml.xpath("//rtninfo").text
+          @err_desc = xml.xpath("//rtninfo").text
         end
       else
         @err_code = '20'
-        @error_msg = '数据不齐，提交失败！' + biz.err_desc.to_s
+        @err_desc = '数据不齐，提交失败！' + biz.err_desc.to_s
       end
     end
 
@@ -112,14 +112,15 @@ module Biz
       end
       pd = post_xml_gbk('zx_intfc_query', AppConfig.get('zx', 'intfc_url'), builder.to_xml, @org.zx_mct)
       @post_data = pd
-      @error_msg = nil
+      @err_code = '00'
+      @err_desc = nil
       xml = Nokogiri::XML(pd.resp_body)
       if xml.xpath("//rtncode").text == '00000000'
         @org.zx_mct.status = 1
         @org.zx_mct.save!
       else
         @err_code = '20'
-        @error_msg = xml.xpath("//rtninfo").text
+        @err_desc = xml.xpath("//rtninfo").text
       end
     end
 
