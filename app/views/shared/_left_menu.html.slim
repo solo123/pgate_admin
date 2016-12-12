@@ -1,0 +1,16 @@
+ul.nav
+  li.nav-profile
+    div.info
+      big 普尔支付 
+      span 渠道系统
+
+ul.nav#sidemenu
+  li.nav-header 菜单
+          
+  li
+    = link_to '退出登录', destroy_user_session_path, :method => :delete
+  li
+    a href='javascript:;' class='sidebar-minify-btn' data-click='sidebar-minify'
+      i class="fa fa-angle-double-left"
+
+  

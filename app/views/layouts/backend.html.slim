@@ -18,10 +18,10 @@ html[lang="en"]
     link[href="/color_admin/assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet"]
     link[href="/color_admin/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet"]
     link[href="/color_admin/assets/plugins/morris/morris.css" rel="stylesheet"]
-    script[src="/color_admin/assets/plugins/pace/pace.min.js"]
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    script[src="/color_admin/assets/js/apps.min.js"]
 
 
   body
@@ -36,10 +36,31 @@ html[lang="en"]
       #navbar.collapse.navbar-collapse
         = render 'shared/main_menu'
       /! /.nav-collapse
-
-    .container
-      - flash.each do |name, msg|
-        = content_tag :div, msg, :class => "flash_#{name}"
+          
     .container-fluid
       = yield
-    footer.footer Copyright © 2016 PooulCloud 保留所有权利
+    footer.footer Copyright © 2015-2016 PooulCloud 保留所有权利
+
+    script[src="/color_admin/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"]
+    script[src="/color_admin/assets/plugins/pace/pace.min.js"]
+    script[src="/color_admin/assets/plugins/gritter/js/jquery.gritter.min.js"]
+    javascript:
+      //sidemenu();
+      //client_show();
+      App.init();
+      //FormPlugins.init();
+      //Dashboard.init();
+    
+    // 显示flash消息
+    - flash.each do |type, message|
+      javascript:
+        setTimeout( function() {
+          $.gritter.add({
+            title: '#{type}信息',
+            text: '#{message}',
+            image: '#{asset_path("messagebox_warning.png")}',
+            sticky: false,
+            time: '10000',
+            class_name: 'my-sticky-class'
+            });
+            }, 500);

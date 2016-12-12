@@ -1,6 +1,6 @@
 - if @object.zx_mct
   .bs-callout.bs-callout-warning
-    = form_for(@object.zx_mct) do |f|
+    = form_for(@object.zx_mct, remote: true) do |f|
       h4 中信银行商户信息
       table.table.table-bordered.table-striped
         tr
@@ -71,7 +71,9 @@
         tr
           td
           td.inp colspan='3'
-            = f.submit "保存"
-            = f.submit '发送到中信银行', class: 'btn btn-default', confirm: '确认要申请开通中信支付通道吗？'
+            .btn-group
+              = f.submit "保存", class: 'btn btn-primary'
+              = f.submit '发送到中信银行', class: 'btn btn-info', confirm: '确认要申请开通中信支付通道吗？'
+              = f.submit '查询', class: 'btn btn-info'
 - else
   = link_to '申请开通中信银行接口', create_zx_mct_org_path(@object), class: 'btn btn-default'

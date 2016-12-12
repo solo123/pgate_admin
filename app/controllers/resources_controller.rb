@@ -18,7 +18,7 @@ class ResourcesController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.js
-			format.json { render json: @object }
+			#format.json { render json: @object }
 		end
 	end
 	def edit
@@ -94,12 +94,6 @@ class ResourcesController < ApplicationController
 	end
 	def object_name
 		controller_name.singularize
-	end
-
-	def flash_message_for(object, event_sym)
-		resource_desc  = object.class.model_name.human
-		resource_desc += " \"#{object.name}\"" if object.respond_to?(:name) && object.name.present?
-		I18n.t(event_sym, :resource => resource_desc)
 	end
 
 	# Index request for JSON needs to pass a CSRF token in order to prevent JSON Hijacking

@@ -34,6 +34,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'sqlite3'
+  gem 'webmock'
 end
 
 group :development do
@@ -51,11 +52,12 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 
+
 gem 'bootstrap'
 gem 'devise'
 gem 'slim'
-gem 'pgate_model', git: 'https://github.com/solo123/pgate_model.git'
-#gem 'pgate_model', path: '../pgate_model'
+#gem 'pgate_model', git: 'https://github.com/solo123/pgate_model.git'
+gem 'pgate_model', path: '../pgate_model'
 gem 'ransack'
 gem 'kaminari'
 gem 'rqrcode'

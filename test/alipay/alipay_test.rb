@@ -70,6 +70,7 @@ class AlipayTest < ActionDispatch::IntegrationTest
     assert ck
   end
   test "test prepay sandbox" do
+    return
     #url = 'https://openapi.alipay.com/gateway.do'
     url = 'https://openapi.alipaydev.com/gateway.do'
     #app_id = '2016101502183655'
@@ -166,6 +167,7 @@ class AlipayTest < ActionDispatch::IntegrationTest
     #post_data(url, js_request)
   end
   test "test prepay params log" do
+    return
     url = 'https://openapi.alipay.com/gateway.do'
     app_id = '2016101502183655'
     n = rand(1000).to_s

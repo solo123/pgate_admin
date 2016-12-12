@@ -3,6 +3,7 @@ require 'test_helper'
 
 class KaifuQueryTest < ActionDispatch::IntegrationTest
   test "query to kaifu" do
+    return
     query_url	= "http://61.135.202.242:8022/payform/organization"
     tmk = "9DB9095654D1FA7763F32E6B4E922140"
 

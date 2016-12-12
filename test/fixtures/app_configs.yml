@@ -2,3 +2,7 @@ keys_path:
   group: 'pooul'
   name: 'keys_path'
   val: '/Users/jimmy/work/keys'
+zx_intfc_path:
+  group: 'zx'
+  name: 'intfc_url'
+  val: 'http://intfc.zx.com'

@@ -5,27 +5,24 @@ class Backend::ZxMctsController < ResourcesController
     @object.attributes = params[:zx_mct]
     if @object.changed_for_autosave?
       if @object.save
+        flash[:info] = "数据保存成功"
       else
         flash[:error] = @object.errors.full_messages.to_sentence
         @no_log = 1
       end
     end
-    if params[:commit] == '发送到中信银行'
-      flash[:alert] = "已经发送给银行"
+    case params[:commit]
+    when '发送到中信银行'
       biz = Biz::ZxIntfcApi.new(@object.org)
       biz.prepare_request
-      if @xml = biz.xml
-        url = AppConfig.get('zx', 'intfc_url')
-        pd = biz.post_xml_gbk('zx_intfc', url, @xml, @object)
-        @post_data = pd
-        @error_msg = nil
+      if biz.err_code == '00'
+        biz.send_zx_intfc
       else
-        @error_msg = '数据不齐，提交失败！' + biz.err_desc.to_s
+        flash[:error] = biz.err_desc
       end
-      render 'send_to_zx'
     else
-      redirect_to edit_org_path(@object.org)
     end
+    redirect_to edit_org_path(@object.org)
   end
 
 end

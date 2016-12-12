@@ -30,34 +30,14 @@ module Biz
       builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
         xml.ROOT {
           CSV.foreach("#{Rails.root}/config/zx_reg_fields.csv", headers: true) do |r|
-            val = nil
-            if r['f_name']
-              if r['f_name'] == 'list'
-                xml.Contr_Info_List {
-                  @org.zx_mct.zx_contr_info_lists.each do |cl|
-                    xml.Contrinfo {
-                      xml.Pay_Typ_Encd cl.pay_typ_encd
-                      xml.Pay_Typ_Fee_Rate cl.pay_typ_fee_rate
-                      xml.Start_Dt cl.start_dt
-                    }
-                    mabs << cl.pay_typ_encd
-                    mabs << cl.start_dt
-                    mabs << cl.pay_typ_fee_rate
-                  end
-                }
+            val = r['f_name'] ? eval(r['f_name']) : org.zx_mct[r['regn_en_nm'].downcase]
+            unless val == "NO_VALUE"
+              xml.send r['regn_en_nm'], val
+              if val
+                mabs << val if r['is_sign_regn'] == "1"
               else
-                val = eval(r['f_name'])
+                missed_require_fields << "#{r['regn_en_nm']}(#{r['regn_cn_nm']})" if r['regn_nt_null'] == "1"
               end
-            else
-              val = org.zx_mct[r['regn_en_nm'].downcase]
-            end
-            xml.send r['regn_en_nm'], val if r['f_name'] != 'list'
-            if val
-              if r['is_sign_regn'] == "1"
-                mabs << val
-              end
-            else
-              missed_require_fields << "#{r['regn_en_nm']}(#{r['regn_cn_nm']})" if r['regn_nt_null'] == "1" && r['f_name'] != 'list'
             end
           end
           xml.Msg_Sign sign(mabs)
@@ -70,6 +50,21 @@ module Biz
         @err_desc = "缺少必须的字段：\n" + missed_require_fields.join("\n")
       end
     end
+    def contr_info_list(xml, mabs)
+      xml.Contr_Info_List {
+        @org.zx_mct.zx_contr_info_lists.each do |cl|
+          xml.Contrinfo {
+            xml.Pay_Typ_Encd cl.pay_typ_encd
+            xml.Pay_Typ_Fee_Rate cl.pay_typ_fee_rate
+            xml.Start_Dt cl.start_dt
+          }
+          mabs << cl.pay_typ_encd
+          mabs << cl.start_dt
+          mabs << cl.pay_typ_fee_rate
+        end
+      }
+      "NO_VALUE"
+    end
 
     def sign(mabs)
       @mab = mabs.join().encode('GBK', 'UTF-8')
@@ -78,6 +73,54 @@ module Biz
       sign = OpenSSL::PKCS7::sign(crt, key, @mab, [], OpenSSL::PKCS7::DETACHED)
       sign.certificates = []
       Base64.strict_encode64 sign.to_der
+    end
+
+    def send_zx_intfc
+      if @xml
+        url = AppConfig.get('zx', 'intfc_url')
+        pd = post_xml_gbk('zx_intfc', url, @xml, @org.zx_mct)
+        @post_data = pd
+        @error_msg = nil
+        xml = Nokogiri::XML(pd.resp_body)
+        if xml.xpath("//rtncode").text == '00000000'
+          @org.zx_mct.status = 1
+          @org.zx_mct.save!
+        else
+          @err_code = '20'
+          @error_msg = xml.xpath("//rtninfo").text
+        end
+      else
+        @err_code = '20'
+        @error_msg = '数据不齐，提交失败！' + biz.err_desc.to_s
+      end
+    end
+
+    def send_zx_query
+      mab_query = []
+      mab_query << @org.zx_mct.chnl_id
+      mab_query << @org.zx_mct.chnl_mercht_id
+      mab_query << @org.zx_mct.pay_chnl_encd
+      mab_query << '0100SDC0'
+      builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
+        xml.ROOT {
+          xml.Chnl_Id @org.zx_mct.chnl_id
+          xml.Chnl_Mercht_Id @org.zx_mct.chnl_mercht_id
+          xml.Pay_Chnl_Encd @org.zx_mct.pay_chnl_encd
+          xml.trancode '0100SDC0'
+          xml.Msg_Sign sign(mab_query)
+        }
+      end
+      pd = post_xml_gbk('zx_intfc_query', AppConfig.get('zx', 'intfc_url'), builder.to_xml, @org.zx_mct)
+      @post_data = pd
+      @error_msg = nil
+      xml = Nokogiri::XML(pd.resp_body)
+      if xml.xpath("//rtncode").text == '00000000'
+        @org.zx_mct.status = 1
+        @org.zx_mct.save!
+      else
+        @err_code = '20'
+        @error_msg = xml.xpath("//rtninfo").text
+      end
     end
 
     def post_xml_gbk(method, url, data, sender)
