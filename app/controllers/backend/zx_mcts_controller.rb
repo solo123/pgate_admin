@@ -17,10 +17,14 @@ class Backend::ZxMctsController < ResourcesController
       biz.prepare_request
       if biz.err_code == '00'
         biz.send_zx_intfc
+        flash[:error] = biz.err_desc unless biz.err_code == '00'
       else
         flash[:error] = biz.err_desc
       end
-    else
+    when '查询'
+      biz = Biz::ZxIntfcApi.new(@object.org)
+      biz.send_zx_query
+      flash[:error] = biz.err_desc unless biz.err_code == '00'
     end
     redirect_to edit_org_path(@object.org)
   end
