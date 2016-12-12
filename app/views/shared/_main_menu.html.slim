@@ -21,26 +21,16 @@ ul.nav.navbar-nav.navbar-right
   li= link_to 'HOME', '/'
   li.dropdown
     a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
-      | 管理数据  
-    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
-      li.dropdown-header
-        | 系统管理数据
-  li.dropdown
-    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
       | 商户数据 
     ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li.dropdown-header
+        = link_to '商户列表', orgs_path
   li.dropdown
     a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
-      | 天付宝数据 
+      | 清分数据 
     ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
-  li.dropdown
-    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
-      | 凯富数据 
-    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
-  li.dropdown
-    a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
-      | 系统数据 
-    ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
+      li.dropdown-header
+        = link_to '中信清分', zx_clrs_path
 
   li
     - if user_signed_in?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207174913) do
+ActiveRecord::Schema.define(version: 20161212160356) do
 
   create_table "app_configs", force: :cascade do |t|
     t.string   "group"
@@ -37,6 +37,29 @@ ActiveRecord::Schema.define(version: 20161207174913) do
     t.string   "person_id_num"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "channels", force: :cascade do |t|
+    t.string   "channel_code"
+    t.string   "channel_name"
+    t.string   "success_code"
+    t.string   "channel_out_code"
+    t.string   "biz_out_code"
+    t.string   "biz_type"
+    t.integer  "t1_rate"
+    t.integer  "d0_add_rate"
+    t.integer  "d0_min_fee"
+    t.string   "prepay_url"
+    t.string   "query_url"
+    t.string   "withdraw_url"
+    t.string   "clr_url"
+    t.string   "tmk"
+    t.string   "public_cert"
+    t.string   "channel_public_cert"
+    t.string   "aes_key"
+    t.integer  "status",              default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "http_logs", force: :cascade do |t|
@@ -220,6 +243,20 @@ ActiveRecord::Schema.define(version: 20161207174913) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "zx_clrs", force: :cascade do |t|
+    t.string   "chnl_id"
+    t.string   "pay_chnl_encd"
+    t.string   "clr_dt"
+    t.string   "trancode"
+    t.string   "clr_dtl_fn"
+    t.string   "dtl_memo"
+    t.string   "rtncode"
+    t.string   "rtninfo"
+    t.integer  "status",        default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "zx_contr_info_lists", force: :cascade do |t|

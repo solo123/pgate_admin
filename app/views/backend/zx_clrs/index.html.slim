@@ -1,0 +1,33 @@
+p#notice
+  = notice
+  
+h1.page-header
+  | 中信清分数据管理
+
+= form_tag(zx_clrs_path, method: :post) do 
+  = text_field_tag :clr_dt  
+  = submit_tag '请求清分'
+= paginate @collection  
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th ID
+      th 渠道编号
+      th 支付渠道
+      th 清分日期
+      th 清分文件
+      th 返回信息
+      th 状态
+      th 
+  tbody
+    - @collection.each do |dt|
+      tr
+        td= dt.id
+        td= dt.chnl_id
+        td= dt.pay_chnl_encd
+        td= dt.clr_dtl_fn
+        td= dt.rtncode = rtninfo
+        td= dt.status
+        td= link_to '清分', edit_zx_clr(dt) if dt.status == 0
+        
+= paginate @collection  

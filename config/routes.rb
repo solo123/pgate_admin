@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  resources :zx_merchts
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :skip => [:registrations]
 
@@ -14,7 +12,7 @@ Rails.application.routes.draw do
     end
     resources :sent_posts, :notify_recvs
     resources :merchants
-    resources :zx_mcts
+    resources :zx_mcts, :zx_clrs
   end
 
   namespace :test_pages do

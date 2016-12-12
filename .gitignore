@@ -20,6 +20,7 @@
 /public/color_admin/*
 /public/uploads/*
 /public/*.png
+/public/zx_clrs/*
 
 # Ignore Byebug command history file.
 .byebug_history

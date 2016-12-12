@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
     #bulk_delete
     show
     edit do
-      only ['AppConfig', 'Org', 'Merchant', 'PfbMercht']
+      only ['AppConfig', 'Org', 'Merchant', 'PfbMercht', 'Channel']
     end
     #delete
     #show_in_app
@@ -65,6 +65,10 @@ RailsAdmin.config do |config|
   config.model 'AppConfig' do
     navigation_label '系统管理'
     label '系统配置'
+  end
+  config.model 'Channel' do
+    navigation_label '系统管理'
+    label '通道配置'
   end
   config.model 'ZxContrInfoList' do
     visible false

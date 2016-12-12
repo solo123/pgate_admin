@@ -128,6 +128,45 @@ module Biz
         @err_desc = xml.xpath("//rtninfo").text
       end
     end
+    def send_zx_clr(clr_dt)
+      channel = Channel.find_by(channel_code: 'zx_alipay')
+      clr = ZxClr.find_or_create_by(clr_dt: clr_dt)
+      clr.chnl_id = channel.channel_out_code
+      clr.pay_chnl_encd = channel.biz_out_code
+      clr.clr_dt = clr_dt
+      clr.trancode = '0100SDC4'
+      clr.save!
+
+      mab_query = []
+      mab_query << clr.chnl_id
+      mab_query << clr.pay_chnl_encd
+      mab_query << clr.clr_dt
+      mab_query << clr.trancode
+      builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
+        xml.ROOT {
+          xml.Chnl_Id clr.chnl_id
+          xml.Pay_Chnl_Encd clr.pay_chnl_encd
+          xml.Clr_Dt clr.clr_dt
+          xml.trancode clr.trancode
+          xml.Msg_Sign sign(mab_query)
+        }
+      end
+      pd = post_xml_gbk('zx_clr', channel.prepay_url, builder.to_xml, clr)
+      @post_data = pd
+      @err_code = '00'
+      @err_desc = nil
+      xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
+      if xml.xpath("//rtncode").text == '00000000'
+        clr.rtncode = xml.xpath("//rtncode").text
+        clr.rtninfo = xml.xpath("//rtninfo").text
+        clr.dtl_memo = xml.xpath("//Dtl_Memo").text
+        clr.status = 1
+        clr.save!
+      else
+        @err_code = '20'
+        @err_desc = xml.xpath("//rtninfo").text
+      end
+    end
 
     def post_xml_gbk(method, url, data, sender)
       pd = SentPost.new

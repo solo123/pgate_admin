@@ -15,7 +15,6 @@ class ZxIntfcTest < ActionDispatch::IntegrationTest
   end
 
   test "zx sign" do
-    #certificate = 'MIIDITCCAgmgAwIBAgIBMDANBgkqhkiG9w0BAQUFADArMQswCQYDVQQGEwJDTjENMAsGA1UECwwEUFROUjENMAsGA1UEAwwEdGVzdDAeFw0xNjA5MDYxMDMzMzlaFw0yNjA5MDQxMDMzMzlaMCsxCzAJBgNVBAYTAkNOMQ0wCwYDVQQLDARQVE5SMQ0wCwYDVQQDDAR0ZXN0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhJfufuUP92Gonrhxo1wBqO1nh3+yUlorF+UySal5+BWalQU6QY1K2rUprxRF6y9rO6J+qel83juWXkYdtyH0shJEDPLfmEe4iUIWzNPJHRPi4Uwsg1CNOnLI93mrbh0sXlOAhwMxqhBD5GdcEDyXYm9egttegXgbVFNG9frBVxu3tjkqlwxPVAHNR78Atuj/avaM705EiKWScm1Hxc5fmbJQCLSy1pMX5/V5z5m1yk3DjkFo98aqRdFzJaR+gqPk1mSv8rPn2BvT8nIrrMRmVOH2VzX/wDiKMpvuGQcq8l9deoTSMphR30XfYs6MQ/9OWDH49/xBEGnUV9bG3GoLbwIDAQABo1AwTjAdBgNVHQ4EFgQUWaZ57KamnQXLHbvsRS4sm5gM3vswHwYDVR0jBBgwFoAUWaZ57KamnQXLHbvsRS4sm5gM3vswDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEABSgrIpZdXWGvgE7n/R81UlvtWTP7Zl9nqSLedEZu6b01YBPGdNsIccMaa8RVrkMkwE/kgrsEuHF8V1hf3VHCIkhaZ78A+8dKAiYFX6Z1bMH0epsgKUiwWTQygQPCrQApvflPN8mu0ieYiWVpcISMA+JziA3keQphGgBN8ocE4WBwgM/biCYFg1abF3LiXA9gh7wu+w3mpy5NTNuU4HONFdfDSHu8+HG87Yu0E+cz3iDK9gZkPXZhhjG61IZusR55gOyyJZkhvv+2f40C+X1Ryw+kJyk7w2iOhRPqTvHzGMiqI1wmDi4QoCS6traMnSnyERwK3NDhSRceTJSD9Pn+7g=='
     data        = 'abc123'
 
     key = OpenSSL::PKey::RSA.new(File.read("#{AppConfig.get('pooul', 'keys_path')}/zx_test_priv_key.pem"))
@@ -28,6 +27,19 @@ class ZxIntfcTest < ActionDispatch::IntegrationTest
     #puts "Sign:"
     #puts v_sn.inspect
 
+
+    pkcs7 = OpenSSL::PKCS7.new(sign.to_der)
+    assert pkcs7.verify([crt], OpenSSL::X509::Store.new, data, OpenSSL::PKCS7::NOVERIFY)
+  end
+  test "zx product key_cert" do
+    data        = 'abc123'
+
+    key = OpenSSL::PKey::RSA.new(File.read("#{AppConfig.get('pooul', 'keys_path')}/zx_prod_key.pem"))
+    crt = OpenSSL::X509::Certificate.new(File.read("#{AppConfig.get('pooul', 'keys_path')}/zx_prod.crt"))
+
+    sign = OpenSSL::PKCS7::sign(crt, key, data, [], OpenSSL::PKCS7::DETACHED)
+    sign.certificates = []
+    v_sn = Base64.strict_encode64 sign.to_der
 
     pkcs7 = OpenSSL::PKCS7.new(sign.to_der)
     assert pkcs7.verify([crt], OpenSSL::X509::Store.new, data, OpenSSL::PKCS7::NOVERIFY)

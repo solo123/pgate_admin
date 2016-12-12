@@ -1,0 +1,2 @@
+class ZxClr < ApplicationRecord
+end
