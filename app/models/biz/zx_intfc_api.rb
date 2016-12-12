@@ -119,13 +119,18 @@ module Biz
       @post_data = pd
       @err_code = '00'
       @err_desc = nil
-      xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
-      if xml.xpath("//rtncode").text == '00000000'
-        @org.zx_mct.status = 1
-        @org.zx_mct.save!
+      if pd.resp_body
+        xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
+        if xml.xpath("//rtncode").text == '00000000'
+          @org.zx_mct.status = 1
+          @org.zx_mct.save!
+        else
+          @err_code = '20'
+          @err_desc = xml.xpath("//rtninfo").text
+        end
       else
         @err_code = '20'
-        @err_desc = xml.xpath("//rtninfo").text
+        @err_desc = '请求返回为空'
       end
     end
     def send_zx_clr(clr_dt)
@@ -155,16 +160,21 @@ module Biz
       @post_data = pd
       @err_code = '00'
       @err_desc = nil
-      xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
-      if xml.xpath("//rtncode").text == '00000000'
-        clr.rtncode = xml.xpath("//rtncode").text
-        clr.rtninfo = xml.xpath("//rtninfo").text
-        clr.dtl_memo = xml.xpath("//Dtl_Memo").text
-        clr.status = 1
-        clr.save!
+      if pd.resp_body
+        xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
+        if xml.xpath("//rtncode").text == '00000000'
+          clr.rtncode = xml.xpath("//rtncode").text
+          clr.rtninfo = xml.xpath("//rtninfo").text
+          clr.dtl_memo = xml.xpath("//Dtl_Memo").text
+          clr.status = 1
+          clr.save!
+        else
+          @err_code = '20'
+          @err_desc = xml.xpath("//rtninfo").text
+        end
       else
         @err_code = '20'
-        @err_desc = xml.xpath("//rtninfo").text
+        @err_desc = '请求返回为空'
       end
     end
 

@@ -25,9 +25,10 @@ table.table.table-striped.table-bordered
         td= dt.id
         td= dt.chnl_id
         td= dt.pay_chnl_encd
+        td= dt.clr_dt
         td= dt.clr_dtl_fn
-        td= dt.rtncode = rtninfo
+        td= dt.rtncode = dt.rtninfo
         td= dt.status
-        td= link_to '清分', edit_zx_clr(dt) if dt.status == 0
+        td= link_to '清分', edit_zx_clr_path(dt) if dt.status == 0
         
 = paginate @collection  
