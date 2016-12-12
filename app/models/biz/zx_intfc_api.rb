@@ -81,13 +81,18 @@ module Biz
         pd = post_xml_gbk('zx_intfc', url, @xml, @org.zx_mct)
         @post_data = pd
         @err_desc = nil
-        xml = Nokogiri::XML(pd.resp_body)
-        if xml.xpath("//rtncode").text == '00000000'
-          @org.zx_mct.status = 1
-          @org.zx_mct.save!
+        if pd.resp_body
+          xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
+          if xml.xpath("//rtncode").text == '00000000'
+            @org.zx_mct.status = 1
+            @org.zx_mct.save!
+          else
+            @err_code = '20'
+            @err_desc = xml.xpath("//rtninfo").text
+          end
         else
           @err_code = '20'
-          @err_desc = xml.xpath("//rtninfo").text
+          @err_desc = 'null返回值'
         end
       else
         @err_code = '20'
@@ -114,13 +119,13 @@ module Biz
       @post_data = pd
       @err_code = '00'
       @err_desc = nil
-      xml = Nokogiri::XML(pd.resp_body)
+      xml = Nokogiri::XML(pd.resp_body.encode('gbk', 'utf-8'))
       if xml.xpath("//rtncode").text == '00000000'
         @org.zx_mct.status = 1
         @org.zx_mct.save!
       else
         @err_code = '20'
-        @err_desc = xml.xpath("//rtninfo").text
+        @err_desc = xml.xpath("//rtninfo").text.encode('utf-8', 'gbk')
       end
     end
 

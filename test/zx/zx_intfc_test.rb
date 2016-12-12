@@ -106,6 +106,7 @@ class ZxIntfcTest < ActionDispatch::IntegrationTest
     biz.prepare_request
     biz.send_zx_intfc
     assert_equal '20', biz.err_code
+    assert_equal '验签失败，请检查签名！', biz.err_desc
     assert_equal 0, org.zx_mct.status
   end
 
