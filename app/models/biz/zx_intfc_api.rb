@@ -125,7 +125,7 @@ module Biz
         @org.zx_mct.save!
       else
         @err_code = '20'
-        @err_desc = xml.xpath("//rtninfo").text.encode('utf-8', 'gbk')
+        @err_desc = xml.xpath("//rtninfo").text
       end
     end
 
