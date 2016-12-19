@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations]
 
   scope module: :backend, path: :adm do
-    root to: 'payments#index'
+    root to: 'orgs#index'
     resources :app_configs
     resources :orgs do
       member do

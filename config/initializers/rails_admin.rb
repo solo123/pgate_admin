@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
     #bulk_delete
     show
     edit do
-      only ['AppConfig', 'Org', 'Merchant', 'PfbMercht', 'Channel']
+      only ['AppConfig', 'Org', 'Merchant', 'PfbMercht', 'Channel', 'Agent']
     end
     #delete
     #show_in_app
@@ -61,6 +61,28 @@ RailsAdmin.config do |config|
   config.model 'User' do
     navigation_label '系统管理'
     label '管理用户'
+  end
+  config.model 'Agent' do
+    navigation_label '系统管理'
+    label '代理商后台账号'
+    list do
+      field :id
+      field :org
+      field :email
+      field :roles
+      field :sign_in_count
+      field :current_sign_in_at
+      field :last_sign_in_at
+      field :current_sign_in_ip
+      field :created_at
+    end
+    edit do
+      field :org
+      field :email
+      field :password
+      field :password_confirmation
+      field :roles
+    end
   end
   config.model 'AppConfig' do
     navigation_label '系统管理'
