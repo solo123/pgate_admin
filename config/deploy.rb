@@ -9,12 +9,11 @@ require 'securerandom'
 #   deploy_to    - Path to deploy into.
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
-
 app_name = 'pgate_admin'
 
 set :domain, 'rb@a.pooulcloud.cn'
 set :deploy_to, "/home/rb/work/#{app_name}"
-set :repository, "https://github.com/solo123/#{app_name}.git"
+set :repository, "git@github.com:solo123/#{app_name}.git"
 set :branch, 'deploy'
 
 # Optional settings:
