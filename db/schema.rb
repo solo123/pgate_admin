@@ -145,9 +145,10 @@ ActiveRecord::Schema.define(version: 20161213143422) do
     t.string   "name"
     t.string   "org_code"
     t.string   "tmk"
-    t.integer  "d0_rate"
-    t.integer  "d0_min_fee"
-    t.integer  "t1_rate"
+    t.string   "public_key"
+    t.string   "aes_key"
+    t.string   "sign_mode"
+    t.string   "trans_mode"
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

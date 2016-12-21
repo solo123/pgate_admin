@@ -19,7 +19,7 @@ module Biz
       return nil unless lics
       stringio = Zip::OutputStream.write_buffer do |zio|
         zio.put_next_entry(lics.attach_asset_identifier)
-        zio.write File.read("#{Rails.root}/public#{lics.attach_asset.url}")
+        zio.write File.read("#{Rails.root}/public#{URI.decode(lics.attach_asset.url)}")
       end
       lics_file = stringio.string
       lics_md5 = Digest::MD5.hexdigest(lics_file)

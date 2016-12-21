@@ -24,3 +24,5 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+public/.DS_Store
+.DS_Store

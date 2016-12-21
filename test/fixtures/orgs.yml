@@ -3,8 +3,6 @@ one:
   name: 普尔支付1
   org_code: pooul1
   tmk: 1234567890abcdef
-  d0_min_fee: 30
-  d0_rate: 3000
   status: 1
 
 zero:
@@ -12,6 +10,4 @@ zero:
   name: 普尔支付0
   org_code: pooul0
   tmk: 1234567890abcdef
-  d0_min_fee: 30
-  d0_rate: 3000
   status: 0
