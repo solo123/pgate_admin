@@ -92,6 +92,8 @@ GEM
     haml (4.0.7)
       tilt
     hashdiff (0.3.1)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -127,6 +129,7 @@ GEM
     mocha (1.2.1)
       metaclass (~> 0.0.1)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
     mysql2 (0.4.4)
     nested_form (0.3.2)
     nio4r (1.2.1)
@@ -261,6 +264,7 @@ DEPENDENCIES
   carrierwave (>= 1.0.0.rc, < 2.0)
   coffee-rails (~> 4.2)
   devise
+  httparty
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

@@ -29,5 +29,8 @@
         td auto_code
         td= text_field_tag 'payment[auth_code]' 
       tr
+        td 直接跳转
+        td= select_tag 'payment[redirect]', options_for_select({"不直接跳转": '', "直接跳转": 'Y'})
+      tr
         td
         td= submit_tag '确认支付'

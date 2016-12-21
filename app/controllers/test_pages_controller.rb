@@ -15,27 +15,31 @@ class TestPagesController < ApplicationController
       notify_url: AppConfig.get('pooul','notify_url') + "/test_notify/#{order_num}",
       callback_url: AppConfig.get('pooul','callback_url') + "/test_callback/#{order_num}",
       remote_ip: p[:remote_ip] || request.remote_ip,
-      auth_code: p[:auth_code]
     }
+    js_biz[:auth_code] = p[:auth_code] if p[:auth_code]
     js_request = {
       org_code: p[:org_code],
       method: p[:method],
-      data: js_biz.to_json
+      data: js_biz.to_json,
+      redirect: p[:redirect]
     }
     org = Org.find_by(org_code: p[:org_code])
     if org
       js_request[:sign] = Biz::PooulApi.get_mac(js_biz, org.tmk)
       url = AppConfig.get('pooul', 'pay_url')
-      if resp = Biz::WebBiz.post_data('test.pay', url, js_request, nil)
-        if resp.resp_body
+      if resp = Net::HTTP.post_form(URI(url), js_request)
+        if resp.is_a?(Net::HTTPRedirection)
+          redirect_to resp['location'], status: 302
+          return
+        end
+        if resp.body
           begin
-            @js = JSON.parse(resp.resp_body)
-            @js.symbolize_keys!
+            @js = JSON.parse(resp.body).symbolize_keys
           rescue => e
             @js = {error: e.message}
           end
         else
-          @js = {error: "[BIZ] #{resp.result_message}"}
+          @js = {error: "[BIZ] #{resp.inspect}"}
         end
       else
         @js = {error: 'post_data失败'}
