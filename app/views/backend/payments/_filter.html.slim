@@ -1,0 +1,52 @@
+div.filter-wrap.row.collapsed
+  = search_form_for [@q] do |f|
+    - locals = {:f => f}
+    div.row
+      div.col-md-4
+        div.form-group
+          div.col-sm-2.text-right style="padding-top: 10px;"
+            = f.label :order_time, '日期', class: 'control-label'
+          div.col-sm-3
+            = f.text_field :order_time_gt, :class => 'datepicker datepicker-from form-control', style: 'min-width: 10px!important;', :value => params[:q][:order_time_gt]
+          div.col-sm-1
+            | ___
+          div.col-sm-3
+            = f.text_field :order_time_lt, :class => 'datepicker datepicker-to form-control', style: 'min-width: 10px!important;',:value => params[:q][:order_time_lt]
+      div.col-md-4
+        div.form-group
+          div.col-sm-2.text-right style="padding-top: 10px;"
+            = f.label :order_num, '订单号', class: 'control-label'
+          div.col-sm-6
+            = f.text_field :order_num_eq, :class => 'form-control', :value => params[:q][:order_num_eq]
+      div.col-md-4
+        div.form-group
+          div.col-sm-2.text-right style="padding-top: 10px;"
+            = f.label :order_title, '订单标题', class: 'control-label'
+          div.col-sm-6
+            = f.text_field :order_title_eq, :class => 'form-control', :value => params[:q][:order_title_eq]
+      div.col-md-4
+        div.form-group
+          div.col-sm-2.text-right style="padding-top: 10px;"
+            = f.label :method, '请求类型', class: 'control-label'
+          div.col-sm-6
+            = f.text_field :method_eq, :class => 'form-control', :value => params[:q][:method_eq]
+      div.col-md-4
+        div.form-group
+          div.col-sm-2.text-right style="padding-top: 10px;"
+            = f.label :status, '状态', class: 'control-label'
+          div.col-sm-6 style="padding-top: 10px;"
+            = f.select :status_eq,  Payment.new.status_enum,:class => 'form-control', :value => params[:q][:order_num_eq]
+    div.row
+      div.col-md-12.text-center style="padding: 10px"
+          button.btn.btn-primary name="button" type="submit"
+            span.icon.icon-search
+            | 查找
+javascript:
+  $(document).ready(function () {
+    $( ".datepicker.datepicker-from" ).datepicker({
+      dateFormat: "yy.mm.dd 00:00:00",
+    });
+    $( ".datepicker.datepicker-to" ).datepicker({
+      dateFormat: "yy.mm.dd 23:59:59",
+    });
+  });

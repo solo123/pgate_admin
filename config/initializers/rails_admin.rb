@@ -30,7 +30,8 @@ RailsAdmin.config do |config|
   I18n.default_locale = :"zh-CN"
   config.navigation_static_links = {
     '测试首页' => '/',
-    '商户管理' => '/adm/orgs'
+    '商户管理' => '/adm/orgs',
+    '商户数据管理' => '/adm/payments'
   }
 
   config.actions do

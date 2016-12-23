@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         get :create_sub_mct, :send_to_zx, :create_merchant
       end
     end
+    resources :payments do
+    end
     resources :sent_posts, :notify_recvs
     resources :merchants
     resources :zx_mcts, :zx_clrs

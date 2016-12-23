@@ -1,0 +1,29 @@
+p#notice
+  = notice
+
+h1.page-header
+  | 商户数据管理
+= render partial: 'filter'
+
+= paginate @collection
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th 订单时间
+      th 订单号
+      th 请求类型
+      th 订单标题
+      th 金额
+      th IP
+      th 状态
+  tbody
+    - @collection.each do |dt|
+      tr
+        td= dt.order_time.to_datetime.strftime('%Y.%m.%d %H:%M:%S')
+        td= dt.order_num
+        td= dt.method
+        td= dt.order_title
+        td= ActiveSupport::NumberHelper.number_to_currency(dt.amount*0.01, unit:'￥')
+        td= dt.remote_ip
+        td= dt.status_enum.invert[dt.status]
+= paginate @collection  
