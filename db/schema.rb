@@ -262,11 +262,13 @@ ActiveRecord::Schema.define(version: 20161226053131) do
     t.string   "bank_mct_type"
     t.integer  "bank_mct_id"
     t.string   "bank_name"
+    t.string   "parent_mch_id"
     t.string   "mch_id"
-    t.integer  "clearing_type", default: 1
-    t.integer  "status",        default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "pay_channel_type", default: 0
+    t.integer  "clearing_type",    default: 0
+    t.integer  "status",           default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["bank_mct_type", "bank_mct_id"], name: "index_sub_mcts_on_bank_mct_type_and_bank_mct_id"
     t.index ["org_id"], name: "index_sub_mcts_on_org_id"
   end
