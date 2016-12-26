@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213143422) do
+ActiveRecord::Schema.define(version: 20161226053131) do
 
   create_table "agents", force: :cascade do |t|
     t.integer  "org_id"
@@ -145,10 +145,9 @@ ActiveRecord::Schema.define(version: 20161213143422) do
     t.string   "name"
     t.string   "org_code"
     t.string   "tmk"
-    t.string   "public_key"
-    t.string   "aes_key"
-    t.string   "sign_mode"
-    t.string   "trans_mode"
+    t.integer  "d0_rate"
+    t.integer  "d0_min_fee"
+    t.integer  "t1_rate"
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -256,6 +255,20 @@ ActiveRecord::Schema.define(version: 20161213143422) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["sender_type", "sender_id"], name: "index_sent_posts_on_sender_type_and_sender_id"
+  end
+
+  create_table "sub_mcts", force: :cascade do |t|
+    t.integer  "org_id"
+    t.string   "bank_mct_type"
+    t.integer  "bank_mct_id"
+    t.string   "bank_name"
+    t.string   "mch_id"
+    t.integer  "clearing_type", default: 1
+    t.integer  "status",        default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["bank_mct_type", "bank_mct_id"], name: "index_sub_mcts_on_bank_mct_type_and_bank_mct_id"
+    t.index ["org_id"], name: "index_sub_mcts_on_org_id"
   end
 
   create_table "users", force: :cascade do |t|
