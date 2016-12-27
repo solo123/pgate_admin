@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
     resources :sent_posts, :notify_recvs
     resources :merchants
-    resources :zx_mcts, :zx_clrs
+    resources :zx_mcts, :zx_clrs, :pfb_merchts
     resources :sub_mcts
   end
 

@@ -1,13 +1,17 @@
 - if @object
-  = simple_form_for(@object) do |f|
-    = f.input :parent_mch_id
-    = f.input :mch_id
-    = f.input :pay_channel_type, collection: @object.pay_channel_type_enum
-    = f.input :clearing_type, collection: @object.clearing_type_enum
-    = f.input :sort_order
-    = f.input :business_type
-    = f.input :status
-    = f.submit
+  .bs-callout.bs-callout-warning
+    h4 商户基本资料
+    = simple_form_for(@object) do |f|
+      = f.input :parent_mch_id
+      = f.input :mch_id
+      = f.input :pay_channel_type, collection: f.object.pay_channel_type_enum
+      = f.input :clearing_type, collection: f.object.clearing_type_enum
+      = f.input :sort_order
+      = f.input :business_type
+      = f.input :status, collection: f.object.status_enum
+      = f.submit
 
   - if @object.bank_mct_type == 'ZxMct'
     = render 'form_zx'
+  - elsif @object.bank_mct_type == 'PfbMercht'
+    = render 'form_pfb'

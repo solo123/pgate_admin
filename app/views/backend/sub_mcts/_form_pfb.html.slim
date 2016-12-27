@@ -1,0 +1,7 @@
+.bs-callout.bs-callout-warning
+  h4 普付宝商户资料
+  = simple_form_for (@object.bank_mct) do |f|
+    = f.input :mch_id
+    = f.input :mch_key
+    = f.input :status, collection: f.object.status_enum
+    = f.submit

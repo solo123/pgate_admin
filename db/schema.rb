@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226053131) do
+ActiveRecord::Schema.define(version: 20161227092333) do
 
   create_table "agents", force: :cascade do |t|
     t.integer  "org_id"
@@ -211,6 +211,8 @@ ActiveRecord::Schema.define(version: 20161226053131) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "auth_code"
+    t.string   "redirect"
+    t.string   "is_d0"
     t.index ["card_id"], name: "index_payments_on_card_id"
     t.index ["order_day"], name: "index_payments_on_order_day"
     t.index ["order_num"], name: "index_payments_on_order_num"

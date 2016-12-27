@@ -13,3 +13,21 @@ AppConfig.set('pooul', 'callback_url', 'http://cb.pooulcloud.cn/callback')
 AppConfig.set('alipay', 'notify.return', 'SUCCESS')
 AppConfig.set('pfb', 'notify.return', 'SUCCESS')
 AppConfig.set('zx', 'intfc_url', 'https://202.108.57.43:30280/')
+
+puts "#{prompt}Add SubMct!"
+PfbMercht.all.each do |mct|
+  if mct.org && mct.sub_mct.nil?
+    sm = mct.org.sub_mcts.build
+    sm.bank_mct = mct
+    sm.save
+    puts "#{prompt}Add sub_mct for: #{sm.bank_mct_type}"
+  end
+end
+ZxMct.all.each do |mct|
+  if mct.org && mct.sub_mct.nil?
+    sm = mct.org.sub_mcts.build
+    sm.bank_mct = mct
+    sm.save
+    puts "#{prompt}Add sub_mct for: #{sm.bank_mct_type}"
+  end
+end
