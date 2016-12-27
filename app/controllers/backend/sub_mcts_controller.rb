@@ -14,8 +14,8 @@ class Backend::SubMctsController < ResourcesController
     case params[:commit]
     when '进件'
       biz = Biz::HzIntfcApi.new(@object)
-      biz.prepare_request('In')
-      biz.send_hz_intfc('In')
+      biz.intfc_request_xml
+      biz.send_to_hzyb
       if biz.err_code == '00'
         flash[:info] = '进件成功, message:' + biz.err_desc
       else
@@ -23,8 +23,8 @@ class Backend::SubMctsController < ResourcesController
       end
     when '进件信息修改'
       biz = Biz::HzIntfcApi.new(@object)
-      biz.prepare_request('Modify')
-      biz.send_hz_intfc('Modify')
+      biz.modify_request_xml
+      biz.send_to_hzyb
       if biz.err_code == '00'
         flash[:info] = '进件信息修改, message:' + biz.err_desc
       else

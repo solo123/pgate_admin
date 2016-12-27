@@ -13,6 +13,7 @@ AppConfig.set('pooul', 'callback_url', 'http://cb.pooulcloud.cn/callback')
 AppConfig.set('alipay', 'notify.return', 'SUCCESS')
 AppConfig.set('pfb', 'notify.return', 'SUCCESS')
 AppConfig.set('zx', 'intfc_url', 'https://202.108.57.43:30280/')
+AppConfig.set('hzyb', 'intfc_url', 'http://103.25.21.35:11111/gateway')
 
 puts "#{prompt}Add SubMct!"
 PfbMercht.all.each do |mct|
