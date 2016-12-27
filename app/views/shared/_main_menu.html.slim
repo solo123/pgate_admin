@@ -27,10 +27,10 @@ ul.nav.navbar-nav.navbar-right
         = link_to '商户列表', orgs_path
   li.dropdown
     a.dropdown-toggle.f-s-14[href="javascript:;" data-toggle="dropdown"]
-      | 清分数据 
+      | 交易数据 
     ul.dropdown-menu.media-list.pull-right.animated.fadeInDown
       li.dropdown-header
-        = link_to '中信清分', zx_clrs_path
+        = link_to '支付请求', payments_path
 
   li
     - if user_signed_in?
