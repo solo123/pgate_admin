@@ -7,6 +7,7 @@ module Biz
     end
 
     def prepare_request
+      @err_code = '00'
       builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
         xml.AIPG {
           xml.INFO {
@@ -33,7 +34,7 @@ module Biz
       @xml = builder.to_xml
     end
 
-    def sign(mabs)
+    def sign(data)
       sign = ''
       begin
         socket = TCPSocket.open('127.0.0.1', 9001)
@@ -47,20 +48,29 @@ module Biz
       sign
     end
 
-    def send_zx_intfc
+    def send_hz_intfc
       xml_str = @xml.gsub('[sign]', '')
       xml_utf = xml_str.encode('utf-8', 'gbk')
       sn = sign(xml_utf)
       xml_sn = xml_str.gsub('<SIGNED_MSG></SIGNED_MSG>', "<SIGNED_MSG>#{sn}</SIGNED_MSG>")
       gzip = ActiveSupport::Gzip.compress(xml_sn)
       b64 = Base64.encode64(gzip)
+      url = "http://103.25.21.35:11111/gateway/merchantIn/merchantIn"
+      pd = SentPost.new
       begin
+        pd.method = 'hz_intfc'
+        pd.sender = @sub_mct
+        pd.post_url = url
+        pd.post_data = xml_utf.to_s.truncate(2000, omission: '... (to long)')
+
         resp = HTTParty.post(url, body: b64, headers: {"Content-Type": "text/plain; charset=ISO-8859-1"})
+        pd.resp_type = resp.response.inspect
         if resp.body.present?
           txt_gzip = Base64.decode64(resp.body)
           txt = ActiveSupport::Gzip.decompress(txt_gzip)
           txt.force_encoding('gbk')
           txt_no = txt.gsub(/<SIGNED_MSG>(.|\n)*<\/SIGNED_MSG>/, '<SIGNED_MSG></SIGNED_MSG>')
+          pd.resp_body = txt_no
           rr = txt.match(/<SIGNED_MSG>((.|\n)*)<\/SIGNED_MSG>/)
           return_key = rr[1]
           txt_no_utf = txt_no.encode('utf-8', 'gbk')
@@ -68,9 +78,12 @@ module Biz
             @err_code = '20'
             @err_desc = '验签错误'
           end
-          xml = Nokogiri::XML(txt_no_utf.resp_body)
+          xml = Nokogiri::XML(txt_no_utf)
+          puts xml
           if xml.xpath("//RET_CODE").text == '0000'
+            @err_desc = xml.xpath("//ERR_MSG").text
             @sub_mch.status = 1
+            @sub_mch.mch_id = xml.xpath("//SUBMERCHANT_ID").text
             @sub_mch.save!
           else
             @err_code = '20'
@@ -81,9 +94,11 @@ module Biz
           @err_desc = 'null返回值'
         end
       rescue => e
+        pd.result_message = e.message
         @err_code = '21'
         @err_desc = '链接错误：' + e.message
       end
+      pd.save
     end
 
     def verify(data, p7_key)

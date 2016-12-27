@@ -15,9 +15,9 @@ class Backend::SubMctsController < ResourcesController
     when '进件'
       biz = Biz::HzIntfcApi.new(@object)
       biz.prepare_request
+      biz.send_hz_intfc
       if biz.err_code == '00'
-        biz.send_zx_intfc
-        flash[:error] = biz.err_desc unless biz.err_code == '00'
+        flash[:info] = '进件成功' + biz.err_desc
       else
         flash[:error] = biz.err_desc
       end

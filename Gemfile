@@ -33,6 +33,8 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'pry'
+  gem 'pry-rails'
   gem 'sqlite3'
   gem 'mocha'
   gem 'webmock'
@@ -57,8 +59,8 @@ end
 gem 'bootstrap'
 gem 'devise'
 gem 'slim'
-#gem 'pgate_model', git: 'https://github.com/solo123/pgate_model.git'
-gem 'pgate_model', path: '../pgate_model'
+gem 'pgate_model', git: 'https://github.com/solo123/pgate_model.git'
+#gem 'pgate_model', path: '../pgate_model'
 gem 'ransack'
 gem 'kaminari'
 gem 'rqrcode'
