@@ -6,30 +6,54 @@ module Biz
       @sub_mct = sub_mct
     end
 
-    def prepare_request
+    def prepare_request(request)
       @err_code = '00'
-      builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
-        xml.AIPG {
-          xml.INFO {
-            xml.TRX_CODE '100012'
-            xml.VERSION '01'
-            xml.REQ_SN 'ORD-' + Time.now.to_i.to_s + '-001'
-            xml.SIGNED_MSG '[sign]'
-          }
-          xml.BODY {
-            xml.TRANS_DETAIL {
-              xml.IN_CHANNEL '1'
-              xml.QRCODE_CHANNEL '1'
-              xml.MERCHANT_ID @sub_mct.parent_mch_id # 合众主商户代码(必填)
-              xml.SUBMERCHANT_CODE @sub_mct.mch_id
-              xml.SUBMERCHANT_NAME @sub_mct.org.merchant.full_name
-              xml.SUBMERCHANT_SHORTNAME @sub_mct.org.name
-              xml.SUBMERCHANT_ADDRESS @sub_mct.org.merchant.address
-              xml.SUBMERCHANT_SERVICEPHONE @sub_mct.org.merchant.service_tel
-              xml.SUBMERCHANT_CATEGORY @sub_mct.business_type
+      case request
+      when 'Modify'
+        builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
+          xml.AIPG {
+            xml.INFO {
+              xml.TRX_CODE '100013'
+              xml.VERSION '01'
+              xml.REQ_SN 'merchantInModify-' + Time.now.to_i.to_s + '-100012'
+              xml.SIGNED_MSG '[sign]'
+            }
+            xml.BODY {
+              xml.TRANS_DETAIL {
+                xml.MERCHANT_ID @sub_mct.parent_mch_id # 合众主商户代码(必填)
+                xml.SUBMERCHANT_CODE @sub_mct.mch_id
+                xml.IN_CHANNEL '1'
+                xml.SUBMERCHANT_SHORTNAME @sub_mct.org.name
+                xml.SUBMERCHANT_ADDRESS @sub_mct.org.merchant.address
+                xml.SUBMERCHANT_SERVICEPHONE @sub_mct.org.merchant.service_tel
+              }
             }
           }
-        }
+        end
+      when 'In'
+        builder = Nokogiri::XML::Builder.new(:encoding => 'GBK') do |xml|
+          xml.AIPG {
+            xml.INFO {
+              xml.TRX_CODE '100012'
+              xml.VERSION '01'
+              xml.REQ_SN 'ORD-' + Time.now.to_i.to_s + '-001'
+              xml.SIGNED_MSG '[sign]'
+            }
+            xml.BODY {
+              xml.TRANS_DETAIL {
+                xml.IN_CHANNEL '1'
+                xml.QRCODE_CHANNEL @sub_mct.pay_channel_type
+                xml.MERCHANT_ID @sub_mct.parent_mch_id # 合众主商户代码(必填)
+                xml.SUBMERCHANT_CODE @sub_mct.mch_id
+                xml.SUBMERCHANT_NAME @sub_mct.org.merchant.full_name
+                xml.SUBMERCHANT_SHORTNAME @sub_mct.org.name
+                xml.SUBMERCHANT_ADDRESS @sub_mct.org.merchant.address
+                xml.SUBMERCHANT_SERVICEPHONE @sub_mct.org.merchant.service_tel
+                xml.SUBMERCHANT_CATEGORY @sub_mct.business_type
+              }
+            }
+          }
+        end
       end
       @xml = builder.to_xml
     end
@@ -48,14 +72,21 @@ module Biz
       sign
     end
 
-    def send_hz_intfc
+    def send_hz_intfc(request)
       xml_str = @xml.gsub('[sign]', '')
       xml_utf = xml_str.encode('utf-8', 'gbk')
       sn = sign(xml_utf)
       xml_sn = xml_str.gsub('<SIGNED_MSG></SIGNED_MSG>', "<SIGNED_MSG>#{sn}</SIGNED_MSG>")
       gzip = ActiveSupport::Gzip.compress(xml_sn)
       b64 = Base64.encode64(gzip)
-      url = "http://103.25.21.35:11111/gateway/merchantIn/merchantIn"
+      case request
+      when 'In'
+        url = "http://103.25.21.35:11111/gateway/merchantIn/merchantIn" # test
+        #url = "https://www.ulpay.com/gateway/merchantIn/merchantIn" # production
+      when 'Modify'
+        url = "http://103.25.21.35:11111/gateway/merchantIn/merchantInModify" # test
+        #url = "https://www.ulpay.com/gateway/merchantIn/merchantInModify" # production
+      end
       pd = SentPost.new
       begin
         pd.method = 'hz_intfc'
@@ -79,12 +110,13 @@ module Biz
             @err_desc = '验签错误'
           end
           xml = Nokogiri::XML(txt_no_utf)
-          puts xml
           if xml.xpath("//RET_CODE").text == '0000'
             @err_desc = xml.xpath("//ERR_MSG").text
-            @sub_mch.status = 1
-            @sub_mch.mch_id = xml.xpath("//SUBMERCHANT_ID").text
-            @sub_mch.save!
+            if request == 'In'
+              @sub_mch.status = 1
+              @sub_mch.mch_id = xml.xpath("//SUBMERCHANT_ID").text
+              @sub_mch.save!
+            end
           else
             @err_code = '20'
             @err_desc = xml.xpath("//ERR_MSG").text

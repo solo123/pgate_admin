@@ -9,6 +9,7 @@
     = f.input :status
     = f.submit '保存'
     = f.submit '进件'
+    = f.submit '进件信息修改'
 
   - if @object.bank_mct_type == 'ZxMct'
     = render 'form_zx'
