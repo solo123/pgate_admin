@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227092333) do
+ActiveRecord::Schema.define(version: 20161227181101) do
 
   create_table "agents", force: :cascade do |t|
     t.integer  "org_id"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 20161227092333) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["attach_owner_type", "attach_owner_id"], name: "index_attachments_on_attach_owner_type_and_attach_owner_id"
+  end
+
+  create_table "business_catelogs", force: :cascade do |t|
+    t.string   "channel_name"
+    t.string   "business_name"
+    t.string   "v1"
+    t.string   "v2"
+    t.string   "v3"
+    t.string   "v4"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "cards", force: :cascade do |t|

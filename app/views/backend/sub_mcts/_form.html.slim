@@ -7,7 +7,7 @@
       = f.input :pay_channel_type, collection: @object.pay_channel_type_enum
       = f.input :clearing_type, collection: @object.clearing_type_enum
       = f.input :sort_order
-      = f.input :business_type
+      = f.input :business_type, collection: BusinessCatelog.where(channel_name: 'hzyb').order(:v1).map{|b| [b.v1 + ' ' + b.business_name, b.v1]}
       = f.input :status, collection: f.object.status_enum
       = f.submit '保存'
       = f.submit '进件'
