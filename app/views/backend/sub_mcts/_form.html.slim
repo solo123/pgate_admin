@@ -1,0 +1,11 @@
+= simple_form_for(@object) do |f|
+  = f.input :parent_mch_id
+  = f.input :mch_id
+  = f.input :pay_channel_type
+  = f.input :clearing_type
+  = f.input :sort_order
+  = f.input :status
+  = f.submit
+
+- if @object.bank_mct_type == 'ZxMct'
+  = render 'form_zx'

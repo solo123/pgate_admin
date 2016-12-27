@@ -1,0 +1,10 @@
+tr
+  td= model.pay_channel_type
+  td= model.clearing_type
+  td= model.sort_order
+  td= model.bank_mct_type
+  td= model.parent_mch_id
+  th= model.mch_id
+  td= model.status
+  td= model.updated_at
+  td= link_to '修改', edit_sub_mct_path(model)

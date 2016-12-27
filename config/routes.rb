@@ -7,12 +7,13 @@ Rails.application.routes.draw do
     resources :app_configs
     resources :orgs do
       member do
-        get :create_zx_mct, :send_to_zx, :create_merchant
+        get :create_sub_mct, :send_to_zx, :create_merchant
       end
     end
     resources :sent_posts, :notify_recvs
     resources :merchants
     resources :zx_mcts, :zx_clrs
+    resources :sub_mcts
   end
 
   namespace :test_pages do

@@ -20,4 +20,20 @@
           = f.submit '保存'
 = render 'form_merchant'    
 = render 'form_photos'
-= render partial: 'form_zx'
+.bs-callout.bs-callout-warning
+  = link_to '新增中信渠道', create_sub_mct_org_path(@object) +  '?bank_type=zx', remote: true, data: {confirm: '确认添加中信商户吗？'}
+  = link_to '新增商联.合众易宝', create_sub_mct_org_path(@object) + '?bank_type=hzyb', remote: true, data: {confirm: '确认添加合众易宝商户吗？'}
+  table.table.table-bordered.table-striped#sub_mcts
+    tr
+      th 渠道类型
+      th 清算类型
+      th 优先顺序
+      th 银行名称
+      th 渠道号
+      th 商户号
+      th 状态
+      th 更新时间
+      th
+    - @object.sub_mcts.order('pay_channel_type, clearing_type, sort_order desc').each do |m|
+      == cell :sub_mct, m
+    

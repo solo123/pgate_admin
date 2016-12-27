@@ -1,11 +1,18 @@
 class Backend::OrgsController < ResourcesController
-  def create_zx_mct
+  def create_sub_mct
     load_object
-    unless @object.zx_mct
-      @object.build_zx_mct
+    case params[:bank_type]
+    when 'zx'
+      sub_mct = @object.sub_mcts.build
+      sub_mct.bank_mct = ZxMct.new
       @object.save
+      @result = cell(:sub_mct, sub_mct)
+    when 'hzyb'
+      sub_mct = @object.sub_mcts.build
+      sub_mct.bank_mct_type = 'hzyb'
+      @object.save
+      @result = cell(:sub_mct, sub_mct)
     end
-    render action: :edit
   end
   def create_merchant
     load_object
