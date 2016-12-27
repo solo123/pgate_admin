@@ -8,6 +8,7 @@ class CreateSubMcts < ActiveRecord::Migration[5.0]
       t.integer :pay_channel_type, default: 0
       t.integer :clearing_type, default: 0
       t.integer :sort_order, default: 0
+      t.string :business_type
       t.integer :status, default: 0
       t.timestamps
     end

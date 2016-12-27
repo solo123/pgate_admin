@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(version: 20161226053131) do
     t.integer  "pay_channel_type", default: 0
     t.integer  "clearing_type",    default: 0
     t.integer  "sort_order",       default: 0
+    t.string   "business_type"
     t.integer  "status",           default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
