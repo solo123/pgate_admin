@@ -1,7 +1,7 @@
 PATH
   remote: ../pgate_model
   specs:
-    pgate_model (0.9.23)
+    pgate_model (0.9.22)
       httparty
       rails (~> 5.0.0, >= 5.0.0.1)
 

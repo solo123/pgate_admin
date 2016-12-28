@@ -3,9 +3,9 @@ p
   = @js.to_s
 
 - if @js[:resp_code] == '00'
-  - js = JSON.parse(@js[:data]).symbolize_keys
+  - js = JSON.parse(@js[:data]).try(:symbolize_keys)
   - if js[:qr_code]
-    p 
+    p
       = js[:qr_code]
       - img_file = 'qr_' + Time.now.to_i.to_s + '.png'
       - qr = RQRCode::QRCode.new(js[:qr_code])
@@ -13,11 +13,10 @@ p
     h2 扫码支付
     p
       = image_tag "/#{img_file}", size: 200
-      
   - if js[:pay_url]
-    p 
+    p
       = link_to '确认跳转支付', js[:pay_url]
 
   - if js[:qr_code]
-    p 
+    p
       = link_to '确认跳转支付', js[:qr_code]
